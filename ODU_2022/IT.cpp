@@ -63,6 +63,12 @@ namespace IT {
 			entry->value.vstr.str[strlen(value) - 2] = '\0';
 			entry->value.vstr.len = strlen(value) - 2;
 		}
+		else if (entry->iddatatype == BOL) {
+			if (strcmp(value, "true"))
+				entry->value.vbol = true;
+			else 
+				entry->value.vbol = false;
+		}
 		else
 		{
 			entry->value.symbol = value[1];
@@ -88,13 +94,16 @@ namespace IT {
 			switch (e->iddatatype)
 			{
 			case IT::IDDATATYPE::INT:
-				strcat(type, "  integer ");
+				strcat(type, "  int ");
 				break;
 			case IT::IDDATATYPE::STR:
 				strcat(type, " string  ");
 				break;
 			case IT::IDDATATYPE::SYM:
-				strcat(type, "   symbol  ");
+				strcat(type, "   char  ");
+				break;
+			case IT::IDDATATYPE::BOL:
+				strcat(type, "   bool  ");
 				break;
 			case IT::IDDATATYPE::UNDEF:
 				strcat(type, "UNDEFINED");
@@ -127,6 +136,12 @@ namespace IT {
 					std::cout << e->value.vint;
 				else if (e->iddatatype == IT::IDDATATYPE::STR)
 					std::cout << "[" << (int)e->value.vstr.len << "]" << e->value.vstr.str;
+				else if (e->iddatatype == IT::IDDATATYPE::BOL) {
+					if (e->value.vbol = true)
+						std::cout << "TRUE";
+					else
+						std::cout << "FALSE";
+				}
 				else
 					std::cout << e->value.symbol;
 			}
@@ -138,13 +153,16 @@ namespace IT {
 					switch (e->value.params.types[i])
 					{
 					case IT::IDDATATYPE::INT:
-						std::cout << "INTEGER |";
+						std::cout << "INT |";
 						break;
 					case IT::IDDATATYPE::STR:
 						std::cout << "STRING |";
 						break;
 					case IT::IDDATATYPE::SYM:
-						std::cout << "SYMBOL |";
+						std::cout << "CHAR |";
+						break;
+					case IT::IDDATATYPE::BOL:
+						std::cout << "BOOL |";
 						break;
 					case IT::IDDATATYPE::UNDEF:
 						std::cout << "UNDEFINED";

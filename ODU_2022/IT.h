@@ -8,6 +8,7 @@
 #define TI_INT_DEFAULT		0x00000000				//значение по умолчанию для integer
 #define TI_STR_DEFAULT		0x00					//значение по умолчанию для sting
 #define TI_SYM_DEFAULT		0x00					//значение по умолчанию для symbol;
+#define TI_BOL_DEFAULT		0x00					//значение по умолчанию для symbol;
 #define TI_NULLIDX			0xffffffff				//нет элемента таблицы идентификаторов
 #define STR_MAXSIZE			255						//максимальная длина строкового литерала
 #define TI_INT_MAXSIZE		 2147483647				//максимальное значение для типа integer
@@ -21,7 +22,7 @@
 #define LENGHT_TYPE			IT::IDDATATYPE::INT
 
 namespace IT {
-	enum IDDATATYPE { INT = 1, STR = 2, SYM = 3, PROC = 4, UNDEF };									//типы данных идентификаторов: числовой, строковый,символьный неопределенный
+	enum IDDATATYPE { INT = 1, STR = 2, SYM = 3, BOL = 4, PROC = 5, UNDEF };									//типы данных идентификаторов: числовой, строковый, символьный, логический, неопределенный
 	enum IDTYPE { V = 1, F = 2, P = 3, L = 4, S = 5, Z = 6 };										//типы идентификаторов: V = переменная, F = функция, P =параметр, L =литерал, S = стандартная функция Z - знак
 	enum STDFNC { F_POW, F_POWER, F_RANDOM, F_LENGTH, F_NOT_STD };									//стандартные функции
 
@@ -51,6 +52,7 @@ namespace IT {
 				int count;					// количество параметров функции
 				IDDATATYPE* types;			//типы параметров функции
 			} params;
+			bool vbol;
 		} value;		// значение идентификатора
 
 		Entry()							//конструктор без параметров

@@ -23,7 +23,7 @@
 #define LEX_DIRSLASH				'/'	// деление
 #define LEX_PROCENT					'%'	// остаток от деления
 #define	LEX_EQUAL					'='	// присваивание				
-#define LEX_IS						'?'	// is
+#define LEX_IF						'?'	// is
 #define LEX_NOT_DOUBLE_QUOTE		'\''// отрицательный идентификатор
 #define LEX_WHILE					'c'	// while
 #define LEX_ISTRUE					'r'	// ложный блок
@@ -36,7 +36,7 @@
 #define LEX_TYPE					'n'	// объявления переменных
 #define LEX_MORE					'>'	// проверка на больше
 #define LEX_LESS					'<'	// проверка на меньше
-#define LEX_EQUALS					'&'	// проверка на равенство
+#define LEX_EQUALS					'&'	// проверка на равенство {&}
 #define LEX_SUBST					'@'	// вызов функции в польской записи 
 #define LEX_NOTEQUALS				'!'	// проверка на неравенство
 #define	LEXEMA_FIXSIZE				 1	        //размер лексемы

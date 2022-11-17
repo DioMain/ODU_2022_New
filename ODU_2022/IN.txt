@@ -1,3 +1,10 @@
-main {
+Main {
+	type int test = 0;
 	
+	if 12 & 2 then [
+		WriteLine "then";
+	]
+	else [
+		WriteLine "else";
+	]
 }

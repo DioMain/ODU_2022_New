@@ -3,9 +3,10 @@
 #include "LT.h"
 #include "stdafx.h"
 
-#define TYPE_INTEGER	"integer"
+#define TYPE_INTEGER	"int"
 #define TYPE_STRING		"string"
-#define TYPE_SYMBOL		"symbol"
+#define TYPE_SYMBOL		"char"
+#define TYPE_BOOLEAN	"bool"
 #define RANDOM			"random"
 #define TYPE_VOID		"void"
 #define MAIN			"Main"

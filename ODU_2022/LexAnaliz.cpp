@@ -18,11 +18,13 @@ namespace Lex
 		{ LEX_SEPARATORS, FST::FST(GRAPH_SEPARATORS) },
 		{ LEX_SEPARATORS, FST::FST(GRAPH_INKR) },
 		{ LEX_ID_TYPE, FST::FST(GRAPH_INTEGER) },
+		{ LEX_ID_TYPE, FST::FST(GRAPH_BOOLEAN) },
 		{ LEX_VOID, FST::FST(GRAPH_VOID) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_POW) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_RANDOM) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_LENGTH) },
 		{ LEX_LITERAL, FST::FST(GRAPH_INT_LITERAL) },
+		{ LEX_LITERAL, FST::FST(GRAPH_BOOLEAN_LITERAL) },
 		{ LEX_LITERAL, FST::FST(GRAPH_STRING_LITERAL) },
 		{ LEX_LITERAL, FST::FST(GRAPH_SYMBOL_LITERAL) },
 		{ LEX_LITERAL, FST::FST(GRAPH_INT_NEGATIVE) },
@@ -34,7 +36,7 @@ namespace Lex
 		{ LEX_RETURN, FST::FST(GRAPH_RETURN) },
 		{ LEX_WRITE, FST::FST(GRAPH_WRITE) },
 		{ LEX_NEWLINE, FST::FST(GRAPH_WRITELINE) },
-		{ LEX_IS, FST::FST(GRAPH_IS) },
+		{ LEX_IF, FST::FST(GRAPH_IS) },
 		{ LEX_WHILE, FST::FST(GRAPH_WHILE) },
 		{ LEX_DO, FST::FST(GRAPH_DO) },
 		{ LEX_ISFALSE, FST::FST(GRAPH_ISFALSE) },
@@ -96,6 +98,11 @@ namespace Lex
 					if (ittable.table[i].value.symbol == value[1])
 						return i;
 					break;
+				case IT::IDDATATYPE::BOL:
+					if (ittable.table[i].value.vbol == false ||
+						ittable.table[i].value.vbol == true)
+						return i;
+					break;
 				}
 			}
 		}
@@ -114,6 +121,8 @@ namespace Lex
 			return IT::IDDATATYPE::STR;  // строковый ид
 		if (!strcmp(TYPE_INTEGER, idtype))
 			return IT::IDDATATYPE::INT;	 // числовой  ид
+		if (!strcmp(TYPE_BOOLEAN, idtype))
+			return IT::IDDATATYPE::BOL;	 // логичесий  ид
 		if (isdigit(*curword) || *curword == LEX_MINUS)
 			return IT::IDDATATYPE::INT;				// числовой литерал
 		else if (*curword == IN_CODE_QUOTE)
@@ -210,6 +219,9 @@ namespace Lex
 				break;
 			case IT::IDDATATYPE::SYM:
 				itentry->value.symbol = TI_SYM_DEFAULT;
+				break;
+			case IT::IDDATATYPE::BOL:
+				itentry->value.vbol = TI_BOL_DEFAULT;
 				break;
 			}
 

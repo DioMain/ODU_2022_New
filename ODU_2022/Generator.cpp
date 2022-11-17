@@ -28,6 +28,10 @@ namespace Gener
 				{
 					ofile << " BYTE \'" << lex.idtable.table[i].value.vstr.str << "\', 0\n";
 				}
+				if (lex.idtable.table[i].iddatatype == IT::BOL)
+				{
+					ofile << " BYTE \'" << lex.idtable.table[i].value.vbol << endl;
+				}
 				if (lex.idtable.table[i].iddatatype == IT::INT)
 				{
 					ofile << " SDWORD " << lex.idtable.table[i].value.vint << endl;
@@ -45,6 +49,10 @@ namespace Gener
 					ofile << " DWORD ?\n";
 				}
 				if (lex.idtable.table[i].iddatatype == IT::STR)
+				{
+					ofile << " DWORD ?\n";
+				}
+				if (lex.idtable.table[i].iddatatype == IT::BOL)
 				{
 					ofile << " DWORD ?\n";
 				}
@@ -119,7 +127,9 @@ namespace Gener
 				}
 				if (LEXEMA(i + 1) != LEX_SEPARATOR)
 				{
-					if (LEXEMA(i + 1) != LEX_LEFTHESIS && (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT || ITENTRY(i + 1).idtype == IT::IDTYPE::P || ITENTRY(i + 1).idtype == IT::IDTYPE::V))
+					if (LEXEMA(i + 1) != LEX_LEFTHESIS && (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT 
+						|| ITENTRY(i + 1).idtype == IT::IDTYPE::P 
+						|| ITENTRY(i + 1).idtype == IT::IDTYPE::V))
 						ofile << "\tmov eax, " << ITENTRY(i + 1).id << "\n";
 					else if (LEXEMA(i + 1) != LEX_LEFTHESIS)
 						ofile << "\tmov eax,offset " << ITENTRY(i + 1).id << "\n";
@@ -290,6 +300,7 @@ namespace Gener
 				case IT::IDDATATYPE::INT:
 					ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outnumline\n";
 					break;
+				case IT::IDDATATYPE::BOL:
 				case IT::IDDATATYPE::SYM:
 				case IT::IDDATATYPE::STR:
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::L)
@@ -306,6 +317,7 @@ namespace Gener
 				case IT::IDDATATYPE::INT:
 					ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outnum\n";
 					break;
+				case IT::IDDATATYPE::BOL:
 				case IT::IDDATATYPE::SYM:
 				case IT::IDDATATYPE::STR:
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::L)
@@ -315,7 +327,7 @@ namespace Gener
 				}
 				break;
 			}
-			case LEX_IS: // условие
+			case LEX_IF: // условие
 			{
 				conditionnum++;
 				flag_is = true;
@@ -354,7 +366,9 @@ namespace Gener
 					break;
 				}
 				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT){ ofile << "\tmov edx, " << ITENTRY(i + 1).id << "\n\tcmp edx, " << ITENTRY(i + 3).id << "\n";}
-				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM || ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR){
+				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM 
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR 
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::BOL){
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::V || ITENTRY(i + 1).idtype == IT::IDTYPE::P)
 						ofile << "\n\tmov esi, " << ITENTRY(i + 1).id;
 					else
@@ -454,7 +468,9 @@ namespace Gener
 				{
 					cyclecode = "\tmov edx, " + (string)ITENTRY(i + 1).id + "\n\tcmp edx, " + (string)ITENTRY(i + 3).id + "\n";
 				}
-				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM || ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR)
+				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM 
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR 
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::BOL)
 				{
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::V || ITENTRY(i + 1).idtype == IT::IDTYPE::P)
 						cyclecode += "\tmov esi, " + (string)ITENTRY(i + 1).id;

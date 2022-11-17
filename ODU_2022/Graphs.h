@@ -1,6 +1,6 @@
 #pragma once
 #include "FST.h"
-#define N_GRAPHS 25
+#define N_GRAPHS 27
 
 // графы переходов 
 #define GRAPH_SEPARATORS 2,\
@@ -183,20 +183,27 @@
 			FST::RELATION('E',5),FST::RELATION('F',5),		FST::RELATION('8',5),FST::RELATION('9',5)),\
 		FST::NODE()
 
+#define GRAPH_BOOLEAN_LITERAL 6, \
+	FST::NODE(2, FST::RELATION('f',1), FST::RELATION('t',1)),\
+	FST::NODE(2, FST::RELATION('a',2), FST::RELATION('r',2)),\
+	FST::NODE(2, FST::RELATION('l',3), FST::RELATION('u',3)),\
+	FST::NODE(2, FST::RELATION('s',4), FST::RELATION('e',5)),\
+	FST::NODE(1, FST::RELATION('e',5)),\
+	FST::NODE()
+
 #define GRAPH_ISTRUE 5, \
 	FST::NODE(1, FST::RELATION('t',1)),\
-	FST::NODE(1, FST::RELATION('r',2)),\
-	FST::NODE(1, FST::RELATION('u',3)),\
-	FST::NODE(1, FST::RELATION('e',4)),\
+	FST::NODE(1, FST::RELATION('h',2)),\
+	FST::NODE(1, FST::RELATION('e',3)),\
+	FST::NODE(1, FST::RELATION('n',4)),\
 	FST::NODE()
 
 
-#define GRAPH_ISFALSE 6, \
-	FST::NODE(1, FST::RELATION('f',1)),\
-	FST::NODE(1, FST::RELATION('a',2)),\
-	FST::NODE(1, FST::RELATION('l',3)),\
-	FST::NODE(1, FST::RELATION('s',4)),\
-	FST::NODE(1, FST::RELATION('e',5)),\
+#define GRAPH_ISFALSE 5, \
+	FST::NODE(1, FST::RELATION('e',1)),\
+	FST::NODE(1, FST::RELATION('l',2)),\
+	FST::NODE(1, FST::RELATION('s',3)),\
+	FST::NODE(1, FST::RELATION('e',4)),\
 	FST::NODE()
 
 #define GRAPH_FUNCTION 9, \
@@ -212,7 +219,7 @@
 
 #define GRAPH_IS 3,\
 	FST::NODE(1,FST::RELATION('i',1)),\
-	FST::NODE(1,FST::RELATION('s',2)),\
+	FST::NODE(1,FST::RELATION('f',2)),\
 	FST::NODE()
 
 #define GRAPH_POW 4,\
@@ -236,14 +243,10 @@
 	FST::NODE(1,FST::RELATION('h',5)),\
 	FST::NODE(1,FST::RELATION('t',6)),\
 	FST::NODE()
-#define GRAPH_INTEGER 8,\
+#define GRAPH_INTEGER 4,\
 	FST::NODE(1, FST::RELATION('i',1)),\
 	FST::NODE(1, FST::RELATION('n',2)),\
 	FST::NODE(1, FST::RELATION('t',3)),\
-	FST::NODE(1, FST::RELATION('e',4)),\
-	FST::NODE(1, FST::RELATION('g',5)),\
-	FST::NODE(1, FST::RELATION('e',6)),\
-	FST::NODE(1, FST::RELATION('r',7)),\
 	FST::NODE()
 
 #define GRAPH_STRING 7, \
@@ -254,13 +257,19 @@
 	FST::NODE(1, FST::RELATION('n',5)),\
 	FST::NODE(1, FST::RELATION('g',6)),\
 	FST::NODE()
-#define GRAPH_SYMBOL 7, \
-	FST::NODE(1, FST::RELATION('s',1)),\
-	FST::NODE(1, FST::RELATION('y',2)),\
-	FST::NODE(1, FST::RELATION('m',3)),\
-	FST::NODE(1, FST::RELATION('b',4)),\
-	FST::NODE(1, FST::RELATION('o',5)),\
-	FST::NODE(1, FST::RELATION('l',6)),\
+
+#define GRAPH_SYMBOL 5, \
+	FST::NODE(1, FST::RELATION('c',1)),\
+	FST::NODE(1, FST::RELATION('h',2)),\
+	FST::NODE(1, FST::RELATION('a',3)),\
+	FST::NODE(1, FST::RELATION('r',4)),\
+	FST::NODE()
+
+#define GRAPH_BOOLEAN 5, \
+	FST::NODE(1, FST::RELATION('b',1)),\
+	FST::NODE(1, FST::RELATION('o',2)),\
+	FST::NODE(1, FST::RELATION('o',3)),\
+	FST::NODE(1, FST::RELATION('l',4)),\
 	FST::NODE()
 
 #define GRAPH_MAIN 5, \
