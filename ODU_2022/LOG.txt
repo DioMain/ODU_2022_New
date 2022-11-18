@@ -1,597 +1,2457 @@
 Тест: без ошибок 
---- Протокол --- Дата: 18.11.2022 01:09:14
+--- Протокол --- Дата: 18.11.2022 04:35:44
 --- Параметры --- 
 -in : IN.txt
 -out: OUT.asm
 -log: LOG.txt
 --- Исходные данные --- 
-Количество символов : 103
-Количество строк    : 11
+Количество символов : 274
+Количество строк    : 30
 Проигнорировано     : 0
 
 -----------------  Таблица лексем ---------------------
 
   1 | m{
   2 | nti[0]=l[1];
-  4 | ?l[2]&l[3]r[
-  5 | ^l[4];
+  4 | ?i[0]&l[1]r[
+  5 | ^l[2];
   6 | ]
   7 | w[
-  8 | ^l[5];
+  8 | ^l[3];
   9 | ]
- 10 | }
+ 11 | ?i[0]&l[1]r[
+ 12 | ^l[2];
+ 13 | ]
+ 14 | w[
+ 15 | ?l[4]>l[5]r[
+ 17 | ]
+ 18 | ]
+ 20 | nti[6]=l[7];
+ 22 | ci[6]<l[4]d[
+ 23 | i[6]=i[6]+l[5];
+ 25 | ?l[4]>l[5]r[
+ 27 | ]
+ 28 | ]
+ 29 | }
 -------------------------------------------------------------------------
 
 Шаг :Правило             Входная лента                 Стек                
-0   :S->m{K}             m{nti=l;?l&lr[^l;]w[^l;]}     S$                  
+0   :S->m{K}             m{nti=l;?i&lr[^l;]w[^l;]?     S$                  
 1   : SAVESTATE:          1
-1   :                    m{nti=l;?l&lr[^l;]w[^l;]}     m{K}$               
-2   :                    {nti=l;?l&lr[^l;]w[^l;]}      {K}$                
-3   :                    nti=l;?l&lr[^l;]w[^l;]}       K}$                 
-4   :K->nti=V;K          nti=l;?l&lr[^l;]w[^l;]}       K}$                 
+1   :                    m{nti=l;?i&lr[^l;]w[^l;]?     m{K}$               
+2   :                    {nti=l;?i&lr[^l;]w[^l;]?i     {K}$                
+3   :                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+4   :K->nti=V;K          nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
 5   : SAVESTATE:          2
-5   :                    nti=l;?l&lr[^l;]w[^l;]}       nti=V;K}$           
-6   :                    ti=l;?l&lr[^l;]w[^l;]}        ti=V;K}$            
-7   :                    i=l;?l&lr[^l;]w[^l;]}         i=V;K}$             
-8   :                    =l;?l&lr[^l;]w[^l;]}          =V;K}$              
-9   :                    l;?l&lr[^l;]w[^l;]}           V;K}$               
-10  :V->l                l;?l&lr[^l;]w[^l;]}           V;K}$               
+5   :                    nti=l;?i&lr[^l;]w[^l;]?i&     nti=V;K}$           
+6   :                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti=V;K}$            
+7   :                    i=l;?i&lr[^l;]w[^l;]?i&lr     i=V;K}$             
+8   :                    =l;?i&lr[^l;]w[^l;]?i&lr[     =V;K}$              
+9   :                    l;?i&lr[^l;]w[^l;]?i&lr[^     V;K}$               
+10  :V->l                l;?i&lr[^l;]w[^l;]?i&lr[^     V;K}$               
 11  : SAVESTATE:          3
-11  :                    l;?l&lr[^l;]w[^l;]}           l;K}$               
-12  :                    ;?l&lr[^l;]w[^l;]}            ;K}$                
-13  :                    ?l&lr[^l;]w[^l;]}             K}$                 
-14  :K->?ZRK             ?l&lr[^l;]w[^l;]}             K}$                 
+11  :                    l;?i&lr[^l;]w[^l;]?i&lr[^     l;K}$               
+12  :                    ;?i&lr[^l;]w[^l;]?i&lr[^l     ;K}$                
+13  :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+14  :K->?ZRK             ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
 15  : SAVESTATE:          4
-15  :                    ?l&lr[^l;]w[^l;]}             ?ZRK}$              
-16  :                    l&lr[^l;]w[^l;]}              ZRK}$               
-17  :Z->lLl              l&lr[^l;]w[^l;]}              ZRK}$               
+15  :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     ?ZRK}$              
+16  :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+17  :Z->iLi              i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
 18  : SAVESTATE:          5
-18  :                    l&lr[^l;]w[^l;]}              lLlRK}$             
-19  :                    &lr[^l;]w[^l;]}               LlRK}$              
-20  :L->&                &lr[^l;]w[^l;]}               LlRK}$              
+18  :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLiRK}$             
+19  :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
+20  :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
 21  : SAVESTATE:          6
-21  :                    &lr[^l;]w[^l;]}               &lRK}$              
-22  :                    lr[^l;]w[^l;]}                lRK}$               
-23  :                    r[^l;]w[^l;]}                 RK}$                
-24  :R->rY               r[^l;]w[^l;]}                 RK}$                
-25  : SAVESTATE:          7
-25  :                    r[^l;]w[^l;]}                 rYK}$               
-26  :                    [^l;]w[^l;]}                  YK}$                
-27  :Y->[XQ]             [^l;]w[^l;]}                  YK}$                
-28  : SAVESTATE:          8
-28  :                    [^l;]w[^l;]}                  [XQ]K}$             
-29  :                    ^l;]w[^l;]}                   XQ]K}$              
-30  :X->^V;X             ^l;]w[^l;]}                   XQ]K}$              
-31  : SAVESTATE:          9
-31  :                    ^l;]w[^l;]}                   ^V;XQ]K}$           
-32  :                    l;]w[^l;]}                    V;XQ]K}$            
-33  :V->l                l;]w[^l;]}                    V;XQ]K}$            
-34  : SAVESTATE:          10
-34  :                    l;]w[^l;]}                    l;XQ]K}$            
-35  :                    ;]w[^l;]}                     ;XQ]K}$             
-36  :                    ]w[^l;]}                      XQ]K}$              
-37  : TNS_NORULECHAIN/NS_NORULE
-37  : RESSTATE            
-37  :                    l;]w[^l;]}                    V;XQ]K}$            
-38  : TNS_NORULECHAIN/NS_NORULE
-38  : RESSTATE            
-38  :                    ^l;]w[^l;]}                   XQ]K}$              
-39  :X->^V;              ^l;]w[^l;]}                   XQ]K}$              
-40  : SAVESTATE:          9
-40  :                    ^l;]w[^l;]}                   ^V;Q]K}$            
-41  :                    l;]w[^l;]}                    V;Q]K}$             
-42  :V->l                l;]w[^l;]}                    V;Q]K}$             
-43  : SAVESTATE:          10
-43  :                    l;]w[^l;]}                    l;Q]K}$             
-44  :                    ;]w[^l;]}                     ;Q]K}$              
-45  :                    ]w[^l;]}                      Q]K}$               
+21  :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &iRK}$              
+22  :                    lr[^l;]w[^l;]?i&lr[^l;]w[     iRK}$               
+23  : TS_NOK/NS_NORULECHAIN
+23  : RESSTATE            
+23  :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
+24  : TNS_NORULECHAIN/NS_NORULE
+24  : RESSTATE            
+24  :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+25  :Z->iLl              i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+26  : SAVESTATE:          5
+26  :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLlRK}$             
+27  :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+28  :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+29  : SAVESTATE:          6
+29  :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &lRK}$              
+30  :                    lr[^l;]w[^l;]?i&lr[^l;]w[     lRK}$               
+31  :                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+32  :R->rY               r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+33  : SAVESTATE:          7
+33  :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYK}$               
+34  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+35  :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+36  : SAVESTATE:          8
+36  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]K}$             
+37  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+38  :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+39  : SAVESTATE:          9
+39  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]K}$           
+40  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
+41  :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
+42  : SAVESTATE:          10
+42  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]K}$            
+43  :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]K}$             
+44  :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]K}$              
+45  : TNS_NORULECHAIN/NS_NORULE
+45  : RESSTATE            
+45  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
 46  : TNS_NORULECHAIN/NS_NORULE
 46  : RESSTATE            
-46  :                    l;]w[^l;]}                    V;Q]K}$             
-47  : TNS_NORULECHAIN/NS_NORULE
-47  : RESSTATE            
-47  :                    ^l;]w[^l;]}                   XQ]K}$              
-48  : TNS_NORULECHAIN/NS_NORULE
-48  : RESSTATE            
-48  :                    [^l;]w[^l;]}                  YK}$                
-49  :Y->[X]              [^l;]w[^l;]}                  YK}$                
-50  : SAVESTATE:          8
-50  :                    [^l;]w[^l;]}                  [X]K}$              
-51  :                    ^l;]w[^l;]}                   X]K}$               
-52  :X->^V;X             ^l;]w[^l;]}                   X]K}$               
-53  : SAVESTATE:          9
-53  :                    ^l;]w[^l;]}                   ^V;X]K}$            
-54  :                    l;]w[^l;]}                    V;X]K}$             
-55  :V->l                l;]w[^l;]}                    V;X]K}$             
-56  : SAVESTATE:          10
-56  :                    l;]w[^l;]}                    l;X]K}$             
-57  :                    ;]w[^l;]}                     ;X]K}$              
-58  :                    ]w[^l;]}                      X]K}$               
-59  : TNS_NORULECHAIN/NS_NORULE
-59  : RESSTATE            
-59  :                    l;]w[^l;]}                    V;X]K}$             
-60  : TNS_NORULECHAIN/NS_NORULE
-60  : RESSTATE            
-60  :                    ^l;]w[^l;]}                   X]K}$               
-61  :X->^V;              ^l;]w[^l;]}                   X]K}$               
-62  : SAVESTATE:          9
-62  :                    ^l;]w[^l;]}                   ^V;]K}$             
-63  :                    l;]w[^l;]}                    V;]K}$              
-64  :V->l                l;]w[^l;]}                    V;]K}$              
-65  : SAVESTATE:          10
-65  :                    l;]w[^l;]}                    l;]K}$              
-66  :                    ;]w[^l;]}                     ;]K}$               
-67  :                    ]w[^l;]}                      ]K}$                
-68  :                    w[^l;]}                       K}$                 
-69  : TNS_NORULECHAIN/NS_NORULE
-69  : RESSTATE            
-69  :                    l;]w[^l;]}                    V;]K}$              
-70  : TNS_NORULECHAIN/NS_NORULE
-70  : RESSTATE            
-70  :                    ^l;]w[^l;]}                   X]K}$               
-71  : TNS_NORULECHAIN/NS_NORULE
-71  : RESSTATE            
-71  :                    [^l;]w[^l;]}                  YK}$                
-72  :Y->[Q]              [^l;]w[^l;]}                  YK}$                
-73  : SAVESTATE:          8
-73  :                    [^l;]w[^l;]}                  [Q]K}$              
-74  :                    ^l;]w[^l;]}                   Q]K}$               
-75  : TNS_NORULECHAIN/NS_NORULE
-75  : RESSTATE            
-75  :                    [^l;]w[^l;]}                  YK}$                
-76  : TNS_NORULECHAIN/NS_NORULE
-76  : RESSTATE            
-76  :                    r[^l;]w[^l;]}                 RK}$                
-77  :R->rYwY             r[^l;]w[^l;]}                 RK}$                
-78  : SAVESTATE:          7
-78  :                    r[^l;]w[^l;]}                 rYwYK}$             
-79  :                    [^l;]w[^l;]}                  YwYK}$              
-80  :Y->[XQ]             [^l;]w[^l;]}                  YwYK}$              
+46  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+47  :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+48  : SAVESTATE:          9
+48  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]K}$            
+49  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+50  :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+51  : SAVESTATE:          10
+51  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]K}$             
+52  :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]K}$              
+53  :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]K}$               
+54  : TNS_NORULECHAIN/NS_NORULE
+54  : RESSTATE            
+54  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+55  : TNS_NORULECHAIN/NS_NORULE
+55  : RESSTATE            
+55  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+56  : TNS_NORULECHAIN/NS_NORULE
+56  : RESSTATE            
+56  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+57  :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+58  : SAVESTATE:          8
+58  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]K}$              
+59  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+60  :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+61  : SAVESTATE:          9
+61  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]K}$            
+62  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+63  :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+64  : SAVESTATE:          10
+64  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]K}$             
+65  :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]K}$              
+66  :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]K}$               
+67  : TNS_NORULECHAIN/NS_NORULE
+67  : RESSTATE            
+67  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+68  : TNS_NORULECHAIN/NS_NORULE
+68  : RESSTATE            
+68  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+69  :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+70  : SAVESTATE:          9
+70  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]K}$             
+71  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+72  :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+73  : SAVESTATE:          10
+73  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]K}$              
+74  :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]K}$               
+75  :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]K}$                
+76  :                    w[^l;]?i&lr[^l;]w[?l>lr[]     K}$                 
+77  : TNS_NORULECHAIN/NS_NORULE
+77  : RESSTATE            
+77  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+78  : TNS_NORULECHAIN/NS_NORULE
+78  : RESSTATE            
+78  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+79  : TNS_NORULECHAIN/NS_NORULE
+79  : RESSTATE            
+79  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+80  :Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
 81  : SAVESTATE:          8
-81  :                    [^l;]w[^l;]}                  [XQ]wYK}$           
-82  :                    ^l;]w[^l;]}                   XQ]wYK}$            
-83  :X->^V;X             ^l;]w[^l;]}                   XQ]wYK}$            
-84  : SAVESTATE:          9
-84  :                    ^l;]w[^l;]}                   ^V;XQ]wYK}$         
-85  :                    l;]w[^l;]}                    V;XQ]wYK}$          
-86  :V->l                l;]w[^l;]}                    V;XQ]wYK}$          
-87  : SAVESTATE:          10
-87  :                    l;]w[^l;]}                    l;XQ]wYK}$          
-88  :                    ;]w[^l;]}                     ;XQ]wYK}$           
-89  :                    ]w[^l;]}                      XQ]wYK}$            
-90  : TNS_NORULECHAIN/NS_NORULE
-90  : RESSTATE            
-90  :                    l;]w[^l;]}                    V;XQ]wYK}$          
-91  : TNS_NORULECHAIN/NS_NORULE
-91  : RESSTATE            
-91  :                    ^l;]w[^l;]}                   XQ]wYK}$            
-92  :X->^V;              ^l;]w[^l;]}                   XQ]wYK}$            
-93  : SAVESTATE:          9
-93  :                    ^l;]w[^l;]}                   ^V;Q]wYK}$          
-94  :                    l;]w[^l;]}                    V;Q]wYK}$           
-95  :V->l                l;]w[^l;]}                    V;Q]wYK}$           
-96  : SAVESTATE:          10
-96  :                    l;]w[^l;]}                    l;Q]wYK}$           
-97  :                    ;]w[^l;]}                     ;Q]wYK}$            
-98  :                    ]w[^l;]}                      Q]wYK}$             
-99  : TNS_NORULECHAIN/NS_NORULE
-99  : RESSTATE            
-99  :                    l;]w[^l;]}                    V;Q]wYK}$           
-100 : TNS_NORULECHAIN/NS_NORULE
-100 : RESSTATE            
-100 :                    ^l;]w[^l;]}                   XQ]wYK}$            
-101 : TNS_NORULECHAIN/NS_NORULE
-101 : RESSTATE            
-101 :                    [^l;]w[^l;]}                  YwYK}$              
-102 :Y->[X]              [^l;]w[^l;]}                  YwYK}$              
-103 : SAVESTATE:          8
-103 :                    [^l;]w[^l;]}                  [X]wYK}$            
-104 :                    ^l;]w[^l;]}                   X]wYK}$             
-105 :X->^V;X             ^l;]w[^l;]}                   X]wYK}$             
-106 : SAVESTATE:          9
-106 :                    ^l;]w[^l;]}                   ^V;X]wYK}$          
-107 :                    l;]w[^l;]}                    V;X]wYK}$           
-108 :V->l                l;]w[^l;]}                    V;X]wYK}$           
-109 : SAVESTATE:          10
-109 :                    l;]w[^l;]}                    l;X]wYK}$           
-110 :                    ;]w[^l;]}                     ;X]wYK}$            
-111 :                    ]w[^l;]}                      X]wYK}$             
+81  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]K}$              
+82  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]K}$               
+83  : TNS_NORULECHAIN/NS_NORULE
+83  : RESSTATE            
+83  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+84  :Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+85  : SAVESTATE:          8
+85  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     []K}$               
+86  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]K}$                
+87  : TS_NOK/NS_NORULECHAIN
+87  : RESSTATE            
+87  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+88  : TNS_NORULECHAIN/NS_NORULE
+88  : RESSTATE            
+88  :                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+89  :R->rYwY             r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+90  : SAVESTATE:          7
+90  :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYwYK}$             
+91  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+92  :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+93  : SAVESTATE:          8
+93  :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]wYK}$           
+94  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+95  :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+96  : SAVESTATE:          9
+96  :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]wYK}$         
+97  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+98  :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+99  : SAVESTATE:          10
+99  :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]wYK}$          
+100 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]wYK}$           
+101 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]wYK}$            
+102 : TNS_NORULECHAIN/NS_NORULE
+102 : RESSTATE            
+102 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+103 : TNS_NORULECHAIN/NS_NORULE
+103 : RESSTATE            
+103 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+104 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+105 : SAVESTATE:          9
+105 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]wYK}$          
+106 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
+107 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
+108 : SAVESTATE:          10
+108 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]wYK}$           
+109 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]wYK}$            
+110 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]wYK}$             
+111 : TNS_NORULECHAIN/NS_NORULE
+111 : RESSTATE            
+111 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
 112 : TNS_NORULECHAIN/NS_NORULE
 112 : RESSTATE            
-112 :                    l;]w[^l;]}                    V;X]wYK}$           
+112 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
 113 : TNS_NORULECHAIN/NS_NORULE
 113 : RESSTATE            
-113 :                    ^l;]w[^l;]}                   X]wYK}$             
-114 :X->^V;              ^l;]w[^l;]}                   X]wYK}$             
-115 : SAVESTATE:          9
-115 :                    ^l;]w[^l;]}                   ^V;]wYK}$           
-116 :                    l;]w[^l;]}                    V;]wYK}$            
-117 :V->l                l;]w[^l;]}                    V;]wYK}$            
-118 : SAVESTATE:          10
-118 :                    l;]w[^l;]}                    l;]wYK}$            
-119 :                    ;]w[^l;]}                     ;]wYK}$             
-120 :                    ]w[^l;]}                      ]wYK}$              
-121 :                    w[^l;]}                       wYK}$               
-122 :                    [^l;]}                        YK}$                
-123 :Y->[XQ]             [^l;]}                        YK}$                
-124 : SAVESTATE:          11
-124 :                    [^l;]}                        [XQ]K}$             
-125 :                    ^l;]}                         XQ]K}$              
-126 :X->^V;X             ^l;]}                         XQ]K}$              
-127 : SAVESTATE:          12
-127 :                    ^l;]}                         ^V;XQ]K}$           
-128 :                    l;]}                          V;XQ]K}$            
-129 :V->l                l;]}                          V;XQ]K}$            
-130 : SAVESTATE:          13
-130 :                    l;]}                          l;XQ]K}$            
-131 :                    ;]}                           ;XQ]K}$             
-132 :                    ]}                            XQ]K}$              
-133 : TNS_NORULECHAIN/NS_NORULE
-133 : RESSTATE            
-133 :                    l;]}                          V;XQ]K}$            
-134 : TNS_NORULECHAIN/NS_NORULE
-134 : RESSTATE            
-134 :                    ^l;]}                         XQ]K}$              
-135 :X->^V;              ^l;]}                         XQ]K}$              
-136 : SAVESTATE:          12
-136 :                    ^l;]}                         ^V;Q]K}$            
-137 :                    l;]}                          V;Q]K}$             
-138 :V->l                l;]}                          V;Q]K}$             
-139 : SAVESTATE:          13
-139 :                    l;]}                          l;Q]K}$             
-140 :                    ;]}                           ;Q]K}$              
-141 :                    ]}                            Q]K}$               
-142 : TNS_NORULECHAIN/NS_NORULE
-142 : RESSTATE            
-142 :                    l;]}                          V;Q]K}$             
-143 : TNS_NORULECHAIN/NS_NORULE
-143 : RESSTATE            
-143 :                    ^l;]}                         XQ]K}$              
-144 : TNS_NORULECHAIN/NS_NORULE
-144 : RESSTATE            
-144 :                    [^l;]}                        YK}$                
-145 :Y->[X]              [^l;]}                        YK}$                
-146 : SAVESTATE:          11
-146 :                    [^l;]}                        [X]K}$              
-147 :                    ^l;]}                         X]K}$               
-148 :X->^V;X             ^l;]}                         X]K}$               
-149 : SAVESTATE:          12
-149 :                    ^l;]}                         ^V;X]K}$            
-150 :                    l;]}                          V;X]K}$             
-151 :V->l                l;]}                          V;X]K}$             
-152 : SAVESTATE:          13
-152 :                    l;]}                          l;X]K}$             
-153 :                    ;]}                           ;X]K}$              
-154 :                    ]}                            X]K}$               
+113 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+114 :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+115 : SAVESTATE:          8
+115 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]wYK}$            
+116 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+117 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+118 : SAVESTATE:          9
+118 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]wYK}$          
+119 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+120 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+121 : SAVESTATE:          10
+121 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]wYK}$           
+122 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]wYK}$            
+123 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]wYK}$             
+124 : TNS_NORULECHAIN/NS_NORULE
+124 : RESSTATE            
+124 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+125 : TNS_NORULECHAIN/NS_NORULE
+125 : RESSTATE            
+125 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+126 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+127 : SAVESTATE:          9
+127 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]wYK}$           
+128 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+129 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+130 : SAVESTATE:          10
+130 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]wYK}$            
+131 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]wYK}$             
+132 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]wYK}$              
+133 :                    w[^l;]?i&lr[^l;]w[?l>lr[]     wYK}$               
+134 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+135 :Y->[XQ]             [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+136 : SAVESTATE:          11
+136 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [XQ]K}$             
+137 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+138 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+139 : SAVESTATE:          12
+139 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;XQ]K}$           
+140 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+141 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+142 : SAVESTATE:          13
+142 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;XQ]K}$            
+143 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;XQ]K}$             
+144 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     XQ]K}$              
+145 : TNS_NORULECHAIN/NS_NORULE
+145 : RESSTATE            
+145 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+146 : TNS_NORULECHAIN/NS_NORULE
+146 : RESSTATE            
+146 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+147 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+148 : SAVESTATE:          12
+148 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;Q]K}$            
+149 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
+150 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
+151 : SAVESTATE:          13
+151 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;Q]K}$             
+152 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;Q]K}$              
+153 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     Q]K}$               
+154 : TNS_NORULECHAIN/NS_NORULE
+154 : RESSTATE            
+154 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
 155 : TNS_NORULECHAIN/NS_NORULE
 155 : RESSTATE            
-155 :                    l;]}                          V;X]K}$             
+155 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
 156 : TNS_NORULECHAIN/NS_NORULE
 156 : RESSTATE            
-156 :                    ^l;]}                         X]K}$               
-157 :X->^V;              ^l;]}                         X]K}$               
-158 : SAVESTATE:          12
-158 :                    ^l;]}                         ^V;]K}$             
-159 :                    l;]}                          V;]K}$              
-160 :V->l                l;]}                          V;]K}$              
-161 : SAVESTATE:          13
-161 :                    l;]}                          l;]K}$              
-162 :                    ;]}                           ;]K}$               
-163 :                    ]}                            ]K}$                
-164 :                    }                             K}$                 
-165 : TNS_NORULECHAIN/NS_NORULE
-165 : RESSTATE            
-165 :                    l;]}                          V;]K}$              
-166 : TNS_NORULECHAIN/NS_NORULE
-166 : RESSTATE            
-166 :                    ^l;]}                         X]K}$               
+156 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+157 :Y->[X]              [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+158 : SAVESTATE:          11
+158 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [X]K}$              
+159 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+160 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+161 : SAVESTATE:          12
+161 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;X]K}$            
+162 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+163 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+164 : SAVESTATE:          13
+164 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;X]K}$             
+165 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;X]K}$              
+166 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     X]K}$               
 167 : TNS_NORULECHAIN/NS_NORULE
 167 : RESSTATE            
-167 :                    [^l;]}                        YK}$                
-168 :Y->[Q]              [^l;]}                        YK}$                
-169 : SAVESTATE:          11
-169 :                    [^l;]}                        [Q]K}$              
-170 :                    ^l;]}                         Q]K}$               
-171 : TNS_NORULECHAIN/NS_NORULE
-171 : RESSTATE            
-171 :                    [^l;]}                        YK}$                
-172 : TNS_NORULECHAIN/NS_NORULE
-172 : RESSTATE            
-172 :                    l;]w[^l;]}                    V;]wYK}$            
-173 : TNS_NORULECHAIN/NS_NORULE
-173 : RESSTATE            
-173 :                    ^l;]w[^l;]}                   X]wYK}$             
-174 : TNS_NORULECHAIN/NS_NORULE
-174 : RESSTATE            
-174 :                    [^l;]w[^l;]}                  YwYK}$              
-175 :Y->[Q]              [^l;]w[^l;]}                  YwYK}$              
-176 : SAVESTATE:          8
-176 :                    [^l;]w[^l;]}                  [Q]wYK}$            
-177 :                    ^l;]w[^l;]}                   Q]wYK}$             
-178 : TNS_NORULECHAIN/NS_NORULE
-178 : RESSTATE            
-178 :                    [^l;]w[^l;]}                  YwYK}$              
-179 : TNS_NORULECHAIN/NS_NORULE
-179 : RESSTATE            
-179 :                    r[^l;]w[^l;]}                 RK}$                
-180 : TNS_NORULECHAIN/NS_NORULE
-180 : RESSTATE            
-180 :                    &lr[^l;]w[^l;]}               LlRK}$              
-181 : TNS_NORULECHAIN/NS_NORULE
-181 : RESSTATE            
-181 :                    l&lr[^l;]w[^l;]}              ZRK}$               
-182 :Z->lLi              l&lr[^l;]w[^l;]}              ZRK}$               
-183 : SAVESTATE:          5
-183 :                    l&lr[^l;]w[^l;]}              lLiRK}$             
-184 :                    &lr[^l;]w[^l;]}               LiRK}$              
-185 :L->&                &lr[^l;]w[^l;]}               LiRK}$              
-186 : SAVESTATE:          6
-186 :                    &lr[^l;]w[^l;]}               &iRK}$              
-187 :                    lr[^l;]w[^l;]}                iRK}$               
-188 : TS_NOK/NS_NORULECHAIN
-188 : RESSTATE            
-188 :                    &lr[^l;]w[^l;]}               LiRK}$              
-189 : TNS_NORULECHAIN/NS_NORULE
-189 : RESSTATE            
-189 :                    l&lr[^l;]w[^l;]}              ZRK}$               
-190 : TNS_NORULECHAIN/NS_NORULE
-190 : RESSTATE            
-190 :                    ?l&lr[^l;]w[^l;]}             K}$                 
-191 :K->?ZR              ?l&lr[^l;]w[^l;]}             K}$                 
-192 : SAVESTATE:          4
-192 :                    ?l&lr[^l;]w[^l;]}             ?ZR}$               
-193 :                    l&lr[^l;]w[^l;]}              ZR}$                
-194 :Z->lLl              l&lr[^l;]w[^l;]}              ZR}$                
-195 : SAVESTATE:          5
-195 :                    l&lr[^l;]w[^l;]}              lLlR}$              
-196 :                    &lr[^l;]w[^l;]}               LlR}$               
-197 :L->&                &lr[^l;]w[^l;]}               LlR}$               
-198 : SAVESTATE:          6
-198 :                    &lr[^l;]w[^l;]}               &lR}$               
-199 :                    lr[^l;]w[^l;]}                lR}$                
-200 :                    r[^l;]w[^l;]}                 R}$                 
-201 :R->rY               r[^l;]w[^l;]}                 R}$                 
-202 : SAVESTATE:          7
-202 :                    r[^l;]w[^l;]}                 rY}$                
-203 :                    [^l;]w[^l;]}                  Y}$                 
-204 :Y->[XQ]             [^l;]w[^l;]}                  Y}$                 
-205 : SAVESTATE:          8
-205 :                    [^l;]w[^l;]}                  [XQ]}$              
-206 :                    ^l;]w[^l;]}                   XQ]}$               
-207 :X->^V;X             ^l;]w[^l;]}                   XQ]}$               
-208 : SAVESTATE:          9
-208 :                    ^l;]w[^l;]}                   ^V;XQ]}$            
-209 :                    l;]w[^l;]}                    V;XQ]}$             
-210 :V->l                l;]w[^l;]}                    V;XQ]}$             
-211 : SAVESTATE:          10
-211 :                    l;]w[^l;]}                    l;XQ]}$             
-212 :                    ;]w[^l;]}                     ;XQ]}$              
-213 :                    ]w[^l;]}                      XQ]}$               
-214 : TNS_NORULECHAIN/NS_NORULE
-214 : RESSTATE            
-214 :                    l;]w[^l;]}                    V;XQ]}$             
-215 : TNS_NORULECHAIN/NS_NORULE
-215 : RESSTATE            
-215 :                    ^l;]w[^l;]}                   XQ]}$               
-216 :X->^V;              ^l;]w[^l;]}                   XQ]}$               
-217 : SAVESTATE:          9
-217 :                    ^l;]w[^l;]}                   ^V;Q]}$             
-218 :                    l;]w[^l;]}                    V;Q]}$              
-219 :V->l                l;]w[^l;]}                    V;Q]}$              
-220 : SAVESTATE:          10
-220 :                    l;]w[^l;]}                    l;Q]}$              
-221 :                    ;]w[^l;]}                     ;Q]}$               
-222 :                    ]w[^l;]}                      Q]}$                
-223 : TNS_NORULECHAIN/NS_NORULE
-223 : RESSTATE            
-223 :                    l;]w[^l;]}                    V;Q]}$              
-224 : TNS_NORULECHAIN/NS_NORULE
-224 : RESSTATE            
-224 :                    ^l;]w[^l;]}                   XQ]}$               
-225 : TNS_NORULECHAIN/NS_NORULE
-225 : RESSTATE            
-225 :                    [^l;]w[^l;]}                  Y}$                 
-226 :Y->[X]              [^l;]w[^l;]}                  Y}$                 
-227 : SAVESTATE:          8
-227 :                    [^l;]w[^l;]}                  [X]}$               
-228 :                    ^l;]w[^l;]}                   X]}$                
-229 :X->^V;X             ^l;]w[^l;]}                   X]}$                
-230 : SAVESTATE:          9
-230 :                    ^l;]w[^l;]}                   ^V;X]}$             
-231 :                    l;]w[^l;]}                    V;X]}$              
-232 :V->l                l;]w[^l;]}                    V;X]}$              
-233 : SAVESTATE:          10
-233 :                    l;]w[^l;]}                    l;X]}$              
-234 :                    ;]w[^l;]}                     ;X]}$               
-235 :                    ]w[^l;]}                      X]}$                
-236 : TNS_NORULECHAIN/NS_NORULE
-236 : RESSTATE            
-236 :                    l;]w[^l;]}                    V;X]}$              
-237 : TNS_NORULECHAIN/NS_NORULE
-237 : RESSTATE            
-237 :                    ^l;]w[^l;]}                   X]}$                
-238 :X->^V;              ^l;]w[^l;]}                   X]}$                
-239 : SAVESTATE:          9
-239 :                    ^l;]w[^l;]}                   ^V;]}$              
-240 :                    l;]w[^l;]}                    V;]}$               
-241 :V->l                l;]w[^l;]}                    V;]}$               
-242 : SAVESTATE:          10
-242 :                    l;]w[^l;]}                    l;]}$               
-243 :                    ;]w[^l;]}                     ;]}$                
-244 :                    ]w[^l;]}                      ]}$                 
-245 :                    w[^l;]}                       }$                  
-246 : TS_NOK/NS_NORULECHAIN
+167 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+168 : TNS_NORULECHAIN/NS_NORULE
+168 : RESSTATE            
+168 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+169 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+170 : SAVESTATE:          12
+170 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;]K}$             
+171 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+172 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+173 : SAVESTATE:          13
+173 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;]K}$              
+174 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;]K}$               
+175 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     ]K}$                
+176 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+177 :K->?ZRK             ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+178 : SAVESTATE:          14
+178 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     ?ZRK}$              
+179 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+180 :Z->iLi              i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+181 : SAVESTATE:          15
+181 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLiRK}$             
+182 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+183 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+184 : SAVESTATE:          16
+184 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &iRK}$              
+185 :                    lr[^l;]w[?l>lr[]]nti=l;ci     iRK}$               
+186 : TS_NOK/NS_NORULECHAIN
+186 : RESSTATE            
+186 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+187 : TNS_NORULECHAIN/NS_NORULE
+187 : RESSTATE            
+187 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+188 :Z->iLl              i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+189 : SAVESTATE:          15
+189 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLlRK}$             
+190 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+191 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+192 : SAVESTATE:          16
+192 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &lRK}$              
+193 :                    lr[^l;]w[?l>lr[]]nti=l;ci     lRK}$               
+194 :                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+195 :R->rY               r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+196 : SAVESTATE:          17
+196 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rYK}$               
+197 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+198 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+199 : SAVESTATE:          18
+199 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]K}$             
+200 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+201 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+202 : SAVESTATE:          19
+202 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]K}$           
+203 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+204 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+205 : SAVESTATE:          20
+205 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]K}$            
+206 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]K}$             
+207 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]K}$              
+208 : TNS_NORULECHAIN/NS_NORULE
+208 : RESSTATE            
+208 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+209 : TNS_NORULECHAIN/NS_NORULE
+209 : RESSTATE            
+209 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+210 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+211 : SAVESTATE:          19
+211 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]K}$            
+212 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+213 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+214 : SAVESTATE:          20
+214 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]K}$             
+215 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]K}$              
+216 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]K}$               
+217 : TNS_NORULECHAIN/NS_NORULE
+217 : RESSTATE            
+217 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+218 : TNS_NORULECHAIN/NS_NORULE
+218 : RESSTATE            
+218 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+219 : TNS_NORULECHAIN/NS_NORULE
+219 : RESSTATE            
+219 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+220 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+221 : SAVESTATE:          18
+221 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]K}$              
+222 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+223 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+224 : SAVESTATE:          19
+224 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]K}$            
+225 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+226 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+227 : SAVESTATE:          20
+227 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]K}$             
+228 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]K}$              
+229 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]K}$               
+230 : TNS_NORULECHAIN/NS_NORULE
+230 : RESSTATE            
+230 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+231 : TNS_NORULECHAIN/NS_NORULE
+231 : RESSTATE            
+231 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+232 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+233 : SAVESTATE:          19
+233 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]K}$             
+234 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+235 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+236 : SAVESTATE:          20
+236 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]K}$              
+237 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]K}$               
+238 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]K}$                
+239 :                    w[?l>lr[]]nti=l;ci<ld[i=i     K}$                 
+240 : TNS_NORULECHAIN/NS_NORULE
+240 : RESSTATE            
+240 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+241 : TNS_NORULECHAIN/NS_NORULE
+241 : RESSTATE            
+241 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+242 : TNS_NORULECHAIN/NS_NORULE
+242 : RESSTATE            
+242 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+243 :Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+244 : SAVESTATE:          18
+244 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]K}$              
+245 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]K}$               
+246 : TNS_NORULECHAIN/NS_NORULE
 246 : RESSTATE            
-246 :                    l;]w[^l;]}                    V;]}$               
-247 : TNS_NORULECHAIN/NS_NORULE
-247 : RESSTATE            
-247 :                    ^l;]w[^l;]}                   X]}$                
-248 : TNS_NORULECHAIN/NS_NORULE
-248 : RESSTATE            
-248 :                    [^l;]w[^l;]}                  Y}$                 
-249 :Y->[Q]              [^l;]w[^l;]}                  Y}$                 
-250 : SAVESTATE:          8
-250 :                    [^l;]w[^l;]}                  [Q]}$               
-251 :                    ^l;]w[^l;]}                   Q]}$                
-252 : TNS_NORULECHAIN/NS_NORULE
-252 : RESSTATE            
-252 :                    [^l;]w[^l;]}                  Y}$                 
-253 : TNS_NORULECHAIN/NS_NORULE
-253 : RESSTATE            
-253 :                    r[^l;]w[^l;]}                 R}$                 
-254 :R->rYwY             r[^l;]w[^l;]}                 R}$                 
-255 : SAVESTATE:          7
-255 :                    r[^l;]w[^l;]}                 rYwY}$              
-256 :                    [^l;]w[^l;]}                  YwY}$               
-257 :Y->[XQ]             [^l;]w[^l;]}                  YwY}$               
-258 : SAVESTATE:          8
-258 :                    [^l;]w[^l;]}                  [XQ]wY}$            
-259 :                    ^l;]w[^l;]}                   XQ]wY}$             
-260 :X->^V;X             ^l;]w[^l;]}                   XQ]wY}$             
-261 : SAVESTATE:          9
-261 :                    ^l;]w[^l;]}                   ^V;XQ]wY}$          
-262 :                    l;]w[^l;]}                    V;XQ]wY}$           
-263 :V->l                l;]w[^l;]}                    V;XQ]wY}$           
-264 : SAVESTATE:          10
-264 :                    l;]w[^l;]}                    l;XQ]wY}$           
-265 :                    ;]w[^l;]}                     ;XQ]wY}$            
-266 :                    ]w[^l;]}                      XQ]wY}$             
-267 : TNS_NORULECHAIN/NS_NORULE
-267 : RESSTATE            
-267 :                    l;]w[^l;]}                    V;XQ]wY}$           
-268 : TNS_NORULECHAIN/NS_NORULE
-268 : RESSTATE            
-268 :                    ^l;]w[^l;]}                   XQ]wY}$             
-269 :X->^V;              ^l;]w[^l;]}                   XQ]wY}$             
-270 : SAVESTATE:          9
-270 :                    ^l;]w[^l;]}                   ^V;Q]wY}$           
-271 :                    l;]w[^l;]}                    V;Q]wY}$            
-272 :V->l                l;]w[^l;]}                    V;Q]wY}$            
-273 : SAVESTATE:          10
-273 :                    l;]w[^l;]}                    l;Q]wY}$            
-274 :                    ;]w[^l;]}                     ;Q]wY}$             
-275 :                    ]w[^l;]}                      Q]wY}$              
+246 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+247 :Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+248 : SAVESTATE:          18
+248 :                    [^l;]w[?l>lr[]]nti=l;ci<l     []K}$               
+249 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]K}$                
+250 : TS_NOK/NS_NORULECHAIN
+250 : RESSTATE            
+250 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+251 : TNS_NORULECHAIN/NS_NORULE
+251 : RESSTATE            
+251 :                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+252 :R->rYwY             r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+253 : SAVESTATE:          17
+253 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rYwYK}$             
+254 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+255 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+256 : SAVESTATE:          18
+256 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]wYK}$           
+257 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+258 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+259 : SAVESTATE:          19
+259 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]wYK}$         
+260 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+261 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+262 : SAVESTATE:          20
+262 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]wYK}$          
+263 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]wYK}$           
+264 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]wYK}$            
+265 : TNS_NORULECHAIN/NS_NORULE
+265 : RESSTATE            
+265 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+266 : TNS_NORULECHAIN/NS_NORULE
+266 : RESSTATE            
+266 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+267 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+268 : SAVESTATE:          19
+268 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]wYK}$          
+269 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+270 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+271 : SAVESTATE:          20
+271 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]wYK}$           
+272 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]wYK}$            
+273 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]wYK}$             
+274 : TNS_NORULECHAIN/NS_NORULE
+274 : RESSTATE            
+274 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+275 : TNS_NORULECHAIN/NS_NORULE
+275 : RESSTATE            
+275 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
 276 : TNS_NORULECHAIN/NS_NORULE
 276 : RESSTATE            
-276 :                    l;]w[^l;]}                    V;Q]wY}$            
-277 : TNS_NORULECHAIN/NS_NORULE
-277 : RESSTATE            
-277 :                    ^l;]w[^l;]}                   XQ]wY}$             
-278 : TNS_NORULECHAIN/NS_NORULE
-278 : RESSTATE            
-278 :                    [^l;]w[^l;]}                  YwY}$               
-279 :Y->[X]              [^l;]w[^l;]}                  YwY}$               
-280 : SAVESTATE:          8
-280 :                    [^l;]w[^l;]}                  [X]wY}$             
-281 :                    ^l;]w[^l;]}                   X]wY}$              
-282 :X->^V;X             ^l;]w[^l;]}                   X]wY}$              
-283 : SAVESTATE:          9
-283 :                    ^l;]w[^l;]}                   ^V;X]wY}$           
-284 :                    l;]w[^l;]}                    V;X]wY}$            
-285 :V->l                l;]w[^l;]}                    V;X]wY}$            
-286 : SAVESTATE:          10
-286 :                    l;]w[^l;]}                    l;X]wY}$            
-287 :                    ;]w[^l;]}                     ;X]wY}$             
-288 :                    ]w[^l;]}                      X]wY}$              
-289 : TNS_NORULECHAIN/NS_NORULE
-289 : RESSTATE            
-289 :                    l;]w[^l;]}                    V;X]wY}$            
-290 : TNS_NORULECHAIN/NS_NORULE
-290 : RESSTATE            
-290 :                    ^l;]w[^l;]}                   X]wY}$              
-291 :X->^V;              ^l;]w[^l;]}                   X]wY}$              
-292 : SAVESTATE:          9
-292 :                    ^l;]w[^l;]}                   ^V;]wY}$            
-293 :                    l;]w[^l;]}                    V;]wY}$             
-294 :V->l                l;]w[^l;]}                    V;]wY}$             
-295 : SAVESTATE:          10
-295 :                    l;]w[^l;]}                    l;]wY}$             
-296 :                    ;]w[^l;]}                     ;]wY}$              
-297 :                    ]w[^l;]}                      ]wY}$               
-298 :                    w[^l;]}                       wY}$                
-299 :                    [^l;]}                        Y}$                 
-300 :Y->[XQ]             [^l;]}                        Y}$                 
-301 : SAVESTATE:          11
-301 :                    [^l;]}                        [XQ]}$              
-302 :                    ^l;]}                         XQ]}$               
-303 :X->^V;X             ^l;]}                         XQ]}$               
-304 : SAVESTATE:          12
-304 :                    ^l;]}                         ^V;XQ]}$            
-305 :                    l;]}                          V;XQ]}$             
-306 :V->l                l;]}                          V;XQ]}$             
-307 : SAVESTATE:          13
-307 :                    l;]}                          l;XQ]}$             
-308 :                    ;]}                           ;XQ]}$              
-309 :                    ]}                            XQ]}$               
-310 : TNS_NORULECHAIN/NS_NORULE
-310 : RESSTATE            
-310 :                    l;]}                          V;XQ]}$             
-311 : TNS_NORULECHAIN/NS_NORULE
-311 : RESSTATE            
-311 :                    ^l;]}                         XQ]}$               
-312 :X->^V;              ^l;]}                         XQ]}$               
-313 : SAVESTATE:          12
-313 :                    ^l;]}                         ^V;Q]}$             
-314 :                    l;]}                          V;Q]}$              
-315 :V->l                l;]}                          V;Q]}$              
-316 : SAVESTATE:          13
-316 :                    l;]}                          l;Q]}$              
-317 :                    ;]}                           ;Q]}$               
-318 :                    ]}                            Q]}$                
-319 : TNS_NORULECHAIN/NS_NORULE
-319 : RESSTATE            
-319 :                    l;]}                          V;Q]}$              
+276 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+277 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+278 : SAVESTATE:          18
+278 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]wYK}$            
+279 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+280 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+281 : SAVESTATE:          19
+281 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]wYK}$          
+282 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+283 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+284 : SAVESTATE:          20
+284 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]wYK}$           
+285 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]wYK}$            
+286 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]wYK}$             
+287 : TNS_NORULECHAIN/NS_NORULE
+287 : RESSTATE            
+287 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+288 : TNS_NORULECHAIN/NS_NORULE
+288 : RESSTATE            
+288 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+289 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+290 : SAVESTATE:          19
+290 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]wYK}$           
+291 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+292 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+293 : SAVESTATE:          20
+293 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]wYK}$            
+294 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]wYK}$             
+295 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]wYK}$              
+296 :                    w[?l>lr[]]nti=l;ci<ld[i=i     wYK}$               
+297 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+298 :Y->[XQ]             [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+299 : SAVESTATE:          21
+299 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [XQ]K}$             
+300 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     XQ]K}$              
+301 : TNS_NORULECHAIN/NS_NORULE
+301 : RESSTATE            
+301 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+302 :Y->[X]              [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+303 : SAVESTATE:          21
+303 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [X]K}$              
+304 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     X]K}$               
+305 : TNS_NORULECHAIN/NS_NORULE
+305 : RESSTATE            
+305 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+306 :Y->[Q]              [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+307 : SAVESTATE:          21
+307 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [Q]K}$              
+308 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     Q]K}$               
+309 : TNS_NORULECHAIN/NS_NORULE
+309 : RESSTATE            
+309 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+310 :Y->[]               [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+311 : SAVESTATE:          21
+311 :                    [?l>lr[]]nti=l;ci<ld[i=i+     []K}$               
+312 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     ]K}$                
+313 : TS_NOK/NS_NORULECHAIN
+313 : RESSTATE            
+313 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+314 : TNS_NORULECHAIN/NS_NORULE
+314 : RESSTATE            
+314 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+315 : TNS_NORULECHAIN/NS_NORULE
+315 : RESSTATE            
+315 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+316 : TNS_NORULECHAIN/NS_NORULE
+316 : RESSTATE            
+316 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+317 :Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+318 : SAVESTATE:          18
+318 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]wYK}$            
+319 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]wYK}$             
 320 : TNS_NORULECHAIN/NS_NORULE
 320 : RESSTATE            
-320 :                    ^l;]}                         XQ]}$               
-321 : TNS_NORULECHAIN/NS_NORULE
-321 : RESSTATE            
-321 :                    [^l;]}                        Y}$                 
-322 :Y->[X]              [^l;]}                        Y}$                 
-323 : SAVESTATE:          11
-323 :                    [^l;]}                        [X]}$               
-324 :                    ^l;]}                         X]}$                
-325 :X->^V;X             ^l;]}                         X]}$                
-326 : SAVESTATE:          12
-326 :                    ^l;]}                         ^V;X]}$             
-327 :                    l;]}                          V;X]}$              
-328 :V->l                l;]}                          V;X]}$              
-329 : SAVESTATE:          13
-329 :                    l;]}                          l;X]}$              
-330 :                    ;]}                           ;X]}$               
-331 :                    ]}                            X]}$                
-332 : TNS_NORULECHAIN/NS_NORULE
-332 : RESSTATE            
-332 :                    l;]}                          V;X]}$              
-333 : TNS_NORULECHAIN/NS_NORULE
-333 : RESSTATE            
-333 :                    ^l;]}                         X]}$                
-334 :X->^V;              ^l;]}                         X]}$                
-335 : SAVESTATE:          12
-335 :                    ^l;]}                         ^V;]}$              
-336 :                    l;]}                          V;]}$               
-337 :V->l                l;]}                          V;]}$               
-338 : SAVESTATE:          13
-338 :                    l;]}                          l;]}$               
-339 :                    ;]}                           ;]}$                
-340 :                    ]}                            ]}$                 
-341 :                    }                             }$                  
-342 :                                                  $                   
-343 : LENTA_END           
-344 : ------>LENTA_END    
+320 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+321 :Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+322 : SAVESTATE:          18
+322 :                    [^l;]w[?l>lr[]]nti=l;ci<l     []wYK}$             
+323 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]wYK}$              
+324 : TS_NOK/NS_NORULECHAIN
+324 : RESSTATE            
+324 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+325 : TNS_NORULECHAIN/NS_NORULE
+325 : RESSTATE            
+325 :                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+326 : TNS_NORULECHAIN/NS_NORULE
+326 : RESSTATE            
+326 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+327 : TNS_NORULECHAIN/NS_NORULE
+327 : RESSTATE            
+327 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+328 : TNS_NORULECHAIN/NS_NORULE
+328 : RESSTATE            
+328 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+329 :K->?ZR              ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+330 : SAVESTATE:          14
+330 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     ?ZR}$               
+331 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+332 :Z->iLi              i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+333 : SAVESTATE:          15
+333 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLiR}$              
+334 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+335 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+336 : SAVESTATE:          16
+336 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &iR}$               
+337 :                    lr[^l;]w[?l>lr[]]nti=l;ci     iR}$                
+338 : TS_NOK/NS_NORULECHAIN
+338 : RESSTATE            
+338 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+339 : TNS_NORULECHAIN/NS_NORULE
+339 : RESSTATE            
+339 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+340 :Z->iLl              i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+341 : SAVESTATE:          15
+341 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLlR}$              
+342 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+343 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+344 : SAVESTATE:          16
+344 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &lR}$               
+345 :                    lr[^l;]w[?l>lr[]]nti=l;ci     lR}$                
+346 :                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+347 :R->rY               r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+348 : SAVESTATE:          17
+348 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rY}$                
+349 :                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+350 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+351 : SAVESTATE:          18
+351 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]}$              
+352 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+353 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+354 : SAVESTATE:          19
+354 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]}$            
+355 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+356 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+357 : SAVESTATE:          20
+357 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]}$             
+358 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]}$              
+359 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]}$               
+360 : TNS_NORULECHAIN/NS_NORULE
+360 : RESSTATE            
+360 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+361 : TNS_NORULECHAIN/NS_NORULE
+361 : RESSTATE            
+361 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+362 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+363 : SAVESTATE:          19
+363 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]}$             
+364 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+365 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+366 : SAVESTATE:          20
+366 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]}$              
+367 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]}$               
+368 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]}$                
+369 : TNS_NORULECHAIN/NS_NORULE
+369 : RESSTATE            
+369 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+370 : TNS_NORULECHAIN/NS_NORULE
+370 : RESSTATE            
+370 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+371 : TNS_NORULECHAIN/NS_NORULE
+371 : RESSTATE            
+371 :                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+372 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+373 : SAVESTATE:          18
+373 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]}$               
+374 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+375 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+376 : SAVESTATE:          19
+376 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]}$             
+377 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+378 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+379 : SAVESTATE:          20
+379 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]}$              
+380 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]}$               
+381 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]}$                
+382 : TNS_NORULECHAIN/NS_NORULE
+382 : RESSTATE            
+382 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+383 : TNS_NORULECHAIN/NS_NORULE
+383 : RESSTATE            
+383 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+384 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+385 : SAVESTATE:          19
+385 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]}$              
+386 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+387 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+388 : SAVESTATE:          20
+388 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]}$               
+389 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]}$                
+390 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]}$                 
+391 :                    w[?l>lr[]]nti=l;ci<ld[i=i     }$                  
+392 : TS_NOK/NS_NORULECHAIN
+392 : RESSTATE            
+392 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+393 : TNS_NORULECHAIN/NS_NORULE
+393 : RESSTATE            
+393 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+394 : TNS_NORULECHAIN/NS_NORULE
+394 : RESSTATE            
+394 :                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+395 :Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+396 : SAVESTATE:          18
+396 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]}$               
+397 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]}$                
+398 : TNS_NORULECHAIN/NS_NORULE
+398 : RESSTATE            
+398 :                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+399 :Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+400 : SAVESTATE:          18
+400 :                    [^l;]w[?l>lr[]]nti=l;ci<l     []}$                
+401 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]}$                 
+402 : TS_NOK/NS_NORULECHAIN
+402 : RESSTATE            
+402 :                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+403 : TNS_NORULECHAIN/NS_NORULE
+403 : RESSTATE            
+403 :                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+404 :R->rYwY             r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+405 : SAVESTATE:          17
+405 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rYwY}$              
+406 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+407 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+408 : SAVESTATE:          18
+408 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]wY}$            
+409 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+410 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+411 : SAVESTATE:          19
+411 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]wY}$          
+412 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+413 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+414 : SAVESTATE:          20
+414 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]wY}$           
+415 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]wY}$            
+416 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]wY}$             
+417 : TNS_NORULECHAIN/NS_NORULE
+417 : RESSTATE            
+417 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+418 : TNS_NORULECHAIN/NS_NORULE
+418 : RESSTATE            
+418 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+419 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+420 : SAVESTATE:          19
+420 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]wY}$           
+421 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+422 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+423 : SAVESTATE:          20
+423 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]wY}$            
+424 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]wY}$             
+425 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]wY}$              
+426 : TNS_NORULECHAIN/NS_NORULE
+426 : RESSTATE            
+426 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+427 : TNS_NORULECHAIN/NS_NORULE
+427 : RESSTATE            
+427 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+428 : TNS_NORULECHAIN/NS_NORULE
+428 : RESSTATE            
+428 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+429 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+430 : SAVESTATE:          18
+430 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]wY}$             
+431 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+432 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+433 : SAVESTATE:          19
+433 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]wY}$           
+434 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+435 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+436 : SAVESTATE:          20
+436 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]wY}$            
+437 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]wY}$             
+438 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]wY}$              
+439 : TNS_NORULECHAIN/NS_NORULE
+439 : RESSTATE            
+439 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+440 : TNS_NORULECHAIN/NS_NORULE
+440 : RESSTATE            
+440 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+441 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+442 : SAVESTATE:          19
+442 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]wY}$            
+443 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+444 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+445 : SAVESTATE:          20
+445 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]wY}$             
+446 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]wY}$              
+447 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]wY}$               
+448 :                    w[?l>lr[]]nti=l;ci<ld[i=i     wY}$                
+449 :                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+450 :Y->[XQ]             [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+451 : SAVESTATE:          21
+451 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [XQ]}$              
+452 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     XQ]}$               
+453 : TNS_NORULECHAIN/NS_NORULE
+453 : RESSTATE            
+453 :                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+454 :Y->[X]              [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+455 : SAVESTATE:          21
+455 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [X]}$               
+456 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     X]}$                
+457 : TNS_NORULECHAIN/NS_NORULE
+457 : RESSTATE            
+457 :                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+458 :Y->[Q]              [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+459 : SAVESTATE:          21
+459 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [Q]}$               
+460 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     Q]}$                
+461 : TNS_NORULECHAIN/NS_NORULE
+461 : RESSTATE            
+461 :                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+462 :Y->[]               [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+463 : SAVESTATE:          21
+463 :                    [?l>lr[]]nti=l;ci<ld[i=i+     []}$                
+464 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     ]}$                 
+465 : TS_NOK/NS_NORULECHAIN
+465 : RESSTATE            
+465 :                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+466 : TNS_NORULECHAIN/NS_NORULE
+466 : RESSTATE            
+466 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+467 : TNS_NORULECHAIN/NS_NORULE
+467 : RESSTATE            
+467 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+468 : TNS_NORULECHAIN/NS_NORULE
+468 : RESSTATE            
+468 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+469 :Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+470 : SAVESTATE:          18
+470 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]wY}$             
+471 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]wY}$              
+472 : TNS_NORULECHAIN/NS_NORULE
+472 : RESSTATE            
+472 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+473 :Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+474 : SAVESTATE:          18
+474 :                    [^l;]w[?l>lr[]]nti=l;ci<l     []wY}$              
+475 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]wY}$               
+476 : TS_NOK/NS_NORULECHAIN
+476 : RESSTATE            
+476 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+477 : TNS_NORULECHAIN/NS_NORULE
+477 : RESSTATE            
+477 :                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+478 : TNS_NORULECHAIN/NS_NORULE
+478 : RESSTATE            
+478 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+479 : TNS_NORULECHAIN/NS_NORULE
+479 : RESSTATE            
+479 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+480 : TNS_NORULECHAIN/NS_NORULE
+480 : RESSTATE            
+480 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+481 : TNS_NORULECHAIN/NS_NORULE
+481 : RESSTATE            
+481 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+482 : TNS_NORULECHAIN/NS_NORULE
+482 : RESSTATE            
+482 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+483 : TNS_NORULECHAIN/NS_NORULE
+483 : RESSTATE            
+483 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+484 :Y->[Q]              [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+485 : SAVESTATE:          11
+485 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [Q]K}$              
+486 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     Q]K}$               
+487 : TNS_NORULECHAIN/NS_NORULE
+487 : RESSTATE            
+487 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+488 :Y->[]               [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+489 : SAVESTATE:          11
+489 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     []K}$               
+490 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ]K}$                
+491 : TS_NOK/NS_NORULECHAIN
+491 : RESSTATE            
+491 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+492 : TNS_NORULECHAIN/NS_NORULE
+492 : RESSTATE            
+492 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+493 : TNS_NORULECHAIN/NS_NORULE
+493 : RESSTATE            
+493 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+494 : TNS_NORULECHAIN/NS_NORULE
+494 : RESSTATE            
+494 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+495 :Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+496 : SAVESTATE:          8
+496 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]wYK}$            
+497 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]wYK}$             
+498 : TNS_NORULECHAIN/NS_NORULE
+498 : RESSTATE            
+498 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+499 :Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+500 : SAVESTATE:          8
+500 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     []wYK}$             
+501 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]wYK}$              
+502 : TS_NOK/NS_NORULECHAIN
+502 : RESSTATE            
+502 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+503 : TNS_NORULECHAIN/NS_NORULE
+503 : RESSTATE            
+503 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+504 : TNS_NORULECHAIN/NS_NORULE
+504 : RESSTATE            
+504 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+505 : TNS_NORULECHAIN/NS_NORULE
+505 : RESSTATE            
+505 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+506 : TNS_NORULECHAIN/NS_NORULE
+506 : RESSTATE            
+506 :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+507 :K->?ZR              ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+508 : SAVESTATE:          4
+508 :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     ?ZR}$               
+509 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+510 :Z->iLi              i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+511 : SAVESTATE:          5
+511 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLiR}$              
+512 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+513 :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+514 : SAVESTATE:          6
+514 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &iR}$               
+515 :                    lr[^l;]w[^l;]?i&lr[^l;]w[     iR}$                
+516 : TS_NOK/NS_NORULECHAIN
+516 : RESSTATE            
+516 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+517 : TNS_NORULECHAIN/NS_NORULE
+517 : RESSTATE            
+517 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+518 :Z->iLl              i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+519 : SAVESTATE:          5
+519 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLlR}$              
+520 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+521 :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+522 : SAVESTATE:          6
+522 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &lR}$               
+523 :                    lr[^l;]w[^l;]?i&lr[^l;]w[     lR}$                
+524 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+525 :R->rY               r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+526 : SAVESTATE:          7
+526 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rY}$                
+527 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+528 :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+529 : SAVESTATE:          8
+529 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]}$              
+530 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+531 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+532 : SAVESTATE:          9
+532 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]}$            
+533 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+534 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+535 : SAVESTATE:          10
+535 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]}$             
+536 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]}$              
+537 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]}$               
+538 : TNS_NORULECHAIN/NS_NORULE
+538 : RESSTATE            
+538 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+539 : TNS_NORULECHAIN/NS_NORULE
+539 : RESSTATE            
+539 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+540 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+541 : SAVESTATE:          9
+541 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]}$             
+542 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+543 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+544 : SAVESTATE:          10
+544 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]}$              
+545 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]}$               
+546 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]}$                
+547 : TNS_NORULECHAIN/NS_NORULE
+547 : RESSTATE            
+547 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+548 : TNS_NORULECHAIN/NS_NORULE
+548 : RESSTATE            
+548 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+549 : TNS_NORULECHAIN/NS_NORULE
+549 : RESSTATE            
+549 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+550 :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+551 : SAVESTATE:          8
+551 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]}$               
+552 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+553 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+554 : SAVESTATE:          9
+554 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]}$             
+555 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+556 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+557 : SAVESTATE:          10
+557 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]}$              
+558 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]}$               
+559 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]}$                
+560 : TNS_NORULECHAIN/NS_NORULE
+560 : RESSTATE            
+560 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+561 : TNS_NORULECHAIN/NS_NORULE
+561 : RESSTATE            
+561 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+562 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+563 : SAVESTATE:          9
+563 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]}$              
+564 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+565 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+566 : SAVESTATE:          10
+566 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]}$               
+567 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]}$                
+568 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]}$                 
+569 :                    w[^l;]?i&lr[^l;]w[?l>lr[]     }$                  
+570 : TS_NOK/NS_NORULECHAIN
+570 : RESSTATE            
+570 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+571 : TNS_NORULECHAIN/NS_NORULE
+571 : RESSTATE            
+571 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+572 : TNS_NORULECHAIN/NS_NORULE
+572 : RESSTATE            
+572 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+573 :Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+574 : SAVESTATE:          8
+574 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]}$               
+575 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]}$                
+576 : TNS_NORULECHAIN/NS_NORULE
+576 : RESSTATE            
+576 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+577 :Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+578 : SAVESTATE:          8
+578 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     []}$                
+579 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]}$                 
+580 : TS_NOK/NS_NORULECHAIN
+580 : RESSTATE            
+580 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+581 : TNS_NORULECHAIN/NS_NORULE
+581 : RESSTATE            
+581 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+582 :R->rYwY             r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+583 : SAVESTATE:          7
+583 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYwY}$              
+584 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+585 :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+586 : SAVESTATE:          8
+586 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]wY}$            
+587 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+588 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+589 : SAVESTATE:          9
+589 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]wY}$          
+590 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+591 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+592 : SAVESTATE:          10
+592 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]wY}$           
+593 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]wY}$            
+594 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]wY}$             
+595 : TNS_NORULECHAIN/NS_NORULE
+595 : RESSTATE            
+595 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+596 : TNS_NORULECHAIN/NS_NORULE
+596 : RESSTATE            
+596 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+597 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+598 : SAVESTATE:          9
+598 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]wY}$           
+599 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+600 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+601 : SAVESTATE:          10
+601 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]wY}$            
+602 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]wY}$             
+603 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]wY}$              
+604 : TNS_NORULECHAIN/NS_NORULE
+604 : RESSTATE            
+604 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+605 : TNS_NORULECHAIN/NS_NORULE
+605 : RESSTATE            
+605 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+606 : TNS_NORULECHAIN/NS_NORULE
+606 : RESSTATE            
+606 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+607 :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+608 : SAVESTATE:          8
+608 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]wY}$             
+609 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+610 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+611 : SAVESTATE:          9
+611 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]wY}$           
+612 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+613 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+614 : SAVESTATE:          10
+614 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]wY}$            
+615 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]wY}$             
+616 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]wY}$              
+617 : TNS_NORULECHAIN/NS_NORULE
+617 : RESSTATE            
+617 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+618 : TNS_NORULECHAIN/NS_NORULE
+618 : RESSTATE            
+618 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+619 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+620 : SAVESTATE:          9
+620 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]wY}$            
+621 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+622 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+623 : SAVESTATE:          10
+623 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]wY}$             
+624 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]wY}$              
+625 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]wY}$               
+626 :                    w[^l;]?i&lr[^l;]w[?l>lr[]     wY}$                
+627 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+628 :Y->[XQ]             [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+629 : SAVESTATE:          11
+629 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [XQ]}$              
+630 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+631 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+632 : SAVESTATE:          12
+632 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;XQ]}$            
+633 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+634 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+635 : SAVESTATE:          13
+635 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;XQ]}$             
+636 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;XQ]}$              
+637 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     XQ]}$               
+638 : TNS_NORULECHAIN/NS_NORULE
+638 : RESSTATE            
+638 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+639 : TNS_NORULECHAIN/NS_NORULE
+639 : RESSTATE            
+639 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+640 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+641 : SAVESTATE:          12
+641 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;Q]}$             
+642 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+643 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+644 : SAVESTATE:          13
+644 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;Q]}$              
+645 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;Q]}$               
+646 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     Q]}$                
+647 : TNS_NORULECHAIN/NS_NORULE
+647 : RESSTATE            
+647 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+648 : TNS_NORULECHAIN/NS_NORULE
+648 : RESSTATE            
+648 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+649 : TNS_NORULECHAIN/NS_NORULE
+649 : RESSTATE            
+649 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+650 :Y->[X]              [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+651 : SAVESTATE:          11
+651 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [X]}$               
+652 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+653 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+654 : SAVESTATE:          12
+654 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;X]}$             
+655 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+656 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+657 : SAVESTATE:          13
+657 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;X]}$              
+658 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;X]}$               
+659 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     X]}$                
+660 : TNS_NORULECHAIN/NS_NORULE
+660 : RESSTATE            
+660 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+661 : TNS_NORULECHAIN/NS_NORULE
+661 : RESSTATE            
+661 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+662 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+663 : SAVESTATE:          12
+663 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;]}$              
+664 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+665 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+666 : SAVESTATE:          13
+666 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;]}$               
+667 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;]}$                
+668 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     ]}$                 
+669 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     }$                  
+670 : TS_NOK/NS_NORULECHAIN
+670 : RESSTATE            
+670 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+671 : TNS_NORULECHAIN/NS_NORULE
+671 : RESSTATE            
+671 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+672 : TNS_NORULECHAIN/NS_NORULE
+672 : RESSTATE            
+672 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+673 :Y->[Q]              [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+674 : SAVESTATE:          11
+674 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [Q]}$               
+675 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     Q]}$                
+676 : TNS_NORULECHAIN/NS_NORULE
+676 : RESSTATE            
+676 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+677 :Y->[]               [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+678 : SAVESTATE:          11
+678 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     []}$                
+679 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ]}$                 
+680 : TS_NOK/NS_NORULECHAIN
+680 : RESSTATE            
+680 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+681 : TNS_NORULECHAIN/NS_NORULE
+681 : RESSTATE            
+681 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+682 : TNS_NORULECHAIN/NS_NORULE
+682 : RESSTATE            
+682 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+683 : TNS_NORULECHAIN/NS_NORULE
+683 : RESSTATE            
+683 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+684 :Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+685 : SAVESTATE:          8
+685 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]wY}$             
+686 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]wY}$              
+687 : TNS_NORULECHAIN/NS_NORULE
+687 : RESSTATE            
+687 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+688 :Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+689 : SAVESTATE:          8
+689 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     []wY}$              
+690 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]wY}$               
+691 : TS_NOK/NS_NORULECHAIN
+691 : RESSTATE            
+691 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+692 : TNS_NORULECHAIN/NS_NORULE
+692 : RESSTATE            
+692 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+693 : TNS_NORULECHAIN/NS_NORULE
+693 : RESSTATE            
+693 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+694 : TNS_NORULECHAIN/NS_NORULE
+694 : RESSTATE            
+694 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+695 : TNS_NORULECHAIN/NS_NORULE
+695 : RESSTATE            
+695 :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+696 : TNS_NORULECHAIN/NS_NORULE
+696 : RESSTATE            
+696 :                    l;?i&lr[^l;]w[^l;]?i&lr[^     V;K}$               
+697 : TNS_NORULECHAIN/NS_NORULE
+697 : RESSTATE            
+697 :                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+698 :K->nti=W;K          nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+699 : SAVESTATE:          2
+699 :                    nti=l;?i&lr[^l;]w[^l;]?i&     nti=W;K}$           
+700 :                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti=W;K}$            
+701 :                    i=l;?i&lr[^l;]w[^l;]?i&lr     i=W;K}$             
+702 :                    =l;?i&lr[^l;]w[^l;]?i&lr[     =W;K}$              
+703 :                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;K}$               
+704 :W->l                l;?i&lr[^l;]w[^l;]?i&lr[^     W;K}$               
+705 : SAVESTATE:          3
+705 :                    l;?i&lr[^l;]w[^l;]?i&lr[^     l;K}$               
+706 :                    ;?i&lr[^l;]w[^l;]?i&lr[^l     ;K}$                
+707 :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+708 :K->?ZRK             ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+709 : SAVESTATE:          4
+709 :                    ?i&lr[^l;]w[^l;]?i&lr[^l;     ?ZRK}$              
+710 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+711 :Z->iLi              i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+712 : SAVESTATE:          5
+712 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLiRK}$             
+713 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
+714 :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
+715 : SAVESTATE:          6
+715 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &iRK}$              
+716 :                    lr[^l;]w[^l;]?i&lr[^l;]w[     iRK}$               
+717 : TS_NOK/NS_NORULECHAIN
+717 : RESSTATE            
+717 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiRK}$              
+718 : TNS_NORULECHAIN/NS_NORULE
+718 : RESSTATE            
+718 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+719 :Z->iLl              i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+720 : SAVESTATE:          5
+720 :                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLlRK}$             
+721 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+722 :L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+723 : SAVESTATE:          6
+723 :                    &lr[^l;]w[^l;]?i&lr[^l;]w     &lRK}$              
+724 :                    lr[^l;]w[^l;]?i&lr[^l;]w[     lRK}$               
+725 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+726 :R->rY               r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+727 : SAVESTATE:          7
+727 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYK}$               
+728 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+729 :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+730 : SAVESTATE:          8
+730 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]K}$             
+731 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+732 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+733 : SAVESTATE:          9
+733 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]K}$           
+734 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
+735 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
+736 : SAVESTATE:          10
+736 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]K}$            
+737 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]K}$             
+738 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]K}$              
+739 : TNS_NORULECHAIN/NS_NORULE
+739 : RESSTATE            
+739 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]K}$            
+740 : TNS_NORULECHAIN/NS_NORULE
+740 : RESSTATE            
+740 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+741 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+742 : SAVESTATE:          9
+742 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]K}$            
+743 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+744 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+745 : SAVESTATE:          10
+745 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]K}$             
+746 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]K}$              
+747 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]K}$               
+748 : TNS_NORULECHAIN/NS_NORULE
+748 : RESSTATE            
+748 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]K}$             
+749 : TNS_NORULECHAIN/NS_NORULE
+749 : RESSTATE            
+749 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]K}$              
+750 : TNS_NORULECHAIN/NS_NORULE
+750 : RESSTATE            
+750 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+751 :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+752 : SAVESTATE:          8
+752 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]K}$              
+753 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+754 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+755 : SAVESTATE:          9
+755 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]K}$            
+756 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+757 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+758 : SAVESTATE:          10
+758 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]K}$             
+759 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]K}$              
+760 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]K}$               
+761 : TNS_NORULECHAIN/NS_NORULE
+761 : RESSTATE            
+761 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]K}$             
+762 : TNS_NORULECHAIN/NS_NORULE
+762 : RESSTATE            
+762 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+763 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+764 : SAVESTATE:          9
+764 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]K}$             
+765 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+766 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+767 : SAVESTATE:          10
+767 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]K}$              
+768 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]K}$               
+769 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]K}$                
+770 :                    w[^l;]?i&lr[^l;]w[?l>lr[]     K}$                 
+771 : TNS_NORULECHAIN/NS_NORULE
+771 : RESSTATE            
+771 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]K}$              
+772 : TNS_NORULECHAIN/NS_NORULE
+772 : RESSTATE            
+772 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]K}$               
+773 : TNS_NORULECHAIN/NS_NORULE
+773 : RESSTATE            
+773 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+774 :Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+775 : SAVESTATE:          8
+775 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]K}$              
+776 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]K}$               
+777 : TNS_NORULECHAIN/NS_NORULE
+777 : RESSTATE            
+777 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+778 :Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+779 : SAVESTATE:          8
+779 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     []K}$               
+780 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]K}$                
+781 : TS_NOK/NS_NORULECHAIN
+781 : RESSTATE            
+781 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YK}$                
+782 : TNS_NORULECHAIN/NS_NORULE
+782 : RESSTATE            
+782 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+783 :R->rYwY             r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+784 : SAVESTATE:          7
+784 :                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYwYK}$             
+785 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+786 :Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+787 : SAVESTATE:          8
+787 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]wYK}$           
+788 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+789 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+790 : SAVESTATE:          9
+790 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]wYK}$         
+791 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+792 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+793 : SAVESTATE:          10
+793 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]wYK}$          
+794 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]wYK}$           
+795 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]wYK}$            
+796 : TNS_NORULECHAIN/NS_NORULE
+796 : RESSTATE            
+796 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wYK}$          
+797 : TNS_NORULECHAIN/NS_NORULE
+797 : RESSTATE            
+797 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+798 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+799 : SAVESTATE:          9
+799 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]wYK}$          
+800 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
+801 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
+802 : SAVESTATE:          10
+802 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]wYK}$           
+803 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]wYK}$            
+804 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]wYK}$             
+805 : TNS_NORULECHAIN/NS_NORULE
+805 : RESSTATE            
+805 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wYK}$           
+806 : TNS_NORULECHAIN/NS_NORULE
+806 : RESSTATE            
+806 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wYK}$            
+807 : TNS_NORULECHAIN/NS_NORULE
+807 : RESSTATE            
+807 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+808 :Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+809 : SAVESTATE:          8
+809 :                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]wYK}$            
+810 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+811 :X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+812 : SAVESTATE:          9
+812 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]wYK}$          
+813 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+814 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+815 : SAVESTATE:          10
+815 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]wYK}$           
+816 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]wYK}$            
+817 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]wYK}$             
+818 : TNS_NORULECHAIN/NS_NORULE
+818 : RESSTATE            
+818 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wYK}$           
+819 : TNS_NORULECHAIN/NS_NORULE
+819 : RESSTATE            
+819 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+820 :X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+821 : SAVESTATE:          9
+821 :                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]wYK}$           
+822 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+823 :V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+824 : SAVESTATE:          10
+824 :                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]wYK}$            
+825 :                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]wYK}$             
+826 :                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]wYK}$              
+827 :                    w[^l;]?i&lr[^l;]w[?l>lr[]     wYK}$               
+828 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+829 :Y->[XQ]             [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+830 : SAVESTATE:          11
+830 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [XQ]K}$             
+831 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+832 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+833 : SAVESTATE:          12
+833 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;XQ]K}$           
+834 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+835 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+836 : SAVESTATE:          13
+836 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;XQ]K}$            
+837 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;XQ]K}$             
+838 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     XQ]K}$              
+839 : TNS_NORULECHAIN/NS_NORULE
+839 : RESSTATE            
+839 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]K}$            
+840 : TNS_NORULECHAIN/NS_NORULE
+840 : RESSTATE            
+840 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+841 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+842 : SAVESTATE:          12
+842 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;Q]K}$            
+843 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
+844 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
+845 : SAVESTATE:          13
+845 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;Q]K}$             
+846 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;Q]K}$              
+847 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     Q]K}$               
+848 : TNS_NORULECHAIN/NS_NORULE
+848 : RESSTATE            
+848 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]K}$             
+849 : TNS_NORULECHAIN/NS_NORULE
+849 : RESSTATE            
+849 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]K}$              
+850 : TNS_NORULECHAIN/NS_NORULE
+850 : RESSTATE            
+850 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+851 :Y->[X]              [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+852 : SAVESTATE:          11
+852 :                    [^l;]?i&lr[^l;]w[?l>lr[]]     [X]K}$              
+853 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+854 :X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+855 : SAVESTATE:          12
+855 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;X]K}$            
+856 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+857 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+858 : SAVESTATE:          13
+858 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;X]K}$             
+859 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;X]K}$              
+860 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     X]K}$               
+861 : TNS_NORULECHAIN/NS_NORULE
+861 : RESSTATE            
+861 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]K}$             
+862 : TNS_NORULECHAIN/NS_NORULE
+862 : RESSTATE            
+862 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+863 :X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+864 : SAVESTATE:          12
+864 :                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;]K}$             
+865 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+866 :V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+867 : SAVESTATE:          13
+867 :                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;]K}$              
+868 :                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;]K}$               
+869 :                    ]?i&lr[^l;]w[?l>lr[]]nti=     ]K}$                
+870 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+871 :K->?ZRK             ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+872 : SAVESTATE:          14
+872 :                    ?i&lr[^l;]w[?l>lr[]]nti=l     ?ZRK}$              
+873 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+874 :Z->iLi              i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+875 : SAVESTATE:          15
+875 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLiRK}$             
+876 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+877 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+878 : SAVESTATE:          16
+878 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &iRK}$              
+879 :                    lr[^l;]w[?l>lr[]]nti=l;ci     iRK}$               
+880 : TS_NOK/NS_NORULECHAIN
+880 : RESSTATE            
+880 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LiRK}$              
+881 : TNS_NORULECHAIN/NS_NORULE
+881 : RESSTATE            
+881 :                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+882 :Z->iLl              i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+883 : SAVESTATE:          15
+883 :                    i&lr[^l;]w[?l>lr[]]nti=l;     iLlRK}$             
+884 :                    &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+885 :L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+886 : SAVESTATE:          16
+886 :                    &lr[^l;]w[?l>lr[]]nti=l;c     &lRK}$              
+887 :                    lr[^l;]w[?l>lr[]]nti=l;ci     lRK}$               
+888 :                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+889 :R->rY               r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+890 : SAVESTATE:          17
+890 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rYK}$               
+891 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+892 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+893 : SAVESTATE:          18
+893 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]K}$             
+894 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+895 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+896 : SAVESTATE:          19
+896 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]K}$           
+897 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+898 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+899 : SAVESTATE:          20
+899 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]K}$            
+900 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]K}$             
+901 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]K}$              
+902 : TNS_NORULECHAIN/NS_NORULE
+902 : RESSTATE            
+902 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]K}$            
+903 : TNS_NORULECHAIN/NS_NORULE
+903 : RESSTATE            
+903 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+904 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+905 : SAVESTATE:          19
+905 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]K}$            
+906 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+907 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+908 : SAVESTATE:          20
+908 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]K}$             
+909 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]K}$              
+910 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]K}$               
+911 : TNS_NORULECHAIN/NS_NORULE
+911 : RESSTATE            
+911 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]K}$             
+912 : TNS_NORULECHAIN/NS_NORULE
+912 : RESSTATE            
+912 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]K}$              
+913 : TNS_NORULECHAIN/NS_NORULE
+913 : RESSTATE            
+913 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+914 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+915 : SAVESTATE:          18
+915 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]K}$              
+916 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+917 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+918 : SAVESTATE:          19
+918 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]K}$            
+919 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+920 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+921 : SAVESTATE:          20
+921 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]K}$             
+922 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]K}$              
+923 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]K}$               
+924 : TNS_NORULECHAIN/NS_NORULE
+924 : RESSTATE            
+924 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]K}$             
+925 : TNS_NORULECHAIN/NS_NORULE
+925 : RESSTATE            
+925 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+926 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+927 : SAVESTATE:          19
+927 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]K}$             
+928 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+929 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+930 : SAVESTATE:          20
+930 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]K}$              
+931 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]K}$               
+932 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]K}$                
+933 :                    w[?l>lr[]]nti=l;ci<ld[i=i     K}$                 
+934 : TNS_NORULECHAIN/NS_NORULE
+934 : RESSTATE            
+934 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]K}$              
+935 : TNS_NORULECHAIN/NS_NORULE
+935 : RESSTATE            
+935 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]K}$               
+936 : TNS_NORULECHAIN/NS_NORULE
+936 : RESSTATE            
+936 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+937 :Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+938 : SAVESTATE:          18
+938 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]K}$              
+939 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]K}$               
+940 : TNS_NORULECHAIN/NS_NORULE
+940 : RESSTATE            
+940 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+941 :Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+942 : SAVESTATE:          18
+942 :                    [^l;]w[?l>lr[]]nti=l;ci<l     []K}$               
+943 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]K}$                
+944 : TS_NOK/NS_NORULECHAIN
+944 : RESSTATE            
+944 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YK}$                
+945 : TNS_NORULECHAIN/NS_NORULE
+945 : RESSTATE            
+945 :                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+946 :R->rYwY             r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+947 : SAVESTATE:          17
+947 :                    r[^l;]w[?l>lr[]]nti=l;ci<     rYwYK}$             
+948 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+949 :Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+950 : SAVESTATE:          18
+950 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]wYK}$           
+951 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+952 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+953 : SAVESTATE:          19
+953 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]wYK}$         
+954 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+955 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+956 : SAVESTATE:          20
+956 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]wYK}$          
+957 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]wYK}$           
+958 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]wYK}$            
+959 : TNS_NORULECHAIN/NS_NORULE
+959 : RESSTATE            
+959 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wYK}$          
+960 : TNS_NORULECHAIN/NS_NORULE
+960 : RESSTATE            
+960 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+961 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+962 : SAVESTATE:          19
+962 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]wYK}$          
+963 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+964 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+965 : SAVESTATE:          20
+965 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]wYK}$           
+966 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]wYK}$            
+967 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]wYK}$             
+968 : TNS_NORULECHAIN/NS_NORULE
+968 : RESSTATE            
+968 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wYK}$           
+969 : TNS_NORULECHAIN/NS_NORULE
+969 : RESSTATE            
+969 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wYK}$            
+970 : TNS_NORULECHAIN/NS_NORULE
+970 : RESSTATE            
+970 :                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+971 :Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+972 : SAVESTATE:          18
+972 :                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]wYK}$            
+973 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+974 :X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+975 : SAVESTATE:          19
+975 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]wYK}$          
+976 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+977 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+978 : SAVESTATE:          20
+978 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]wYK}$           
+979 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]wYK}$            
+980 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]wYK}$             
+981 : TNS_NORULECHAIN/NS_NORULE
+981 : RESSTATE            
+981 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wYK}$           
+982 : TNS_NORULECHAIN/NS_NORULE
+982 : RESSTATE            
+982 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+983 :X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+984 : SAVESTATE:          19
+984 :                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]wYK}$           
+985 :                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+986 :V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+987 : SAVESTATE:          20
+987 :                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]wYK}$            
+988 :                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]wYK}$             
+989 :                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]wYK}$              
+990 :                    w[?l>lr[]]nti=l;ci<ld[i=i     wYK}$               
+991 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+992 :Y->[XQ]             [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+993 : SAVESTATE:          21
+993 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [XQ]K}$             
+994 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     XQ]K}$              
+995 : TNS_NORULECHAIN/NS_NORULE
+995 : RESSTATE            
+995 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+996 :Y->[X]              [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+997 : SAVESTATE:          21
+997 :                    [?l>lr[]]nti=l;ci<ld[i=i+     [X]K}$              
+998 :                    ?l>lr[]]nti=l;ci<ld[i=i+l     X]K}$               
+999 : TNS_NORULECHAIN/NS_NORULE
+999 : RESSTATE            
+999 :                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+1000:Y->[Q]              [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+1001: SAVESTATE:          21
+1001:                    [?l>lr[]]nti=l;ci<ld[i=i+     [Q]K}$              
+1002:                    ?l>lr[]]nti=l;ci<ld[i=i+l     Q]K}$               
+1003: TNS_NORULECHAIN/NS_NORULE
+1003: RESSTATE            
+1003:                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+1004:Y->[]               [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+1005: SAVESTATE:          21
+1005:                    [?l>lr[]]nti=l;ci<ld[i=i+     []K}$               
+1006:                    ?l>lr[]]nti=l;ci<ld[i=i+l     ]K}$                
+1007: TS_NOK/NS_NORULECHAIN
+1007: RESSTATE            
+1007:                    [?l>lr[]]nti=l;ci<ld[i=i+     YK}$                
+1008: TNS_NORULECHAIN/NS_NORULE
+1008: RESSTATE            
+1008:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wYK}$            
+1009: TNS_NORULECHAIN/NS_NORULE
+1009: RESSTATE            
+1009:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wYK}$             
+1010: TNS_NORULECHAIN/NS_NORULE
+1010: RESSTATE            
+1010:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+1011:Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+1012: SAVESTATE:          18
+1012:                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]wYK}$            
+1013:                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]wYK}$             
+1014: TNS_NORULECHAIN/NS_NORULE
+1014: RESSTATE            
+1014:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+1015:Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+1016: SAVESTATE:          18
+1016:                    [^l;]w[?l>lr[]]nti=l;ci<l     []wYK}$             
+1017:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]wYK}$              
+1018: TS_NOK/NS_NORULECHAIN
+1018: RESSTATE            
+1018:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwYK}$              
+1019: TNS_NORULECHAIN/NS_NORULE
+1019: RESSTATE            
+1019:                    r[^l;]w[?l>lr[]]nti=l;ci<     RK}$                
+1020: TNS_NORULECHAIN/NS_NORULE
+1020: RESSTATE            
+1020:                    &lr[^l;]w[?l>lr[]]nti=l;c     LlRK}$              
+1021: TNS_NORULECHAIN/NS_NORULE
+1021: RESSTATE            
+1021:                    i&lr[^l;]w[?l>lr[]]nti=l;     ZRK}$               
+1022: TNS_NORULECHAIN/NS_NORULE
+1022: RESSTATE            
+1022:                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+1023:K->?ZR              ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+1024: SAVESTATE:          14
+1024:                    ?i&lr[^l;]w[?l>lr[]]nti=l     ?ZR}$               
+1025:                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+1026:Z->iLi              i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+1027: SAVESTATE:          15
+1027:                    i&lr[^l;]w[?l>lr[]]nti=l;     iLiR}$              
+1028:                    &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+1029:L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+1030: SAVESTATE:          16
+1030:                    &lr[^l;]w[?l>lr[]]nti=l;c     &iR}$               
+1031:                    lr[^l;]w[?l>lr[]]nti=l;ci     iR}$                
+1032: TS_NOK/NS_NORULECHAIN
+1032: RESSTATE            
+1032:                    &lr[^l;]w[?l>lr[]]nti=l;c     LiR}$               
+1033: TNS_NORULECHAIN/NS_NORULE
+1033: RESSTATE            
+1033:                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+1034:Z->iLl              i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+1035: SAVESTATE:          15
+1035:                    i&lr[^l;]w[?l>lr[]]nti=l;     iLlR}$              
+1036:                    &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+1037:L->&                &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+1038: SAVESTATE:          16
+1038:                    &lr[^l;]w[?l>lr[]]nti=l;c     &lR}$               
+1039:                    lr[^l;]w[?l>lr[]]nti=l;ci     lR}$                
+1040:                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+1041:R->rY               r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+1042: SAVESTATE:          17
+1042:                    r[^l;]w[?l>lr[]]nti=l;ci<     rY}$                
+1043:                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1044:Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1045: SAVESTATE:          18
+1045:                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]}$              
+1046:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+1047:X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+1048: SAVESTATE:          19
+1048:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]}$            
+1049:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+1050:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+1051: SAVESTATE:          20
+1051:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]}$             
+1052:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]}$              
+1053:                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]}$               
+1054: TNS_NORULECHAIN/NS_NORULE
+1054: RESSTATE            
+1054:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]}$             
+1055: TNS_NORULECHAIN/NS_NORULE
+1055: RESSTATE            
+1055:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+1056:X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+1057: SAVESTATE:          19
+1057:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]}$             
+1058:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+1059:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+1060: SAVESTATE:          20
+1060:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]}$              
+1061:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]}$               
+1062:                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]}$                
+1063: TNS_NORULECHAIN/NS_NORULE
+1063: RESSTATE            
+1063:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]}$              
+1064: TNS_NORULECHAIN/NS_NORULE
+1064: RESSTATE            
+1064:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]}$               
+1065: TNS_NORULECHAIN/NS_NORULE
+1065: RESSTATE            
+1065:                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1066:Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1067: SAVESTATE:          18
+1067:                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]}$               
+1068:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+1069:X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+1070: SAVESTATE:          19
+1070:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]}$             
+1071:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+1072:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+1073: SAVESTATE:          20
+1073:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]}$              
+1074:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]}$               
+1075:                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]}$                
+1076: TNS_NORULECHAIN/NS_NORULE
+1076: RESSTATE            
+1076:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]}$              
+1077: TNS_NORULECHAIN/NS_NORULE
+1077: RESSTATE            
+1077:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+1078:X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+1079: SAVESTATE:          19
+1079:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]}$              
+1080:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+1081:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+1082: SAVESTATE:          20
+1082:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]}$               
+1083:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]}$                
+1084:                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]}$                 
+1085:                    w[?l>lr[]]nti=l;ci<ld[i=i     }$                  
+1086: TS_NOK/NS_NORULECHAIN
+1086: RESSTATE            
+1086:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]}$               
+1087: TNS_NORULECHAIN/NS_NORULE
+1087: RESSTATE            
+1087:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]}$                
+1088: TNS_NORULECHAIN/NS_NORULE
+1088: RESSTATE            
+1088:                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1089:Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1090: SAVESTATE:          18
+1090:                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]}$               
+1091:                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]}$                
+1092: TNS_NORULECHAIN/NS_NORULE
+1092: RESSTATE            
+1092:                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1093:Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1094: SAVESTATE:          18
+1094:                    [^l;]w[?l>lr[]]nti=l;ci<l     []}$                
+1095:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]}$                 
+1096: TS_NOK/NS_NORULECHAIN
+1096: RESSTATE            
+1096:                    [^l;]w[?l>lr[]]nti=l;ci<l     Y}$                 
+1097: TNS_NORULECHAIN/NS_NORULE
+1097: RESSTATE            
+1097:                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+1098:R->rYwY             r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+1099: SAVESTATE:          17
+1099:                    r[^l;]w[?l>lr[]]nti=l;ci<     rYwY}$              
+1100:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1101:Y->[XQ]             [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1102: SAVESTATE:          18
+1102:                    [^l;]w[?l>lr[]]nti=l;ci<l     [XQ]wY}$            
+1103:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+1104:X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+1105: SAVESTATE:          19
+1105:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;XQ]wY}$          
+1106:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+1107:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+1108: SAVESTATE:          20
+1108:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;XQ]wY}$           
+1109:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;XQ]wY}$            
+1110:                    ]w[?l>lr[]]nti=l;ci<ld[i=     XQ]wY}$             
+1111: TNS_NORULECHAIN/NS_NORULE
+1111: RESSTATE            
+1111:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;XQ]wY}$           
+1112: TNS_NORULECHAIN/NS_NORULE
+1112: RESSTATE            
+1112:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+1113:X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+1114: SAVESTATE:          19
+1114:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;Q]wY}$           
+1115:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+1116:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+1117: SAVESTATE:          20
+1117:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;Q]wY}$            
+1118:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;Q]wY}$             
+1119:                    ]w[?l>lr[]]nti=l;ci<ld[i=     Q]wY}$              
+1120: TNS_NORULECHAIN/NS_NORULE
+1120: RESSTATE            
+1120:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;Q]wY}$            
+1121: TNS_NORULECHAIN/NS_NORULE
+1121: RESSTATE            
+1121:                    ^l;]w[?l>lr[]]nti=l;ci<ld     XQ]wY}$             
+1122: TNS_NORULECHAIN/NS_NORULE
+1122: RESSTATE            
+1122:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1123:Y->[X]              [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1124: SAVESTATE:          18
+1124:                    [^l;]w[?l>lr[]]nti=l;ci<l     [X]wY}$             
+1125:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+1126:X->^V;X             ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+1127: SAVESTATE:          19
+1127:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;X]wY}$           
+1128:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+1129:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+1130: SAVESTATE:          20
+1130:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;X]wY}$            
+1131:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;X]wY}$             
+1132:                    ]w[?l>lr[]]nti=l;ci<ld[i=     X]wY}$              
+1133: TNS_NORULECHAIN/NS_NORULE
+1133: RESSTATE            
+1133:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;X]wY}$            
+1134: TNS_NORULECHAIN/NS_NORULE
+1134: RESSTATE            
+1134:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+1135:X->^V;              ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+1136: SAVESTATE:          19
+1136:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ^V;]wY}$            
+1137:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+1138:V->l                l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+1139: SAVESTATE:          20
+1139:                    l;]w[?l>lr[]]nti=l;ci<ld[     l;]wY}$             
+1140:                    ;]w[?l>lr[]]nti=l;ci<ld[i     ;]wY}$              
+1141:                    ]w[?l>lr[]]nti=l;ci<ld[i=     ]wY}$               
+1142:                    w[?l>lr[]]nti=l;ci<ld[i=i     wY}$                
+1143:                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1144:Y->[XQ]             [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1145: SAVESTATE:          21
+1145:                    [?l>lr[]]nti=l;ci<ld[i=i+     [XQ]}$              
+1146:                    ?l>lr[]]nti=l;ci<ld[i=i+l     XQ]}$               
+1147: TNS_NORULECHAIN/NS_NORULE
+1147: RESSTATE            
+1147:                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1148:Y->[X]              [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1149: SAVESTATE:          21
+1149:                    [?l>lr[]]nti=l;ci<ld[i=i+     [X]}$               
+1150:                    ?l>lr[]]nti=l;ci<ld[i=i+l     X]}$                
+1151: TNS_NORULECHAIN/NS_NORULE
+1151: RESSTATE            
+1151:                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1152:Y->[Q]              [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1153: SAVESTATE:          21
+1153:                    [?l>lr[]]nti=l;ci<ld[i=i+     [Q]}$               
+1154:                    ?l>lr[]]nti=l;ci<ld[i=i+l     Q]}$                
+1155: TNS_NORULECHAIN/NS_NORULE
+1155: RESSTATE            
+1155:                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1156:Y->[]               [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1157: SAVESTATE:          21
+1157:                    [?l>lr[]]nti=l;ci<ld[i=i+     []}$                
+1158:                    ?l>lr[]]nti=l;ci<ld[i=i+l     ]}$                 
+1159: TS_NOK/NS_NORULECHAIN
+1159: RESSTATE            
+1159:                    [?l>lr[]]nti=l;ci<ld[i=i+     Y}$                 
+1160: TNS_NORULECHAIN/NS_NORULE
+1160: RESSTATE            
+1160:                    l;]w[?l>lr[]]nti=l;ci<ld[     V;]wY}$             
+1161: TNS_NORULECHAIN/NS_NORULE
+1161: RESSTATE            
+1161:                    ^l;]w[?l>lr[]]nti=l;ci<ld     X]wY}$              
+1162: TNS_NORULECHAIN/NS_NORULE
+1162: RESSTATE            
+1162:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1163:Y->[Q]              [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1164: SAVESTATE:          18
+1164:                    [^l;]w[?l>lr[]]nti=l;ci<l     [Q]wY}$             
+1165:                    ^l;]w[?l>lr[]]nti=l;ci<ld     Q]wY}$              
+1166: TNS_NORULECHAIN/NS_NORULE
+1166: RESSTATE            
+1166:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1167:Y->[]               [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1168: SAVESTATE:          18
+1168:                    [^l;]w[?l>lr[]]nti=l;ci<l     []wY}$              
+1169:                    ^l;]w[?l>lr[]]nti=l;ci<ld     ]wY}$               
+1170: TS_NOK/NS_NORULECHAIN
+1170: RESSTATE            
+1170:                    [^l;]w[?l>lr[]]nti=l;ci<l     YwY}$               
+1171: TNS_NORULECHAIN/NS_NORULE
+1171: RESSTATE            
+1171:                    r[^l;]w[?l>lr[]]nti=l;ci<     R}$                 
+1172: TNS_NORULECHAIN/NS_NORULE
+1172: RESSTATE            
+1172:                    &lr[^l;]w[?l>lr[]]nti=l;c     LlR}$               
+1173: TNS_NORULECHAIN/NS_NORULE
+1173: RESSTATE            
+1173:                    i&lr[^l;]w[?l>lr[]]nti=l;     ZR}$                
+1174: TNS_NORULECHAIN/NS_NORULE
+1174: RESSTATE            
+1174:                    ?i&lr[^l;]w[?l>lr[]]nti=l     K}$                 
+1175: TNS_NORULECHAIN/NS_NORULE
+1175: RESSTATE            
+1175:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]K}$              
+1176: TNS_NORULECHAIN/NS_NORULE
+1176: RESSTATE            
+1176:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]K}$               
+1177: TNS_NORULECHAIN/NS_NORULE
+1177: RESSTATE            
+1177:                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+1178:Y->[Q]              [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+1179: SAVESTATE:          11
+1179:                    [^l;]?i&lr[^l;]w[?l>lr[]]     [Q]K}$              
+1180:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     Q]K}$               
+1181: TNS_NORULECHAIN/NS_NORULE
+1181: RESSTATE            
+1181:                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+1182:Y->[]               [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+1183: SAVESTATE:          11
+1183:                    [^l;]?i&lr[^l;]w[?l>lr[]]     []K}$               
+1184:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ]K}$                
+1185: TS_NOK/NS_NORULECHAIN
+1185: RESSTATE            
+1185:                    [^l;]?i&lr[^l;]w[?l>lr[]]     YK}$                
+1186: TNS_NORULECHAIN/NS_NORULE
+1186: RESSTATE            
+1186:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wYK}$            
+1187: TNS_NORULECHAIN/NS_NORULE
+1187: RESSTATE            
+1187:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wYK}$             
+1188: TNS_NORULECHAIN/NS_NORULE
+1188: RESSTATE            
+1188:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+1189:Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+1190: SAVESTATE:          8
+1190:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]wYK}$            
+1191:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]wYK}$             
+1192: TNS_NORULECHAIN/NS_NORULE
+1192: RESSTATE            
+1192:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+1193:Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+1194: SAVESTATE:          8
+1194:                    [^l;]w[^l;]?i&lr[^l;]w[?l     []wYK}$             
+1195:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]wYK}$              
+1196: TS_NOK/NS_NORULECHAIN
+1196: RESSTATE            
+1196:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwYK}$              
+1197: TNS_NORULECHAIN/NS_NORULE
+1197: RESSTATE            
+1197:                    r[^l;]w[^l;]?i&lr[^l;]w[?     RK}$                
+1198: TNS_NORULECHAIN/NS_NORULE
+1198: RESSTATE            
+1198:                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlRK}$              
+1199: TNS_NORULECHAIN/NS_NORULE
+1199: RESSTATE            
+1199:                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZRK}$               
+1200: TNS_NORULECHAIN/NS_NORULE
+1200: RESSTATE            
+1200:                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+1201:K->?ZR              ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+1202: SAVESTATE:          4
+1202:                    ?i&lr[^l;]w[^l;]?i&lr[^l;     ?ZR}$               
+1203:                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+1204:Z->iLi              i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+1205: SAVESTATE:          5
+1205:                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLiR}$              
+1206:                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+1207:L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+1208: SAVESTATE:          6
+1208:                    &lr[^l;]w[^l;]?i&lr[^l;]w     &iR}$               
+1209:                    lr[^l;]w[^l;]?i&lr[^l;]w[     iR}$                
+1210: TS_NOK/NS_NORULECHAIN
+1210: RESSTATE            
+1210:                    &lr[^l;]w[^l;]?i&lr[^l;]w     LiR}$               
+1211: TNS_NORULECHAIN/NS_NORULE
+1211: RESSTATE            
+1211:                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+1212:Z->iLl              i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+1213: SAVESTATE:          5
+1213:                    i&lr[^l;]w[^l;]?i&lr[^l;]     iLlR}$              
+1214:                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+1215:L->&                &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+1216: SAVESTATE:          6
+1216:                    &lr[^l;]w[^l;]?i&lr[^l;]w     &lR}$               
+1217:                    lr[^l;]w[^l;]?i&lr[^l;]w[     lR}$                
+1218:                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+1219:R->rY               r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+1220: SAVESTATE:          7
+1220:                    r[^l;]w[^l;]?i&lr[^l;]w[?     rY}$                
+1221:                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1222:Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1223: SAVESTATE:          8
+1223:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]}$              
+1224:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+1225:X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+1226: SAVESTATE:          9
+1226:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]}$            
+1227:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+1228:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+1229: SAVESTATE:          10
+1229:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]}$             
+1230:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]}$              
+1231:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]}$               
+1232: TNS_NORULECHAIN/NS_NORULE
+1232: RESSTATE            
+1232:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]}$             
+1233: TNS_NORULECHAIN/NS_NORULE
+1233: RESSTATE            
+1233:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+1234:X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+1235: SAVESTATE:          9
+1235:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]}$             
+1236:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+1237:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+1238: SAVESTATE:          10
+1238:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]}$              
+1239:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]}$               
+1240:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]}$                
+1241: TNS_NORULECHAIN/NS_NORULE
+1241: RESSTATE            
+1241:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]}$              
+1242: TNS_NORULECHAIN/NS_NORULE
+1242: RESSTATE            
+1242:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]}$               
+1243: TNS_NORULECHAIN/NS_NORULE
+1243: RESSTATE            
+1243:                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1244:Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1245: SAVESTATE:          8
+1245:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]}$               
+1246:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+1247:X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+1248: SAVESTATE:          9
+1248:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]}$             
+1249:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+1250:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+1251: SAVESTATE:          10
+1251:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]}$              
+1252:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]}$               
+1253:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]}$                
+1254: TNS_NORULECHAIN/NS_NORULE
+1254: RESSTATE            
+1254:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]}$              
+1255: TNS_NORULECHAIN/NS_NORULE
+1255: RESSTATE            
+1255:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+1256:X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+1257: SAVESTATE:          9
+1257:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]}$              
+1258:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+1259:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+1260: SAVESTATE:          10
+1260:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]}$               
+1261:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]}$                
+1262:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]}$                 
+1263:                    w[^l;]?i&lr[^l;]w[?l>lr[]     }$                  
+1264: TS_NOK/NS_NORULECHAIN
+1264: RESSTATE            
+1264:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]}$               
+1265: TNS_NORULECHAIN/NS_NORULE
+1265: RESSTATE            
+1265:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]}$                
+1266: TNS_NORULECHAIN/NS_NORULE
+1266: RESSTATE            
+1266:                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1267:Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1268: SAVESTATE:          8
+1268:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]}$               
+1269:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]}$                
+1270: TNS_NORULECHAIN/NS_NORULE
+1270: RESSTATE            
+1270:                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1271:Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1272: SAVESTATE:          8
+1272:                    [^l;]w[^l;]?i&lr[^l;]w[?l     []}$                
+1273:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]}$                 
+1274: TS_NOK/NS_NORULECHAIN
+1274: RESSTATE            
+1274:                    [^l;]w[^l;]?i&lr[^l;]w[?l     Y}$                 
+1275: TNS_NORULECHAIN/NS_NORULE
+1275: RESSTATE            
+1275:                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+1276:R->rYwY             r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+1277: SAVESTATE:          7
+1277:                    r[^l;]w[^l;]?i&lr[^l;]w[?     rYwY}$              
+1278:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1279:Y->[XQ]             [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1280: SAVESTATE:          8
+1280:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [XQ]wY}$            
+1281:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+1282:X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+1283: SAVESTATE:          9
+1283:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;XQ]wY}$          
+1284:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+1285:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+1286: SAVESTATE:          10
+1286:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;XQ]wY}$           
+1287:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;XQ]wY}$            
+1288:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     XQ]wY}$             
+1289: TNS_NORULECHAIN/NS_NORULE
+1289: RESSTATE            
+1289:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;XQ]wY}$           
+1290: TNS_NORULECHAIN/NS_NORULE
+1290: RESSTATE            
+1290:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+1291:X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+1292: SAVESTATE:          9
+1292:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;Q]wY}$           
+1293:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+1294:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+1295: SAVESTATE:          10
+1295:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;Q]wY}$            
+1296:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;Q]wY}$             
+1297:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     Q]wY}$              
+1298: TNS_NORULECHAIN/NS_NORULE
+1298: RESSTATE            
+1298:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;Q]wY}$            
+1299: TNS_NORULECHAIN/NS_NORULE
+1299: RESSTATE            
+1299:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     XQ]wY}$             
+1300: TNS_NORULECHAIN/NS_NORULE
+1300: RESSTATE            
+1300:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1301:Y->[X]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1302: SAVESTATE:          8
+1302:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [X]wY}$             
+1303:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+1304:X->^V;X             ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+1305: SAVESTATE:          9
+1305:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;X]wY}$           
+1306:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+1307:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+1308: SAVESTATE:          10
+1308:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;X]wY}$            
+1309:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;X]wY}$             
+1310:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     X]wY}$              
+1311: TNS_NORULECHAIN/NS_NORULE
+1311: RESSTATE            
+1311:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;X]wY}$            
+1312: TNS_NORULECHAIN/NS_NORULE
+1312: RESSTATE            
+1312:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+1313:X->^V;              ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+1314: SAVESTATE:          9
+1314:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ^V;]wY}$            
+1315:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+1316:V->l                l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+1317: SAVESTATE:          10
+1317:                    l;]w[^l;]?i&lr[^l;]w[?l>l     l;]wY}$             
+1318:                    ;]w[^l;]?i&lr[^l;]w[?l>lr     ;]wY}$              
+1319:                    ]w[^l;]?i&lr[^l;]w[?l>lr[     ]wY}$               
+1320:                    w[^l;]?i&lr[^l;]w[?l>lr[]     wY}$                
+1321:                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1322:Y->[XQ]             [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1323: SAVESTATE:          11
+1323:                    [^l;]?i&lr[^l;]w[?l>lr[]]     [XQ]}$              
+1324:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+1325:X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+1326: SAVESTATE:          12
+1326:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;XQ]}$            
+1327:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+1328:V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+1329: SAVESTATE:          13
+1329:                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;XQ]}$             
+1330:                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;XQ]}$              
+1331:                    ]?i&lr[^l;]w[?l>lr[]]nti=     XQ]}$               
+1332: TNS_NORULECHAIN/NS_NORULE
+1332: RESSTATE            
+1332:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;XQ]}$             
+1333: TNS_NORULECHAIN/NS_NORULE
+1333: RESSTATE            
+1333:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+1334:X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+1335: SAVESTATE:          12
+1335:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;Q]}$             
+1336:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+1337:V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+1338: SAVESTATE:          13
+1338:                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;Q]}$              
+1339:                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;Q]}$               
+1340:                    ]?i&lr[^l;]w[?l>lr[]]nti=     Q]}$                
+1341: TNS_NORULECHAIN/NS_NORULE
+1341: RESSTATE            
+1341:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;Q]}$              
+1342: TNS_NORULECHAIN/NS_NORULE
+1342: RESSTATE            
+1342:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     XQ]}$               
+1343: TNS_NORULECHAIN/NS_NORULE
+1343: RESSTATE            
+1343:                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1344:Y->[X]              [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1345: SAVESTATE:          11
+1345:                    [^l;]?i&lr[^l;]w[?l>lr[]]     [X]}$               
+1346:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+1347:X->^V;X             ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+1348: SAVESTATE:          12
+1348:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;X]}$             
+1349:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+1350:V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+1351: SAVESTATE:          13
+1351:                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;X]}$              
+1352:                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;X]}$               
+1353:                    ]?i&lr[^l;]w[?l>lr[]]nti=     X]}$                
+1354: TNS_NORULECHAIN/NS_NORULE
+1354: RESSTATE            
+1354:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;X]}$              
+1355: TNS_NORULECHAIN/NS_NORULE
+1355: RESSTATE            
+1355:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+1356:X->^V;              ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+1357: SAVESTATE:          12
+1357:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ^V;]}$              
+1358:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+1359:V->l                l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+1360: SAVESTATE:          13
+1360:                    l;]?i&lr[^l;]w[?l>lr[]]nt     l;]}$               
+1361:                    ;]?i&lr[^l;]w[?l>lr[]]nti     ;]}$                
+1362:                    ]?i&lr[^l;]w[?l>lr[]]nti=     ]}$                 
+1363:                    ?i&lr[^l;]w[?l>lr[]]nti=l     }$                  
+1364: TS_NOK/NS_NORULECHAIN
+1364: RESSTATE            
+1364:                    l;]?i&lr[^l;]w[?l>lr[]]nt     V;]}$               
+1365: TNS_NORULECHAIN/NS_NORULE
+1365: RESSTATE            
+1365:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     X]}$                
+1366: TNS_NORULECHAIN/NS_NORULE
+1366: RESSTATE            
+1366:                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1367:Y->[Q]              [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1368: SAVESTATE:          11
+1368:                    [^l;]?i&lr[^l;]w[?l>lr[]]     [Q]}$               
+1369:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     Q]}$                
+1370: TNS_NORULECHAIN/NS_NORULE
+1370: RESSTATE            
+1370:                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1371:Y->[]               [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1372: SAVESTATE:          11
+1372:                    [^l;]?i&lr[^l;]w[?l>lr[]]     []}$                
+1373:                    ^l;]?i&lr[^l;]w[?l>lr[]]n     ]}$                 
+1374: TS_NOK/NS_NORULECHAIN
+1374: RESSTATE            
+1374:                    [^l;]?i&lr[^l;]w[?l>lr[]]     Y}$                 
+1375: TNS_NORULECHAIN/NS_NORULE
+1375: RESSTATE            
+1375:                    l;]w[^l;]?i&lr[^l;]w[?l>l     V;]wY}$             
+1376: TNS_NORULECHAIN/NS_NORULE
+1376: RESSTATE            
+1376:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     X]wY}$              
+1377: TNS_NORULECHAIN/NS_NORULE
+1377: RESSTATE            
+1377:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1378:Y->[Q]              [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1379: SAVESTATE:          8
+1379:                    [^l;]w[^l;]?i&lr[^l;]w[?l     [Q]wY}$             
+1380:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     Q]wY}$              
+1381: TNS_NORULECHAIN/NS_NORULE
+1381: RESSTATE            
+1381:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1382:Y->[]               [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1383: SAVESTATE:          8
+1383:                    [^l;]w[^l;]?i&lr[^l;]w[?l     []wY}$              
+1384:                    ^l;]w[^l;]?i&lr[^l;]w[?l>     ]wY}$               
+1385: TS_NOK/NS_NORULECHAIN
+1385: RESSTATE            
+1385:                    [^l;]w[^l;]?i&lr[^l;]w[?l     YwY}$               
+1386: TNS_NORULECHAIN/NS_NORULE
+1386: RESSTATE            
+1386:                    r[^l;]w[^l;]?i&lr[^l;]w[?     R}$                 
+1387: TNS_NORULECHAIN/NS_NORULE
+1387: RESSTATE            
+1387:                    &lr[^l;]w[^l;]?i&lr[^l;]w     LlR}$               
+1388: TNS_NORULECHAIN/NS_NORULE
+1388: RESSTATE            
+1388:                    i&lr[^l;]w[^l;]?i&lr[^l;]     ZR}$                
+1389: TNS_NORULECHAIN/NS_NORULE
+1389: RESSTATE            
+1389:                    ?i&lr[^l;]w[^l;]?i&lr[^l;     K}$                 
+1390: TNS_NORULECHAIN/NS_NORULE
+1390: RESSTATE            
+1390:                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;K}$               
+1391:W->lAW              l;?i&lr[^l;]w[^l;]?i&lr[^     W;K}$               
+1392: SAVESTATE:          3
+1392:                    l;?i&lr[^l;]w[^l;]?i&lr[^     lAW;K}$             
+1393:                    ;?i&lr[^l;]w[^l;]?i&lr[^l     AW;K}$              
+1394: TNS_NORULECHAIN/NS_NORULE
+1394: RESSTATE            
+1394:                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;K}$               
+1395: TNS_NORULECHAIN/NS_NORULE
+1395: RESSTATE            
+1395:                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1396:K->nti;K            nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1397: SAVESTATE:          2
+1397:                    nti=l;?i&lr[^l;]w[^l;]?i&     nti;K}$             
+1398:                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti;K}$              
+1399:                    i=l;?i&lr[^l;]w[^l;]?i&lr     i;K}$               
+1400:                    =l;?i&lr[^l;]w[^l;]?i&lr[     ;K}$                
+1401: TS_NOK/NS_NORULECHAIN
+1401: RESSTATE            
+1401:                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1402:K->nti=V;           nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1403: SAVESTATE:          2
+1403:                    nti=l;?i&lr[^l;]w[^l;]?i&     nti=V;}$            
+1404:                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti=V;}$             
+1405:                    i=l;?i&lr[^l;]w[^l;]?i&lr     i=V;}$              
+1406:                    =l;?i&lr[^l;]w[^l;]?i&lr[     =V;}$               
+1407:                    l;?i&lr[^l;]w[^l;]?i&lr[^     V;}$                
+1408:V->l                l;?i&lr[^l;]w[^l;]?i&lr[^     V;}$                
+1409: SAVESTATE:          3
+1409:                    l;?i&lr[^l;]w[^l;]?i&lr[^     l;}$                
+1410:                    ;?i&lr[^l;]w[^l;]?i&lr[^l     ;}$                 
+1411:                    ?i&lr[^l;]w[^l;]?i&lr[^l;     }$                  
+1412: TS_NOK/NS_NORULECHAIN
+1412: RESSTATE            
+1412:                    l;?i&lr[^l;]w[^l;]?i&lr[^     V;}$                
+1413: TNS_NORULECHAIN/NS_NORULE
+1413: RESSTATE            
+1413:                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1414:K->nti=W;           nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1415: SAVESTATE:          2
+1415:                    nti=l;?i&lr[^l;]w[^l;]?i&     nti=W;}$            
+1416:                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti=W;}$             
+1417:                    i=l;?i&lr[^l;]w[^l;]?i&lr     i=W;}$              
+1418:                    =l;?i&lr[^l;]w[^l;]?i&lr[     =W;}$               
+1419:                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;}$                
+1420:W->l                l;?i&lr[^l;]w[^l;]?i&lr[^     W;}$                
+1421: SAVESTATE:          3
+1421:                    l;?i&lr[^l;]w[^l;]?i&lr[^     l;}$                
+1422:                    ;?i&lr[^l;]w[^l;]?i&lr[^l     ;}$                 
+1423:                    ?i&lr[^l;]w[^l;]?i&lr[^l;     }$                  
+1424: TS_NOK/NS_NORULECHAIN
+1424: RESSTATE            
+1424:                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;}$                
+1425:W->lAW              l;?i&lr[^l;]w[^l;]?i&lr[^     W;}$                
+1426: SAVESTATE:          3
+1426:                    l;?i&lr[^l;]w[^l;]?i&lr[^     lAW;}$              
+1427:                    ;?i&lr[^l;]w[^l;]?i&lr[^l     AW;}$               
+1428: TNS_NORULECHAIN/NS_NORULE
+1428: RESSTATE            
+1428:                    l;?i&lr[^l;]w[^l;]?i&lr[^     W;}$                
+1429: TNS_NORULECHAIN/NS_NORULE
+1429: RESSTATE            
+1429:                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1430:K->nti;             nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1431: SAVESTATE:          2
+1431:                    nti=l;?i&lr[^l;]w[^l;]?i&     nti;}$              
+1432:                    ti=l;?i&lr[^l;]w[^l;]?i&l     ti;}$               
+1433:                    i=l;?i&lr[^l;]w[^l;]?i&lr     i;}$                
+1434:                    =l;?i&lr[^l;]w[^l;]?i&lr[     ;}$                 
+1435: TS_NOK/NS_NORULECHAIN
+1435: RESSTATE            
+1435:                    nti=l;?i&lr[^l;]w[^l;]?i&     K}$                 
+1436: TNS_NORULECHAIN/NS_NORULE
+1436: RESSTATE            
+1436:                    m{nti=l;?i&lr[^l;]w[^l;]?     S$                  
+1437: TNS_NORULECHAIN/NS_NORULE
+1438: ------>NS_NORULE    
 -------------------------------------------------------------------------------------
-0   :всего строк 25, синтаксический анализ выполнен без ошибок 
-0   : S->m{K}             
-2   : K->nti=V;K          
-6   : V->l                
-8   : K->?ZR              
-9   : Z->lLl              
-10  : L->&                
-12  : R->rYwY             
-13  : Y->[X]              
-14  : X->^V;              
-15  : V->l                
-19  : Y->[X]              
-20  : X->^V;              
-21  : V->l                
-Программа успешно завершена!
+-618: строка 15, Неопределенная ошибка
+-618: строка 15, Неопределенная ошибка
+607: строка 15, ERROR 607 Ошибка. Неверный арифметический оператор
+Синтаксический анализ завершен с ошибками

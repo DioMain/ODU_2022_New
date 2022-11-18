@@ -7,6 +7,8 @@
 #define SEPARATOR '|'
 #define IN_CODE_QUOTE '\"'
 #define IN_CODE_NULL  '\0'
+#define IN_CODE_BOL_T 't'
+#define IN_CODE_BOL_F 'f'
 
 #define MAX_LEN_BUFFER  2048
 #define IN_CODE_NOT_DOUBLE_QUOTE	'\''

@@ -30,7 +30,7 @@ namespace Gener
 				}
 				if (lex.idtable.table[i].iddatatype == IT::BOL)
 				{
-					ofile << " BYTE \'" << lex.idtable.table[i].value.vbol << endl;
+					ofile << " BYTE " << lex.idtable.table[i].value.vbol << endl;
 				}
 				if (lex.idtable.table[i].iddatatype == IT::INT)
 				{
@@ -54,7 +54,7 @@ namespace Gener
 				}
 				if (lex.idtable.table[i].iddatatype == IT::BOL)
 				{
-					ofile << " DWORD ?\n";
+					ofile << " DWORD 0\n";
 				}
 				if (lex.idtable.table[i].iddatatype == IT::INT)
 				{
@@ -284,7 +284,9 @@ namespace Gener
 					}
 					while (!temp.empty())
 					{
-						if (temp.top().idtype == IT::IDTYPE::L && (temp.top().iddatatype == IT::IDDATATYPE::STR || temp.top().iddatatype == IT::IDDATATYPE::SYM))
+						if (temp.top().idtype == IT::IDTYPE::L && (temp.top().iddatatype == IT::IDDATATYPE::STR 
+															|| temp.top().iddatatype == IT::IDDATATYPE::SYM
+															|| temp.top().iddatatype == IT::IDDATATYPE::BOL))
 							ofile << "\npush offset " << temp.top().id << "\n";
 						else  ofile << "\npush " << temp.top().id << "\n";
 						temp.pop();
@@ -365,10 +367,11 @@ namespace Gener
 					right = (char*)"jnz";  wrong = (char*)"jz ";
 					break;
 				}
-				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT){ ofile << "\tmov edx, " << ITENTRY(i + 1).id << "\n\tcmp edx, " << ITENTRY(i + 3).id << "\n";}
+				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::BOL)
+					ofile << "\tmov edx, " << ITENTRY(i + 1).id << "\n\tcmp edx, " << ITENTRY(i + 3).id << "\n";
 				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM 
-					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR 
-					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::BOL){
+					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR){
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::V || ITENTRY(i + 1).idtype == IT::IDTYPE::P)
 						ofile << "\n\tmov esi, " << ITENTRY(i + 1).id;
 					else

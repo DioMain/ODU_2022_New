@@ -11,7 +11,7 @@
 			FST::RELATION('[',1), FST::RELATION(']',1),\
 			FST::RELATION(')',1), FST::RELATION('*',1),\
 			FST::RELATION('+',1), FST::RELATION('-',1),\
-		    FST::RELATION('/',1),FST::RELATION('<',1),\
+		    FST::RELATION('/',1), FST::RELATION('<',1),\
 			FST::RELATION('>',1),\
 			FST::RELATION('&',1),\
 			FST::RELATION('!',1), FST::RELATION('%',1)),\

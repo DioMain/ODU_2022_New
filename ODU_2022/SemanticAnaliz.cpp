@@ -89,7 +89,7 @@ namespace Semantic
 								continue;
 							}
 						}
-						if (lefttype == IT::IDDATATYPE::STR || lefttype == IT::IDDATATYPE::SYM) // справа только литерал, ид или вызов строковой ф-ции
+						if (lefttype == IT::IDDATATYPE::STR || lefttype == IT::IDDATATYPE::SYM || lefttype == IT::IDDATATYPE::BOL) // справа только литерал, ид или вызов строковой ф-ции
 						{
 							char l = tables.lextable.table[k].lexema;
 							if (l == LEX_PLUS || l == LEX_MINUS || l == LEX_STAR || l == LEX_DIRSLASH || l == LEX_PROCENT) // выражения недопустимы =+ =- =* и тд
@@ -215,6 +215,9 @@ namespace Semantic
 						flag = true;
 					else if (tables.idtable.table[tables.lextable.table[i - 1].idxTI].iddatatype == IT::IDDATATYPE::STR
 						&& tables.idtable.table[tables.lextable.table[i + 1].idxTI].iddatatype == IT::IDDATATYPE::STR)
+						flag = true;
+					else if (tables.idtable.table[tables.lextable.table[i - 1].idxTI].iddatatype == IT::IDDATATYPE::BOL
+						&& tables.idtable.table[tables.lextable.table[i + 1].idxTI].iddatatype == IT::IDDATATYPE::BOL)
 						flag = true;
 				}
 				if (!flag)

@@ -24,35 +24,78 @@ ExitProcess PROTO:DWORD
 .const
  null_division BYTE 'ERROR: DIVISION BY ZERO', 0
  overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
-	L1 SDWORD 0
-	L2 SDWORD 12
-	L3 SDWORD 2
-	L4 BYTE 'then', 0
-	L5 BYTE 'else', 0
+	L1 BYTE 1
+	L2 BYTE 'true', 0
+	L3 BYTE 'false', 0
+	L4 SDWORD 0
+	L5 SDWORD 2
+	L6 SDWORD 1
 .data
-	maintest SDWORD 0
+	maina DWORD 0
+	maini SDWORD 0
 
 .code
 
 main PROC
-	push L1
-	pop maintest
+	push offset L1
+	pop maina
 
-	mov edx, L2
-	cmp edx, L3
+	mov edx, maina
+	cmp edx, L1
 	jz right1
 	jnz wrong1
 	jmp next1
 right1:
-push offset L4
+push offset L2
 call outstrline
 	jmp next1
 
 wrong1:
-push offset L5
+push offset L3
 call outstrline
 
-next1:call system_pause
+next1:	mov edx, maina
+	cmp edx, L1
+	jz right2
+	jnz wrong2
+	jmp next2
+right2:
+push offset L2
+call outstrline
+	jmp next2
+
+wrong2:
+push offset L2
+call outstrline
+
+next2:	push L4
+	pop maini
+
+	mov edx, maini
+	cmp edx, L5
+	jl cycle1
+	jmp continue1
+ cycle1:	push maini
+	push L6
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop maini
+
+	mov edx, L5
+	cmp edx, L6
+	jgright3
+	jmp next3
+right3:
+push offset L2
+call outstrline
+
+next3:	mov edx, maini
+	cmp edx, L5
+	jl cycle1
+continue1:call system_pause
 push 0
 call ExitProcess
 SOMETHINGWRONG:

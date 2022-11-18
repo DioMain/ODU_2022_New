@@ -139,15 +139,17 @@ namespace GRB
 			Rule::Chain(5, TS('?'), NS('Z'), NS('R'), NS('X'), NS('B')),
 			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('B'))
 		),
-		Rule(NS('Y'), GRB_ERROR_SERIES + 16, 3,						// Ошибка в теле условного выражения
+		Rule(NS('Y'), GRB_ERROR_SERIES + 16, 4,						// Ошибка в теле условного выражения
 			Rule::Chain(4, TS('['), NS('X'), NS('Q'), TS(']')),
 			Rule::Chain(3, TS('['), NS('X'), TS(']')),
-			Rule::Chain(3, TS('['), NS('Q'), TS(']'))
+			Rule::Chain(3, TS('['), NS('Q'), TS(']')),
+			Rule::Chain(2, TS('['), TS(']'))
 		),
-		Rule(NS('H'), GRB_ERROR_SERIES + 17, 3,						// ошибка в теле цикла	
+		Rule(NS('H'), GRB_ERROR_SERIES + 17, 4,						// ошибка в теле цикла	
 			Rule::Chain(4, TS('['), NS('X'), NS('B'), TS(']')),
 			Rule::Chain(3, TS('['), NS('B'), TS(']')),
-			Rule::Chain(3, TS('['), NS('X'), TS(']'))
+			Rule::Chain(3, TS('['), NS('X'), TS(']')),
+			Rule::Chain(2, TS('['), TS(']'))
 		),
 		Rule(NS('V'), GRB_ERROR_SERIES + 15, 2,						// Правила для идентификаторов или литералов	
 			Rule::Chain(1, TS('i')),

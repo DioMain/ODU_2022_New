@@ -58,7 +58,8 @@ namespace Lex
 
 	bool isLiteral(char* id)
 	{
-		if (isdigit(*id) || *id == IN_CODE_QUOTE || *id == LEX_MINUS || *id == IN_CODE_NOT_DOUBLE_QUOTE || *id == NULL)
+		if (isdigit(*id) || *id == IN_CODE_QUOTE || *id == LEX_MINUS || *id == IN_CODE_NOT_DOUBLE_QUOTE || *id == NULL
+			|| *id == IN_CODE_BOL_T || *id == IN_CODE_BOL_F)
 			return true;
 		return false;
 	}
@@ -129,6 +130,8 @@ namespace Lex
 			return IT::IDDATATYPE::STR;	// строковый литерал
 		else if (*curword == IN_CODE_NOT_DOUBLE_QUOTE)
 			return IT::IDDATATYPE::SYM;	// символьный литерал
+		else if (*curword == IN_CODE_BOL_T || *curword == IN_CODE_BOL_F)
+			return IT::IDDATATYPE::BOL;	// символьный литерал
 
 		return IT::IDDATATYPE::UNDEF;		// неопределенный тип, индикатор ошибки
 	}

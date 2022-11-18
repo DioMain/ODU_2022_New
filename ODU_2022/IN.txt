@@ -1,10 +1,29 @@
 Main {
-	type int test = 0;
+	type bool a = true;
 	
-	if 12 & 2 then [
-		WriteLine "then";
-	]
+	if a & false then [
+		WriteLine "true";
+	]	
 	else [
-		WriteLine "else";
+		WriteLine "false";
+	]
+	
+	if a&false then [
+		WriteLine "true";
+	]	
+	else[
+		if 2 > 1 then [
+			
+		]
+	]
+	
+	type int i = 0;
+	
+	while i < 2 do [
+		i = i + 1;
+		
+		if 2 > 1 then [
+			
+		]
 	]
 }
