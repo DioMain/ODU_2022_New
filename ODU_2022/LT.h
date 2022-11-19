@@ -34,11 +34,13 @@
 #define LEX_RETURN					'e'	// выход из функции
 #define LEX_VOID					'g'	// void
 #define LEX_TYPE					'n'	// объявления переменных
-#define LEX_MORE					'>'	// проверка на больше
-#define LEX_LESS					'<'	// проверка на меньше
-#define LEX_EQUALS					'&'	// проверка на равенство {&}
+#define LEX_LOGIC_EQUALS			'0'	// проверка на равенство ==
+#define LEX_LOGIC_NOT_EQUALS		'1'	// проверка на неравенство !=
+#define LEX_LOGIC_MORE				'2'	// проверка на больше >
+#define LEX_LOGIC_LESS				'3'	// проверка на меньше <
+#define LEX_LOGIC_MORE_EQ			'4'	// проверка на больше либо равно >=
+#define LEX_LOGIC_LESS_EQ			'5'	// проверка на меньше либо равно <=
 #define LEX_SUBST					'@'	// вызов функции в польской записи 
-#define LEX_NOTEQUALS				'!'	// проверка на неравенство
 #define	LEXEMA_FIXSIZE				 1	        //размер лексемы
 #define	LT_MAXSIZE					 4096	    //максимальное количество строк в ТЛ
 #define	NULLDX_TI					 0xffffffff	//нет элемента ТИ

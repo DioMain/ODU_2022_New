@@ -1,29 +1,48 @@
 Main {
 	type bool a = true;
+	type bool b = true;
 	
-	if a & false then [
-		WriteLine "true";
-	]	
+	type int i0 = 1;
+	type int i1 = 1;
+	
+	type char c = 'f';
+	type char d = 'a';
+	
+	type string str0 = "str";
+	type string str1 = "str";
+	
+	type string message = "Is True!";
+	
+	if a != false then [
+		WriteLine message;
+	]
 	else [
-		WriteLine "false";
+		WriteLine "Is False";
 	]
 	
-	if a&false then [
-		WriteLine "true";
-	]	
-	else[
-		if 2 > 1 then [
-			
-		]
+	if c == d then [
+		WriteLine message;
 	]
 	
-	type int i = 0;
+	if i0 == i1 then [
+		WriteLine message;
+	]
 	
-	while i < 2 do [
-		i = i + 1;
-		
-		if 2 > 1 then [
-			
-		]
+	if i0 != 2 then [
+		WriteLine message;
+	]
+	
+	if d != '2' then [
+		WriteLine message;
+	]
+	
+	if str0 == str1 then [ WriteLine message; ]
+	else [
+		WriteLine "Is False";
+	]
+	
+	if str0 != "testing" then [ WriteLine message; ]
+	else [
+		WriteLine "Is False";
 	]
 }

@@ -17,6 +17,12 @@ namespace Lex
 	{
 		{ LEX_SEPARATORS, FST::FST(GRAPH_SEPARATORS) },
 		{ LEX_SEPARATORS, FST::FST(GRAPH_INKR) },
+		{ LEX_LOGIC_EQUALS, FST::FST(GRAPH_LOGIC_EQ) },
+		{ LEX_LOGIC_NOT_EQUALS, FST::FST(GRAPH_LOGIC_NOT_EQ) },
+		{ LEX_LOGIC_MORE, FST::FST(GRAPH_LOGIC_MORE) },
+		{ LEX_LOGIC_LESS, FST::FST(GRAPH_LOGIC_LESS) },
+		{ LEX_LOGIC_MORE_EQ, FST::FST(GRAPH_LOGIC_EQ_MORE) },
+		{ LEX_LOGIC_LESS_EQ, FST::FST(GRAPH_LOGIC_EQ_LESS) },
 		{ LEX_ID_TYPE, FST::FST(GRAPH_INTEGER) },
 		{ LEX_ID_TYPE, FST::FST(GRAPH_BOOLEAN) },
 		{ LEX_VOID, FST::FST(GRAPH_VOID) },
@@ -100,8 +106,7 @@ namespace Lex
 						return i;
 					break;
 				case IT::IDDATATYPE::BOL:
-					if (ittable.table[i].value.vbol == false ||
-						ittable.table[i].value.vbol == true)
+					if (ittable.table[i].value.vbol == (value[0] == 't' ? true : false))
 						return i;
 					break;
 				}

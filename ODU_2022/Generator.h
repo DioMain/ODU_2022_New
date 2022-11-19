@@ -17,14 +17,14 @@
 				"\ncall ExitProcess"\
 				"\nSOMETHINGWRONG:"\
 				"\npush offset null_division"\
-				"\ncall outstrline\n"\
-				"call system_pause"\
+				"\ncall outstrline"\
+				"\ncall system_pause"\
 				"\npush -1"\
 				"\ncall ExitProcess"\
 				"\nEXIT_OVERFLOW:"\
 				"\npush offset overflow"\
-				"\ncall outstrline\n"\
-				"call system_pause"\
+				"\ncall outstrline"\
+				"\ncall system_pause"\
 				"\npush -2"\
 				"\ncall ExitProcess"\
 				"\nmain ENDP\nend main"

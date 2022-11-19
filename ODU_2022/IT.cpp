@@ -64,7 +64,7 @@ namespace IT {
 			entry->value.vstr.len = strlen(value) - 2;
 		}
 		else if (entry->iddatatype == BOL) {
-			if (strcmp(value, "true"))
+			if (strcmp(value, "true") == 0)
 				entry->value.vbol = true;
 			else 
 				entry->value.vbol = false;
@@ -137,7 +137,7 @@ namespace IT {
 				else if (e->iddatatype == IT::IDDATATYPE::STR)
 					std::cout << "[" << (int)e->value.vstr.len << "]" << e->value.vstr.str;
 				else if (e->iddatatype == IT::IDDATATYPE::BOL) {
-					if (e->value.vbol = true)
+					if (e->value.vbol == true)
 						std::cout << "TRUE";
 					else
 						std::cout << "FALSE";

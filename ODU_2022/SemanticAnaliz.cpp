@@ -180,7 +180,8 @@ namespace Semantic
 				}
 				break;
 			}
-			case LEX_MORE:	case LEX_LESS:
+			case LEX_LOGIC_MORE:	case LEX_LOGIC_LESS:
+			case LEX_LOGIC_MORE_EQ:	case LEX_LOGIC_LESS_EQ:
 			{
 				// левый и правый операнд - числовой тип
 				bool flag = true;
@@ -197,12 +198,12 @@ namespace Semantic
 				if (!flag)
 				{
 					// строка или неизвестный ид в условии
-					Log::WriteError(log.stream, Error::GetError(317, tables.lextable.table[i].sn, 0));
+					Log::WriteError(log.stream, Error::GetError(319, tables.lextable.table[i].sn, 0));
 					sem_ok = false;
 				}
 				break;
 			}
-			case LEX_EQUALS:   case LEX_NOTEQUALS:
+			case LEX_LOGIC_EQUALS:   case LEX_LOGIC_NOT_EQUALS:
 			{
 				bool flag = false;
 				if (i > 1 && tables.lextable.table[i - 1].idxTI != TI_NULLIDX)
@@ -223,7 +224,7 @@ namespace Semantic
 				if (!flag)
 				{
 					// неизвестный ид в условии
-					Log::WriteError(log.stream, Error::GetError(317, tables.lextable.table[i].sn, 0));
+					Log::WriteError(log.stream, Error::GetError(314, tables.lextable.table[i].sn, 0));
 					sem_ok = false;
 				}
 				break;

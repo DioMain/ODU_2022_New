@@ -93,6 +93,34 @@ namespace In {
 			{
 			case IN::S:
 			{
+				if (text[i] == '=' || text[i] == '>' || text[i] == '!' || text[i] == '<') {
+					if (*buffer != IN_CODE_NULL)
+					{
+						addWord(words, buffer, line);
+						*buffer = IN_CODE_NULL;  bufpos = 0;
+					}
+
+					if ((text[i] == '=' && text[i + 1] == '=')
+						|| (text[i] == '!' && text[i + 1] == '=')
+						|| (text[i] == '>' && text[i + 1] == '=')
+						|| (text[i] == '<' && text[i + 1] == '=')
+						|| (text[i] == '<' && text[i + 1] == ':')
+						|| (text[i] == '>' && text[i + 1] == ':')) {
+						buffer[bufpos++] = text[i];
+						buffer[bufpos++] = text[i + 1];
+						buffer[bufpos] = IN_CODE_NULL;
+
+						addWord(words, buffer, line);
+
+						*buffer = IN_CODE_NULL;
+
+						bufpos = 0;
+
+						i++;
+
+						break;
+					}
+				}
 				if (text[i] == LEX_MINUS && isdigit(text[i + 1])
 					|| text[i] == LEX_MINUS && words[words->size - 1].word[0] == '='
 					|| (text[i] == LEX_MINUS && text[i + 1] == LEX_MINUS && line > words[words->size - 1].line))
@@ -107,10 +135,15 @@ namespace In {
 						buffer[bufpos++] = ':';
 						buffer[bufpos++] = text[i];
 						buffer[bufpos] = IN_CODE_NULL;
+
 						addWord(words, buffer, line);	// буфер перед односимвольной лексемой
+
 						*buffer = IN_CODE_NULL;
+
 						bufpos = 0;
+
 						i++;
+
 						break;
 					}
 					if (isdigit(words[words->size - 1].word[strlen(words[words->size - 1].word) - 1])
@@ -121,9 +154,13 @@ namespace In {
 					{
 						buffer[bufpos++] = text[i];
 						buffer[bufpos] = IN_CODE_NULL;
+
 						addWord(words, buffer, line);	// буфер перед односимвольной лексемой
+
 						*buffer = IN_CODE_NULL;
+
 						bufpos = 0;
+
 						break;
 					}
 					buffer[bufpos++] = text[i];
@@ -139,20 +176,31 @@ namespace In {
 						addWord(words, buffer, line);
 						*buffer = IN_CODE_NULL;  bufpos = 0;
 					}
+
 					buffer[bufpos++] = ':';
 					buffer[bufpos++] = text[i];
 					buffer[bufpos] = IN_CODE_NULL;
+
 					addWord(words, buffer, line);	// буфер перед односимвольной лексемой
+
 					*buffer = IN_CODE_NULL;
+
 					bufpos = 0;
+
 					i++;
+
 					break;
 				}
+
 				char letter[] = { (char)text[i], IN_CODE_NULL };
+
 				addWord(words, buffer, line);	// буфер перед односимвольной лексемой
 				addWord(words, letter, line);	// сама односимвольная лексема
+
 				*buffer = IN_CODE_NULL;
+
 				bufpos = 0;
+
 				break;
 			}
 			case IN::N:											//новая строка

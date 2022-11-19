@@ -51,11 +51,13 @@ namespace GRB
 			Rule::Chain(3, TS('l'), NS('L'), TS('i'))
 		),
 
-		Rule(NS('L'), GRB_ERROR_SERIES + 9, 4,								// Неверный условный оператор		
-			Rule::Chain(1, TS('<')),
-			Rule::Chain(1, TS('>')),
-			Rule::Chain(1, TS('&')),
-			Rule::Chain(1, TS('!'))
+		Rule(NS('L'), GRB_ERROR_SERIES + 9, 6,				// Неверный условный оператор		/ ЛОГИЧЕСКИЕ ОПЕРАТОРЫ
+			Rule::Chain(1, TS('0')), // ==
+			Rule::Chain(1, TS('1')), // !=
+			Rule::Chain(1, TS('2')), // >
+			Rule::Chain(1, TS('3')), // <
+			Rule::Chain(1, TS('4')), // >=
+			Rule::Chain(1, TS('5'))  // <=
 		),
 
 		Rule(NS('A'), GRB_ERROR_SERIES + 10, 5,											// Неверный арифметический оператор
@@ -81,9 +83,9 @@ namespace GRB
 		),
 
 		Rule(NS('K'), GRB_ERROR_SERIES + 12, 22,							// Недопустимая синтаксическая конструкция
-			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('K')),				// is
+			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('K')),				// if
 			Rule::Chain(5, TS('c'), NS('Z'), TS('d'), NS('H'), NS('K')),	// while
-			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),						// is
+			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),						// if
 			Rule::Chain(4, TS('c'), NS('Z'), TS('d'), NS('H')),				// while	
 
 			Rule::Chain(7, TS('n'), TS('t'), TS('i'), TS('='), NS('V'), TS(';'), NS('K')),	// декларация + присваивание

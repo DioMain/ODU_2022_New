@@ -1,21 +1,64 @@
 #pragma once
 #include "FST.h"
-#define N_GRAPHS 27
+#define N_GRAPHS 33
 
 // графы переходов 
 #define GRAPH_SEPARATORS 2,\
 	FST::NODE(18,\
-			FST::RELATION(';',1), FST::RELATION('=',1),\
-			FST::RELATION(',',1), FST::RELATION('{',1),\
-			FST::RELATION('}',1), FST::RELATION('(',1),\
-			FST::RELATION('[',1), FST::RELATION(']',1),\
-			FST::RELATION(')',1), FST::RELATION('*',1),\
-			FST::RELATION('+',1), FST::RELATION('-',1),\
-		    FST::RELATION('/',1), FST::RELATION('<',1),\
-			FST::RELATION('>',1),\
-			FST::RELATION('&',1),\
-			FST::RELATION('!',1), FST::RELATION('%',1)),\
+			FST::RELATION(';', 1), FST::RELATION('=', 1),\
+			FST::RELATION(',', 1), FST::RELATION('{', 1),\
+			FST::RELATION('}', 1), FST::RELATION('(', 1),\
+			FST::RELATION('[', 1), FST::RELATION(']', 1),\
+			FST::RELATION(')', 1), FST::RELATION('*', 1),\
+			FST::RELATION('+', 1), FST::RELATION('-', 1),\
+		    FST::RELATION('/', 1), FST::RELATION('<', 1),\
+			FST::RELATION('>', 1),\
+			FST::RELATION('&', 1),\
+			FST::RELATION('!', 1), FST::RELATION('%', 1)),\
 	FST::NODE()
+
+#define GRAPH_LOGIC_EQ 3,\
+	FST::NODE(1,\
+			FST::RELATION('=',1)),\
+	FST::NODE(1,\
+			FST::RELATION('=',2)),\
+	FST::NODE()\
+
+#define GRAPH_LOGIC_NOT_EQ 3,\
+	FST::NODE(1,\
+			FST::RELATION('!', 1)),\
+	FST::NODE(1,\
+			FST::RELATION('=', 2)),\
+	FST::NODE()\
+
+#define GRAPH_LOGIC_MORE 3,\
+FST::NODE(1,\
+			FST::RELATION('>', 1)),\
+	FST::NODE(1,\
+			FST::RELATION(':', 2)),\
+	FST::NODE()\
+
+#define GRAPH_LOGIC_LESS 3,\
+FST::NODE(1,\
+			FST::RELATION('<', 1)),\
+	FST::NODE(1,\
+			FST::RELATION(':', 2)),\
+	FST::NODE()\
+
+#define GRAPH_LOGIC_EQ_MORE 3,\
+	FST::NODE(1,\
+			FST::RELATION('>', 1)),\
+	FST::NODE(1,\
+			FST::RELATION('=', 2)),\
+	FST::NODE()\
+
+#define GRAPH_LOGIC_EQ_LESS 3,\
+	FST::NODE(1,\
+			FST::RELATION('<', 1)),\
+	FST::NODE(1,\
+			FST::RELATION('=', 2)),\
+	FST::NODE()\
+
 #define GRAPH_INKR 3,\
 	FST::NODE(1,FST::RELATION(':',1)),\
 	FST::NODE(4,FST::RELATION('+',2),FST::RELATION('-',2),FST::RELATION('/',2),FST::RELATION('*',2)),\
