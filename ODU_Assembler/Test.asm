@@ -12,14 +12,14 @@ ExitProcess PROTO:DWORD
 
 .data
 
-int0	DWORD 150
-int1	DWORD 150
+int0	DWORD 0
+int1	DWORD 15
 bool0	BYTE 1 
 bool1	BYTE 1 
 str0	BYTE "TEXT 1", 0 
 str1	BYTE "TEXT 1 ", 0 
 char0	BYTE 'q', 0
-char1	BYTE 'q', 0
+char1	BYTE 'e', 0
 
 Zero	BYTE '0', 0
 One		BYTE '1', 0
@@ -34,39 +34,26 @@ main PROC
 
 	; INT
 
-	mov eax, int0;
-	mov ebx, int1;
-	.IF eax != ebx
-		INVOKE MessageBoxA, N, offset One, offset TITTLE, EXT
-	.ELSE
-		INVOKE MessageBoxA, N, offset Zero, offset TITTLE, EXT
+while0:
+	
+	mov eax, int0
+	mov ebx, int1
+
+	.IF (eax >= ebx)
+		jmp endwhile0
 	.ENDIF
+
+	mov eax, int0
+	inc eax
+	mov int0, eax
+
+	jmp while0
+
+endwhile0:
 
 	; CHAR
 
-	mov al, char0[0];
-	mov bl, char1[0];
-	.IF eax == ebx
-		INVOKE MessageBoxA, N, offset One, offset TITTLE, EXT
-	.ELSE
-		INVOKE MessageBoxA, N, offset Zero, offset TITTLE, EXT
-	.ENDIF
-
-	; BOOL
-
-	mov al, bool0;
-	mov bl, bool1;
-	.IF eax == ebx
-		INVOKE MessageBoxA, N, offset One, offset TITTLE, EXT
-	.ELSE
-		INVOKE MessageBoxA, N, offset Zero, offset TITTLE, EXT
-	.ENDIF
-	
 	; STRING
-
-	mov esi, offset str0
-	mov edi, offset str1
-	mov eax, 0
 	
 	.WHILE eax == 0		
 		
@@ -87,12 +74,6 @@ main PROC
 		inc esi;
 		inc edi;
 	.ENDW
-
-	.IF eax == 2
-		INVOKE MessageBoxA, N, offset One, offset TITTLE, EXT
-	.ELSE 
-		INVOKE MessageBoxA, N, offset Zero, offset TITTLE, EXT
-	.ENDIF
 
 	push -2
 	call ExitProcess

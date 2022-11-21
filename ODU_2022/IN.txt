@@ -1,48 +1,33 @@
+int function ost(int a, int b){
+	type int result = a % b;
+	
+	return result;
+}
+
 Main {
-	type bool a = true;
-	type bool b = true;
+	type string original = "COPY TEXT!";
+	type string copyright = copy(original);
 	
-	type int i0 = 1;
-	type int i1 = 1;
+	type int offset = 7;
 	
-	type char c = 'f';
-	type char d = 'a';
+	type int nums = (ost(125, 10) + 5 - 2 / (2 * 1)) + offset;
+	type int randnum = random(16);
+	type int textlen = lenght("TEXT");
 	
-	type string str0 = "str";
-	type string str1 = "str";
+	type string con = concat(original, copyright);
 	
-	type string message = "Is True!";
+	WriteLine copyright;
+	WriteLine " ";
+	WriteLine nums;
+	WriteLine " ";
+	WriteLine con;
+	WriteLine " ";
+	WriteLine randnum;
+	WriteLine " ";
+	WriteLine textlen;
+	WriteLine " ";
 	
-	if a != false then [
-		WriteLine message;
-	]
-	else [
-		WriteLine "Is False";
-	]
+	type string conv = intToStr(textlen);
 	
-	if c == d then [
-		WriteLine message;
-	]
-	
-	if i0 == i1 then [
-		WriteLine message;
-	]
-	
-	if i0 != 2 then [
-		WriteLine message;
-	]
-	
-	if d != '2' then [
-		WriteLine message;
-	]
-	
-	if str0 == str1 then [ WriteLine message; ]
-	else [
-		WriteLine "Is False";
-	]
-	
-	if str0 != "testing" then [ WriteLine message; ]
-	else [
-		WriteLine "Is False";
-	]
+	WriteLine conv;
 }

@@ -34,6 +34,9 @@
 "\n outstr PROTO : DWORD\n"\
 "\n outstrline PROTO : DWORD\n"\
 "\n outnumline PROTO : DWORD\n"\
+"\n inttostr PROTO : DWORD\n"\
+"\n concat PROTO : DWORD, : DWORD\n"\
+"\n copy PROTO : DWORD\n"\
 "\n system_pause PROTO \n"\
 "\n random PROTO  : DWORD\n"\
 "\n lenght PROTO  : DWORD\n"\

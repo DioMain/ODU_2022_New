@@ -1,6 +1,6 @@
 #pragma once
 #include "FST.h"
-#define N_GRAPHS 33
+#define N_GRAPHS 36
 
 // графы переходов 
 #define GRAPH_SEPARATORS 2,\
@@ -11,8 +11,7 @@
 			FST::RELATION('[', 1), FST::RELATION(']', 1),\
 			FST::RELATION(')', 1), FST::RELATION('*', 1),\
 			FST::RELATION('+', 1), FST::RELATION('-', 1),\
-		    FST::RELATION('/', 1), FST::RELATION('<', 1),\
-			FST::RELATION('>', 1),\
+		    FST::RELATION('/', 1),\
 			FST::RELATION('&', 1),\
 			FST::RELATION('!', 1), FST::RELATION('%', 1)),\
 	FST::NODE()
@@ -31,18 +30,14 @@
 			FST::RELATION('=', 2)),\
 	FST::NODE()\
 
-#define GRAPH_LOGIC_MORE 3,\
-FST::NODE(1,\
-			FST::RELATION('>', 1)),\
+#define GRAPH_LOGIC_MORE 2,\
 	FST::NODE(1,\
-			FST::RELATION(':', 2)),\
+			FST::RELATION('>', 1)),\
 	FST::NODE()\
 
-#define GRAPH_LOGIC_LESS 3,\
-FST::NODE(1,\
-			FST::RELATION('<', 1)),\
+#define GRAPH_LOGIC_LESS 2,\
 	FST::NODE(1,\
-			FST::RELATION(':', 2)),\
+			FST::RELATION('<', 1)),\
 	FST::NODE()\
 
 #define GRAPH_LOGIC_EQ_MORE 3,\
@@ -260,7 +255,7 @@ FST::NODE(1,\
     FST::NODE(1, FST::RELATION('n', 8)),\
     FST::NODE()
 
-#define GRAPH_IS 3,\
+#define GRAPH_IF 3,\
 	FST::NODE(1,FST::RELATION('i',1)),\
 	FST::NODE(1,FST::RELATION('f',2)),\
 	FST::NODE()
@@ -286,10 +281,38 @@ FST::NODE(1,\
 	FST::NODE(1,FST::RELATION('h',5)),\
 	FST::NODE(1,FST::RELATION('t',6)),\
 	FST::NODE()
+
+#define GRAPH_COPY 5,\
+	FST::NODE(1,FST::RELATION('c',1)),\
+	FST::NODE(1,FST::RELATION('o',2)),\
+	FST::NODE(1,FST::RELATION('p',3)),\
+	FST::NODE(1,FST::RELATION('y',4)),\
+	FST::NODE()
+
 #define GRAPH_INTEGER 4,\
 	FST::NODE(1, FST::RELATION('i',1)),\
 	FST::NODE(1, FST::RELATION('n',2)),\
 	FST::NODE(1, FST::RELATION('t',3)),\
+	FST::NODE()
+
+#define GRAPH_INT_TO_CHAR 9,\
+	FST::NODE(1, FST::RELATION('i',1)),\
+	FST::NODE(1, FST::RELATION('n',2)),\
+	FST::NODE(1, FST::RELATION('t',3)),\
+	FST::NODE(1, FST::RELATION('T',4)),\
+	FST::NODE(1, FST::RELATION('o',5)),\
+	FST::NODE(1, FST::RELATION('S',6)),\
+	FST::NODE(1, FST::RELATION('t',7)),\
+	FST::NODE(1, FST::RELATION('r',8)),\
+	FST::NODE()
+
+#define GRAPH_CONCAT 7,\
+	FST::NODE(1, FST::RELATION('c',1)),\
+	FST::NODE(1, FST::RELATION('o',2)),\
+	FST::NODE(1, FST::RELATION('n',3)),\
+	FST::NODE(1, FST::RELATION('c',4)),\
+	FST::NODE(1, FST::RELATION('a',5)),\
+	FST::NODE(1, FST::RELATION('t',6)),\
 	FST::NODE()
 
 #define GRAPH_STRING 7, \

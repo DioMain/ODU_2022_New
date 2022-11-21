@@ -128,7 +128,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <MASM Include="OUT.asm" />
+    <MASM Include="OUT.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <Text Include="Test.asm">
       <FileType>Document</FileType>
     </Text>

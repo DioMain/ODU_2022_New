@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "IT.h"
 #include "LT.h"
+
 #define ID_MAXSIZE			9						//макс число символов идентификатора
 #define SCOPED_ID_MAXSIZE   (ID_MAXSIZE*2-1)		//макс число символов идентификатор + область видимости
 #define MAXSIZE_TI			4096					//макс число количество строк в таблице идентификаторов
@@ -13,23 +14,33 @@
 #define STR_MAXSIZE			255						//максимальная длина строкового литерала
 #define TI_INT_MAXSIZE		 2147483647				//максимальное значение для типа integer
 #define TI_INT_MINSIZE		-2147483647				//минимальное значение для типа integer
+
 #define MAX_PARAMS_COUNT	5			   			//максимальное количество параметров у функции
 #define POW_PARAMS_CNT		2						//кол-во параметров у функции pow
 #define RANDOM_PARAMS_CNT	1						//кол-во параметров у функции rand
 #define LENGHT_PARAMS_CNT	1						//кол-во параметров у функции lenght
+#define INTTOSTR_PARAMS_CNT	1						//кол-во параметров у функции int to string
+#define CONCAT_PARAMS_CNT	2						//кол-во параметров у функции concat
+#define COPY_PARAMS_CNT		1						//кол-во параметров у функции copy
+
 #define RANDOM_TYPE			IT::IDDATATYPE::INT
 #define POW_TYPE			IT::IDDATATYPE::INT
 #define LENGHT_TYPE			IT::IDDATATYPE::INT
+#define INT_TO_STR_TYPE		IT::IDDATATYPE::STR
+#define CONCAT_TYPE			IT::IDDATATYPE::STR
+#define COPY_TYPE			IT::IDDATATYPE::STR
 
 namespace IT {
-	enum IDDATATYPE { INT = 1, STR = 2, SYM = 3, BOL = 4, PROC = 5, UNDEF };									//типы данных идентификаторов: числовой, строковый, символьный, логический, неопределенный
-	enum IDTYPE { V = 1, F = 2, P = 3, L = 4, S = 5, Z = 6 };										//типы идентификаторов: V = переменная, F = функция, P =параметр, L =литерал, S = стандартная функция Z - знак
-	enum STDFNC { F_POW, F_POWER, F_RANDOM, F_LENGTH, F_NOT_STD };									//стандартные функции
+	enum IDDATATYPE { INT = 1, STR = 2, SYM = 3, BOL = 4, PROC = 5, UNDEF };								//типы данных идентификаторов: числовой, строковый, символьный, логический, неопределенный
+	enum IDTYPE { V = 1, F = 2, P = 3, L = 4, S = 5, Z = 6 };												//типы идентификаторов: V = переменная, F = функция, P =параметр, L =литерал, S = стандартная функция Z - знак
+	enum STDFNC { F_POW, F_POWER, F_RANDOM, F_LENGTH, F_NOT_STD, F_INT_TO_STR, F_CONCAT, F_COPY };			//стандартные функции
 
-	static const IDDATATYPE POW_PARAMS[] = { IT::IDDATATYPE::INT, IT::IDDATATYPE::INT };			//параметры функции  
-	static const IDDATATYPE RANDOM_PARAMS[] = { IT::IDDATATYPE::INT };								//параметры функции  			
-	static const IDDATATYPE LENGHT_PARAMS[] = { IT::IDDATATYPE::STR };								//параметры функции length
-	
+	static const IDDATATYPE POW_PARAMS[] = { IT::IDDATATYPE::INT, IT::IDDATATYPE::INT };				//параметры функции  
+	static const IDDATATYPE RANDOM_PARAMS[] = { IT::IDDATATYPE::INT };									//параметры функции  			
+	static const IDDATATYPE LENGHT_PARAMS[] = { IT::IDDATATYPE::STR };									//параметры функции length
+	static const IDDATATYPE INT_TO_STR_PARAMS[] = { IT::IDDATATYPE::INT };								//параметры функции int to string
+	static const IDDATATYPE CONCAT_PARAMS[] = { IT::IDDATATYPE::STR, IT::IDDATATYPE::STR };				//параметры функции concat
+	static const IDDATATYPE COPY_PARAMS[] = { IT::IDDATATYPE::STR };									//параметры функции copy
 
 	struct Entry	// строка таблицы идентификаторов
 	{

@@ -27,8 +27,11 @@ namespace Lex
 		{ LEX_ID_TYPE, FST::FST(GRAPH_BOOLEAN) },
 		{ LEX_VOID, FST::FST(GRAPH_VOID) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_POW) },
+		{ LEX_STDFUNC, FST::FST(GRAPH_INT_TO_CHAR) },
+		{ LEX_STDFUNC, FST::FST(GRAPH_CONCAT) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_RANDOM) },
 		{ LEX_STDFUNC, FST::FST(GRAPH_LENGTH) },
+		{ LEX_STDFUNC, FST::FST(GRAPH_COPY) },
 		{ LEX_LITERAL, FST::FST(GRAPH_INT_LITERAL) },
 		{ LEX_LITERAL, FST::FST(GRAPH_BOOLEAN_LITERAL) },
 		{ LEX_LITERAL, FST::FST(GRAPH_STRING_LITERAL) },
@@ -42,7 +45,7 @@ namespace Lex
 		{ LEX_RETURN, FST::FST(GRAPH_RETURN) },
 		{ LEX_WRITE, FST::FST(GRAPH_WRITE) },
 		{ LEX_NEWLINE, FST::FST(GRAPH_WRITELINE) },
-		{ LEX_IF, FST::FST(GRAPH_IS) },
+		{ LEX_IF, FST::FST(GRAPH_IF) },
 		{ LEX_WHILE, FST::FST(GRAPH_WHILE) },
 		{ LEX_DO, FST::FST(GRAPH_DO) },
 		{ LEX_ISFALSE, FST::FST(GRAPH_ISFALSE) },
@@ -74,10 +77,17 @@ namespace Lex
 	{
 		if (!strcmp(RANDOM, id))
 			return IT::STDFNC::F_RANDOM;
-		if (!strcmp(POW, id))
+		else if (!strcmp(POW, id))
 			return IT::STDFNC::F_POW;
-		if (!strcmp(LENGHT, id))
+		else if (!strcmp(LENGHT, id))
 			return IT::STDFNC::F_LENGTH;
+		else if (!strcmp(INT_TO_STR, id))
+			return IT::STDFNC::F_INT_TO_STR;
+		else if (!strcmp(CONCAT, id))
+			return IT::STDFNC::F_CONCAT;
+		else if (!strcmp(COPY, id))
+			return IT::STDFNC::F_CONCAT;
+
 		return IT::STDFNC::F_NOT_STD;
 	}
 
@@ -268,9 +278,39 @@ namespace Lex
 						itentry->value.params.types[k] = IT::LENGHT_PARAMS[k];
 					break;
 				}
+				case IT::STDFNC::F_INT_TO_STR:
+				{
+					itentry->idtype = IT::IDTYPE::S;
+					itentry->iddatatype = INT_TO_STR_TYPE;
+					itentry->value.params.count = INTTOSTR_PARAMS_CNT;
+					itentry->value.params.types = new IT::IDDATATYPE[INTTOSTR_PARAMS_CNT];
+					for (int k = 0; k < INTTOSTR_PARAMS_CNT; k++)
+						itentry->value.params.types[k] = IT::INT_TO_STR_PARAMS[k];
+					break;
+				}
+				case IT::STDFNC::F_CONCAT:
+				{
+					itentry->idtype = IT::IDTYPE::S;
+					itentry->iddatatype = CONCAT_TYPE;
+					itentry->value.params.count = CONCAT_PARAMS_CNT;
+					itentry->value.params.types = new IT::IDDATATYPE[CONCAT_PARAMS_CNT];
+					for (int k = 0; k < CONCAT_PARAMS_CNT; k++)
+						itentry->value.params.types[k] = IT::CONCAT_PARAMS[k];
+					break;
+				}
+				case IT::STDFNC::F_COPY:
+				{
+					itentry->idtype = IT::IDTYPE::S;
+					itentry->iddatatype = COPY_TYPE;
+					itentry->value.params.count = COPY_PARAMS_CNT;
+					itentry->value.params.types = new IT::IDDATATYPE[COPY_PARAMS_CNT];
+					for (int k = 0; k < COPY_PARAMS_CNT; k++)
+						itentry->value.params.types[k] = IT::COPY_PARAMS[k];
+					break;
+				}
 				case IT::STDFNC::F_NOT_STD:
 					itentry->idtype = IT::IDTYPE::F;
-					break;
+				break;
 
 				}
 

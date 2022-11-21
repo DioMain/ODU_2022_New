@@ -14,7 +14,7 @@ namespace Gener
 		ofile << BEGIN;
 		ofile << EXTERN;
 		ofile << ".const\n null_division BYTE 'ERROR: DIVISION BY ZERO', 0\n overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 \n";
-		int conditionnum = 0, cyclenum = 0;
+		int cyclenum = 0;
 		for (int i = 0; i < lex.idtable.size; i++)
 		{
 			if (lex.idtable.table[i].idtype == IT::L)
@@ -174,7 +174,8 @@ namespace Gener
 					case LEX_STDFUNC:
 					case LEX_LITERAL:
 					{
-						if (ITENTRY(i).iddatatype == IT::IDDATATYPE::INT)
+						if (ITENTRY(i).iddatatype == IT::IDDATATYPE::INT
+							|| ITENTRY(i).iddatatype == IT::IDDATATYPE::BOL)
 						{
 							ofile << "\tpush " << ITENTRY(i).id << endl;
 							stk.push(lex.idtable.table[lex.lextable.table[i].idxTI].id);
@@ -183,7 +184,7 @@ namespace Gener
 						else
 						{
 							ofile << "\tpush offset " << ITENTRY(i).id << endl;
-							stk.push("offset" + (string)lex.idtable.table[lex.lextable.table[i].idxTI].id);
+							stk.push("offset " + (string)lex.idtable.table[lex.lextable.table[i].idxTI].id);
 							break;
 						}
 					}
@@ -329,7 +330,6 @@ namespace Gener
 			}
 			case LEX_IF: // условие
 			{
-				conditionnum++;
 				flag_is = true;
 
 				char* right = nullptr, *wrong = nullptr;
@@ -463,29 +463,24 @@ namespace Gener
 				break;
 			}
 			case LEX_ISTRUE:
-			{
-				//ofile << "right" << conditionnum << ":";
 				break;
-			}
 			case LEX_ISFALSE:
-			{
-				//ofile << "wrong" << conditionnum << ":";
 				break;
-			}
 			case LEX_SQ_RBRACELET:
 			{
 				if (flag_cycle && !flag_is)
 				{
 					flag_cycle = false;
-					ofile << cyclecode;
-					ofile << "continue" << cyclenum << ":";
+
+					ofile << "\tjmp while" << cyclenum << endl << endl;
+
+					ofile << "endwhile" << cyclenum << ':' << endl;
 				}
 				if (flag_is)
 				{
 					if (LEXEMA(i + 1) != LEX_ISTRUE && LEXEMA(i + 1) != LEX_ISFALSE)
 					{
 						ofile << "\n\t.ENDIF\n";
-						ofile << "next" << conditionnum << ":\n";
 						flag_is = false;
 						flag_true = false;
 						flag_false = false;
@@ -500,68 +495,134 @@ namespace Gener
 			case LEX_WHILE:
 			{
 				flag_cycle = true;
-				cyclecode.clear();
+
 				cyclenum++;
-				char* right = nullptr, * wrong = nullptr;
-				switch (LEXEMA(i + 2))
+
+				ofile << "while" << cyclenum << ":" << endl;
+
+				switch (ITENTRY(i + 1).iddatatype)
 				{
-				case LEX_LOGIC_MORE:
-					right = (char*)"jg";  wrong = (char*)"jle";
+				case IT::IDDATATYPE::INT:
+					ofile << "\tmov eax, " << ITENTRY(i + 1).id << endl;
+					ofile << "\tmov ebx, " << ITENTRY(i + 3).id << endl;
+
+					switch (LEXEMA(i + 2))
+					{
+					case LEX_LOGIC_EQUALS:
+						ofile << "\n\t.IF SDWORD PTR eax  !=  SDWORD PTR ebx\n";
+						break;
+					case LEX_LOGIC_NOT_EQUALS:
+						ofile << "\n\t.IF SDWORD PTR eax  ==  SDWORD PTR ebx\n";
+						break;
+					case LEX_LOGIC_MORE:
+						ofile << "\n\t.IF SDWORD PTR eax  <=  SDWORD PTR ebx\n";
+						break;
+					case LEX_LOGIC_LESS:
+						ofile << "\n\t.IF SDWORD PTR eax  >=  SDWORD PTR ebx\n";
+						break;
+					case LEX_LOGIC_MORE_EQ:
+						ofile << "\n\t.IF SDWORD PTR eax  <  SDWORD PTR ebx\n";
+						break;
+					case LEX_LOGIC_LESS_EQ:
+						ofile << "\n\t.IF SDWORD PTR eax  >  SDWORD PTR ebx\n";
+						break;
+					}
+
 					break;
-				case LEX_LOGIC_LESS:
-					right = (char*)"jl";  wrong = (char*)"jge";
+				case IT::IDDATATYPE::BOL:
+					ofile << "\tmov eax, " << ITENTRY(i + 1).id << endl;
+					ofile << "\tmov ebx, " << ITENTRY(i + 3).id << endl;
+
+					switch (LEXEMA(i + 2))
+					{
+					case LEX_LOGIC_EQUALS:
+						ofile << "\n\t.IF eax  !=  ebx\n";
+						break;
+					case LEX_LOGIC_NOT_EQUALS:
+						ofile << "\n\t.IF eax  ==  ebx\n";
+						break;
+					}
+
 					break;
-				case LEX_LOGIC_EQUALS:
-					right = (char*)"jz";  wrong = (char*)"jnz";
+				case IT::IDDATATYPE::SYM:
+					if (ITENTRY(i + 1).id[0] == 'L')
+						ofile << "\tmov esi, offset " << ITENTRY(i + 1).id << endl;
+					else
+						ofile << "\tmov esi, " << ITENTRY(i + 1).id << endl;
+
+					if (ITENTRY(i + 3).id[0] == 'L')
+						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
+					else
+						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+
+					ofile << "\tmov al, BYTE PTR [esi]" << "\n";
+					ofile << "\tmov bl, BYTE PTR [edi]" << "\n";
+
+					switch (LEXEMA(i + 2))
+					{
+					case LEX_LOGIC_EQUALS:
+						ofile << "\n\t.IF al  !=  bl\n";
+						break;
+					case LEX_LOGIC_NOT_EQUALS:
+						ofile << "\n\t.IF al  ==  bl\n";
+						break;
+					}
 					break;
-				case LEX_LOGIC_NOT_EQUALS:
-					right = (char*)"jnz";  wrong = (char*)"jz";
+
+				case IT::IDDATATYPE::STR:
+					if (ITENTRY(i + 1).id[0] == 'L')
+						ofile << "\tmov esi, offset " << ITENTRY(i + 1).id << endl;
+					else
+						ofile << "\tmov esi, " << ITENTRY(i + 1).id << endl;
+
+					if (ITENTRY(i + 3).id[0] == 'L')
+						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
+					else
+						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+
+					ofile << "\tmov eax, 0" << endl;
+
+					ofile << "\t.WHILE eax == 0" << endl
+						<< "\n\t\tmov dl, BYTE PTR [edi]" << endl
+						<< "\t\t.IF dl == 0" << endl
+						<< "\t\t\tmov dl, BYTE PTR [esi]" << endl
+						<< "\t\t\t.IF dl == 0" << endl
+						<< "\t\t\t\tmov eax, 2" << endl
+						<< "\t\t\t.ENDIF" << endl
+						<< "\t\t.ENDIF" << endl
+						<< endl
+						<< "\t\tmov dl, BYTE PTR [edi]" << endl
+						<< "\t\tmov bl, BYTE PTR [esi]" << endl
+						<< "\t\t.IF dl != bl" << endl
+						<< "\t\t\tmov eax, 1" << endl
+						<< "\t\t.ENDIF" << endl
+						<< endl
+						<< "\t\tinc esi;" << endl
+						<< "\t\tinc edi;" << endl
+						<< "\t.ENDW" << endl << endl;
+
+					switch (LEXEMA(i + 2))
+					{
+					case LEX_LOGIC_EQUALS:
+						ofile << "\n\t.IF eax  !=  2\n";
+						break;
+					case LEX_LOGIC_NOT_EQUALS:
+						ofile << "\n\t.IF eax  ==  2\n";
+						break;
+					}
+
 					break;
 				}
-				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::INT)
-				{
-					cyclecode = "\tmov edx, " + (string)ITENTRY(i + 1).id + "\n\tcmp edx, " + (string)ITENTRY(i + 3).id + "\n";
-				}
-				if (ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::SYM 
-					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::STR 
-					|| ITENTRY(i + 1).iddatatype == IT::IDDATATYPE::BOL)
-				{
-					if (ITENTRY(i + 1).idtype == IT::IDTYPE::V || ITENTRY(i + 1).idtype == IT::IDTYPE::P)
-						cyclecode += "\tmov esi, " + (string)ITENTRY(i + 1).id;
-					else
-						cyclecode += "\tmov esi, offset" + (string)ITENTRY(i + 1).id;
-					if (ITENTRY(i + 3).idtype == IT::IDTYPE::V || ITENTRY(i + 3).idtype == IT::IDTYPE::P)
-						cyclecode += "\n\tmov edi, " + (string)ITENTRY(i + 3).id + "\n";
-					else
-						cyclecode += "\n\tmov edi, offset" + (string)ITENTRY(i + 3).id + "\n";
 
-					if (ITENTRY(i + 1).idtype == IT::IDTYPE::V || ITENTRY(i + 1).idtype == IT::IDTYPE::P)
-						cyclecode += "\n\t push " + (string)ITENTRY(i + 1).id;
-					else
-						cyclecode += "\n\t push offset" + (string)ITENTRY(i + 1).id;
+				ofile << "\t\tjmp endwhile" << cyclenum << endl;
+				ofile << "\t.ENDIF" << endl << endl;
 
-					cyclecode += "\n\t call lenght";
-					cyclecode += "\n\t mov ebx,eax";
-
-					if (ITENTRY(i + 3).idtype == IT::IDTYPE::V || ITENTRY(i + 3).idtype == IT::IDTYPE::P)
-						cyclecode += "\n\t push " + (string)ITENTRY(i + 3).id;
-					else
-						cyclecode += "\n\t push offset" + (string)ITENTRY(i + 3).id;
-					cyclecode += "\n\t call lenght";
-					cyclecode += "\n\t cmp ebx,eax";
-					cyclecode += "\n\t" + (string)wrong + " continue" + std::to_string(cyclenum);
-					cyclecode += "\n\t mov ecx,eax";
-					cyclecode += "\n\t repe cmpsb\n";
-				}
-				cyclecode += "\t" + (string)right + " cycle" + std::to_string(cyclenum) + "\n";
-				ofile << cyclecode;
-				ofile << "\t" << "jmp continue" << cyclenum << "\n";
 				i += 2;
 				break;
 			}
 			case LEX_DO:
 			{
-				ofile << " cycle" << cyclenum << ":";
+				//ofile << " cycle" << cyclenum << ":";
 			}
 
 			}

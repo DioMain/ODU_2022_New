@@ -103,9 +103,7 @@ namespace In {
 					if ((text[i] == '=' && text[i + 1] == '=')
 						|| (text[i] == '!' && text[i + 1] == '=')
 						|| (text[i] == '>' && text[i + 1] == '=')
-						|| (text[i] == '<' && text[i + 1] == '=')
-						|| (text[i] == '<' && text[i + 1] == ':')
-						|| (text[i] == '>' && text[i + 1] == ':')) {
+						|| (text[i] == '<' && text[i + 1] == '=')) {
 						buffer[bufpos++] = text[i];
 						buffer[bufpos++] = text[i + 1];
 						buffer[bufpos] = IN_CODE_NULL;

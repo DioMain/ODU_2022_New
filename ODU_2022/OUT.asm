@@ -14,6 +14,12 @@ ExitProcess PROTO:DWORD
 
  outnumline PROTO : DWORD
 
+ inttostr PROTO : DWORD
+
+ concat PROTO : DWORD, : DWORD
+
+ copy PROTO : DWORD
+
  system_pause PROTO 
 
  random PROTO  : DWORD
@@ -24,179 +30,189 @@ ExitProcess PROTO:DWORD
 .const
  null_division BYTE 'ERROR: DIVISION BY ZERO', 0
  overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
-	L1 DWORD 1
-	L2 SDWORD 1
-	L3 BYTE 'f', 0
-	L4 BYTE 'a', 0
-	L5 BYTE 'str', 0
-	L6 BYTE 'Is True!', 0
-	L7 DWORD 0
-	L8 BYTE 'Is False', 0
-	L9 SDWORD 2
-	L10 BYTE '2', 0
-	L11 BYTE 'testing', 0
+	L1 BYTE 'COPY TEXT!', 0
+	L2 SDWORD 7
+	L3 SDWORD 125
+	L4 SDWORD 10
+	L5 SDWORD 5
+	L6 SDWORD 2
+	L7 SDWORD 1
+	L8 SDWORD 16
+	L9 BYTE 'TEXT', 0
+	L10 BYTE ' ', 0
 .data
-	maina DWORD 0
-	mainb DWORD 0
-	maini0 SDWORD 0
-	maini1 SDWORD 0
-	mainc DWORD ?
-	maind DWORD ?
-	mainstr0 DWORD ?
-	mainstr1 DWORD ?
-	mainmessage DWORD ?
+	_ostresult SDWORD 0
+	mainoriginal DWORD ?
+	maincopyright DWORD ?
+	mainoffset SDWORD 0
+	mainnums SDWORD 0
+	mainrandnum SDWORD 0
+	textlen SDWORD 0
+	maincon DWORD ?
+	mainconv DWORD ?
 
 .code
 
+_ost PROC _osta :  SDWORD , _ostb :  SDWORD 
+	push _osta
+	push _ostb
+	pop ebx
+	pop eax
+	cmp ebx,0
+	je SOMETHINGWRONG
+	cdq
+	idiv ebx
+	push edx
+	pop _ostresult
+
+	mov eax, _ostresult
+	ret
+
+SOMETHINGWRONG:
+push offset null_division
+call outstrline
+call system_pause
+push -1
+call ExitProcess
+
+EXIT_OVERFLOW:
+push offset overflow
+call outstrline
+call system_pause
+push -2
+call ExitProcess
+_ost ENDP
 main PROC
 	push offset L1
-	pop maina
+	pop mainoriginal
 
-	push offset L1
-	pop mainb
+	push offset copy
+	push mainoriginal
+	pop edx
+	pop edx
+	push mainoriginal
+		call copy
+	push eax
+	pop maincopyright
 
 	push L2
-	pop maini0
+	pop mainoffset
 
-	push L2
-	pop maini1
+	push _ost
+	push L3
+	push L4
+	pop edx
+	pop edx
+	pop edx
+	push L4
+	push L3
+		call _ost
+	push eax
+	push L5
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
+	push eax
+	push L6
+	push L6
+	push L7
+	pop eax
+	pop ebx
+	imul ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop ebx
+	pop eax
+	cmp ebx,0
+	je SOMETHINGWRONG
+	cdq
+	idiv ebx
+	push eax
+	pop ebx
+	pop eax
+	sub eax, ebx
+	push eax
+	push mainoffset
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop mainnums
 
-	push offset L3
-	pop mainc
+	push random
+	push L8
+	pop edx
+	pop edx
+	push L8
+		call random
+	push eax
+	pop mainrandnum
 
-	push offset L4
-	pop maind
+	push lenght
+	push offset L9
+	pop edx
+	pop edx
+	push offset L9
+		call lenght
+	push eax
+	pop textlen
 
-	push offset L5
-	pop mainstr0
+	push offset concat
+	push mainoriginal
+	push maincopyright
+	pop edx
+	pop edx
+	pop edx
+	push maincopyright
+	push mainoriginal
+		call concat
+	push eax
+	pop maincon
 
-	push offset L5
-	pop mainstr1
 
-	push offset L6
-	pop mainmessage
-
-	mov eax, maina
-	mov ebx, L7
-	.IF eax  !=  ebx
-
-push mainmessage
-call outstrline
-	.ELSE
-
-push offset L8
-call outstrline
-
-	.ENDIF
-next1:
-	mov esi, mainc
-	mov esi, maind
-	mov al, BYTE PTR [esi]
-	mov bl, BYTE PTR [edi]
-	.IF al  ==  bl
-
-push mainmessage
-call outstrline
-
-	.ENDIF
-next2:
-	mov eax, maini0
-	mov ebx, maini1
-	.IF SDWORD PTR eax  ==  SDWORD PTR ebx
-
-push mainmessage
-call outstrline
-
-	.ENDIF
-next3:
-	mov eax, maini0
-	mov ebx, L9
-	.IF SDWORD PTR eax  !=  SDWORD PTR ebx
-
-push mainmessage
-call outstrline
-
-	.ENDIF
-next4:
-	mov esi, maind
-	mov edi, offset L10
-	mov al, BYTE PTR [esi]
-	mov bl, BYTE PTR [edi]
-	.IF al  !=  bl
-
-push mainmessage
-call outstrline
-
-	.ENDIF
-next5:
-	mov esi, mainstr0
-	mov esi, mainstr1
-	mov eax, 0
-	.WHILE eax == 0
-
-		mov dl, BYTE PTR [edi]
-		.IF dl == 0
-			mov dl, BYTE PTR [esi]
-			.IF dl == 0
-				mov eax, 2
-			.ENDIF
-		.ENDIF
-
-		mov dl, BYTE PTR [edi]
-		mov bl, BYTE PTR [esi]
-		.IF dl != bl
-			mov eax, 1
-		.ENDIF
-
-		inc esi;
-		inc edi;
-	.ENDW
-
-	.IF eax  ==  2
-
-push mainmessage
-call outstrline
-	.ELSE
-
-push offset L8
+push maincopyright
 call outstrline
 
-	.ENDIF
-next6:
-	mov esi, mainstr0
-	mov edi, offset L11
-	mov eax, 0
-	.WHILE eax == 0
-
-		mov dl, BYTE PTR [edi]
-		.IF dl == 0
-			mov dl, BYTE PTR [esi]
-			.IF dl == 0
-				mov eax, 2
-			.ENDIF
-		.ENDIF
-
-		mov dl, BYTE PTR [edi]
-		mov bl, BYTE PTR [esi]
-		.IF dl != bl
-			mov eax, 1
-		.ENDIF
-
-		inc esi;
-		inc edi;
-	.ENDW
-
-	.IF eax  !=  2
-
-push mainmessage
-call outstrline
-	.ELSE
-
-push offset L8
+push offset L10
 call outstrline
 
-	.ENDIF
-next7:
+push mainnums
+call outnumline
+
+push offset L10
+call outstrline
+
+push maincon
+call outstrline
+
+push offset L10
+call outstrline
+
+push mainrandnum
+call outnumline
+
+push offset L10
+call outstrline
+
+push textlen
+call outnumline
+
+push offset L10
+call outstrline
+	push offset intToStr
+	push textlen
+	pop edx
+	pop edx
+	push textlen
+		call intToStr
+	push eax
+	pop mainconv
+
+
+push mainconv
+call outstrline
 call system_pause
 push 0
 call ExitProcess
