@@ -1,5 +1,11 @@
 int function GetDamage(int dmg) {
-	type int GDresult = dmg + random(dmg) - random(dmg);
+	type int rand0 = random(dmg);
+	type int rand1 = random(dmg);
+	type int GDresult = dmg + random(dmg) - rand1;
+	
+	if GDresult < 0 then [
+		GDresult = GDresult * -1;
+	]
 	
 	return GDresult;
 }
@@ -37,6 +43,8 @@ Main {
 		
 			EnemyHpBuf = random(30);
 			EnemyDamageBuf = random(15);
+			
+			IsHaveEnemy = true;
 		]
 		
 		Write "Enemy hp = ";
@@ -44,7 +52,7 @@ Main {
 		WriteLine " ";
 		Write PlayerName;
 		Write " hp = ";
-		WriteLine EnemyHpBuf;
+		WriteLine PlayerHp;
 		WriteLine " ";
 		WriteLine "COMMANDS:";
 		WriteLine "f - FIGTH, d - DEFENCE";

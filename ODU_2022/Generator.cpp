@@ -71,14 +71,13 @@ namespace Gener
 			}
 		}
 
-		stack<string> stk;
+		stack<string> expressionStack;
 		stack<IT::Entry> temp;
-		string cyclecode = "", func_name = "";					// имя локальной функции
-		bool flag_cycle = false,					// внутри цикла?
+
+		string func_name = "";						// имя локальной функции
+
+		bool flag_while = false,					// внутри цикла?
 			flag_main = false,
-			flag_is = false,					// is
-			flag_true = false,
-			flag_false = false,
 			flag_return = false;
 
 		ofile << "\n.code\n\n";
@@ -174,6 +173,8 @@ namespace Gener
 			case LEX_EQUAL:
 			{
 				int result_position = i - 1;
+				bool HaveFunc = false;
+
 				while (lex.lextable.table[i].lexema != LEX_SEPARATOR)
 				{
 
@@ -186,21 +187,20 @@ namespace Gener
 							|| ITENTRY(i).iddatatype == IT::IDDATATYPE::BOL)
 						{
 							ofile << "\tpush " << ITENTRY(i).id << endl;
-							stk.push(lex.idtable.table[lex.lextable.table[i].idxTI].id);
+							expressionStack.push(lex.idtable.table[lex.lextable.table[i].idxTI].id);
 							break;
 						}
 						else
 						{
 							ofile << "\tpush offset " << ITENTRY(i).id << endl;
-							stk.push("offset " + (string)lex.idtable.table[lex.lextable.table[i].idxTI].id);
+							expressionStack.push("offset " + (string)lex.idtable.table[lex.lextable.table[i].idxTI].id);
 							break;
 						}
 					}
 					case LEX_ID:
 					{
-
 						ofile << "\tpush " << ITENTRY(i).id << endl;
-						stk.push(lex.idtable.table[lex.lextable.table[i].idxTI].id);
+						expressionStack.push(lex.idtable.table[lex.lextable.table[i].idxTI].id);
 						break;
 					}
 					case LEX_SUBST:
@@ -208,20 +208,31 @@ namespace Gener
 						for (int j = 1; j <= (LEXEMA(i + 1) - '0') + 1; j++)
 						{
 							ofile << "\tpop edx\n";
-
 						}
+
 						for (int j = 1; j <= lex.lextable.table[i + 1].lexema - '0'; j++)
 						{
-							ofile << "\tpush " << stk.top() << endl;
-							stk.pop();
+							ofile << "\tpush " << expressionStack.top() << endl;
+							expressionStack.pop();
 						}
-						ofile << "\t\tcall " << ITENTRY(i - (lex.lextable.table[i + 1].lexema - '0') - 1).id << "\n\tpush eax\n";
+
+						// Вызывает исключение когда в выражении более одного вызова функции
+						if (HaveFunc) {
+							Log::WriteError(log.stream, Error::GetError(1, lex.lextable.table[i].sn, 0));
+							throw ERROR_THROW_IN(1, lex.lextable.table[i].sn, 0);
+						}						
+
+						HaveFunc = true;
+						
+						ofile << "\t\tcall " << ITENTRY(i - (lex.lextable.table[i + 1].lexema - '0') - 1).id;
+						ofile << "\n\tpush eax\n";
 						break;
 					}
 					case LEX_NOT_DOUBLE_QUOTE:
 					{
 						ofile << "\tmov eax, 0\n\tpop ebx\n";
 						ofile << "\tsub eax, ebx\n\tpush eax\n";
+
 						break;
 					}
 					case LEX_STAR:
@@ -231,11 +242,11 @@ namespace Gener
 
 						break;
 					}
-
 					case LEX_PLUS:
 					{
 						ofile << "\tpop eax\n\tpop ebx\n";
 						ofile << "\tadd eax, ebx\n\tjo EXIT_OVERFLOW\n\tpush eax\n";
+
 						break;
 					}
 					case LEX_MINUS:
@@ -246,8 +257,10 @@ namespace Gener
 							ofile << "\tsub eax, ebx\n\tpush eax\n";
 							break;
 						}
+
 						ofile << "\tpop ebx\n\tpop eax\n";
 						ofile << "\tsub eax, ebx\n\tpush eax\n";
+
 						break;
 					}
 					case LEX_DIRSLASH:
@@ -270,10 +283,14 @@ namespace Gener
 						break;
 					}
 					}
+
 					i++;
 				}
-				ofile << "\tpop " << ITENTRY(result_position).id << "\n";
-				ofile << endl;
+
+				HaveFunc = false;
+
+				ofile << "\tpop " << ITENTRY(result_position).id << endl << endl;
+
 				break;
 			}
 			case LEX_ID:
@@ -460,7 +477,7 @@ namespace Gener
 
 				if (!whileStack.empty() && !lopstack.top())
 				{
-					flag_cycle = false;
+					flag_while = false;
 
 					ofile << "\tjmp while" << whileStack.top() << endl << endl;
 
@@ -497,7 +514,7 @@ namespace Gener
 			{
 				whileNum++;
 
-				flag_cycle = true;
+				flag_while = true;
 
 				ofile << "while" << whileNum << ":" << endl;
 
@@ -624,11 +641,6 @@ namespace Gener
 				i += 2;
 				break;
 			}
-			case LEX_DO:
-			{
-				//ofile << " cycle" << cyclenum << ":";
-			}
-
 			}
 		}
 		ofile << END;
