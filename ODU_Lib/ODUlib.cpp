@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "stdafx.h"
 #include <iostream>
+#include <conio.h>
 #include <string>
 #include <strstream>
 #include <ctime>
@@ -27,7 +28,7 @@ extern "C"
 		return k;
 	}
 
-	int __stdcall lenght(char* str)
+	int __stdcall strLen(char* str)
 	{
 		int len = 0;
 
@@ -59,6 +60,43 @@ extern "C"
 		stream << a << '\0';
 
 		return stream.str();
+	}
+
+	int __stdcall inputInt() {
+		int result;
+
+		std::cin >> result;
+
+		return result;
+	}
+	char* __stdcall inputString() {
+		char* buf = (char*)calloc(1024, 1);
+		char* str;
+		int len;
+
+		std::cin >> buf;
+
+		len = strlen(buf);
+
+		str = (char*)calloc(len + 1, 1);
+
+		for (short i = 0; i < len; i++)
+			str[i] = buf[i];
+		
+		str[len] = '\0';
+
+		return str;
+	}
+	char* __stdcall inputChar() {
+		char symbol = _getch();
+		char* result = (char*)calloc(2, 1);
+
+		std::cout << symbol << std::endl;
+
+		result[0] = symbol;
+		result[1] = '\0';
+
+		return result;
 	}
 
 	int __stdcall outnum(int value)

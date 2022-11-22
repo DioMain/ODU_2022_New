@@ -39,7 +39,10 @@
 "\n copy PROTO : DWORD\n"\
 "\n system_pause PROTO \n"\
 "\n random PROTO  : DWORD\n"\
-"\n lenght PROTO  : DWORD\n"\
+"\n strLen PROTO  : DWORD\n"\
+"\n inputInt PROTO \n"\
+"\n inputString PROTO \n"\
+"\n inputChar PROTO \n"\
 "\n power PROTO : DWORD, : DWORD\n"
 
 

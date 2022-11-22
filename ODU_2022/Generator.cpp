@@ -10,11 +10,19 @@ namespace Gener
 	bool CodeGeneration(Lex::LEX& lex, Parm::PARM& parm, Log::LOG& log)
 	{
 		bool gen_ok;
+
 		ofstream ofile(parm.out);
+
 		ofile << BEGIN;
 		ofile << EXTERN;
 		ofile << ".const\n null_division BYTE 'ERROR: DIVISION BY ZERO', 0\n overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 \n";
-		int cyclenum = 0;
+
+		int whileNum = 0, ifNum = 0;
+
+		stack<int> ifStack;
+		stack<int> whileStack;
+		stack<bool> lopstack;
+
 		for (int i = 0; i < lex.idtable.size; i++)
 		{
 			if (lex.idtable.table[i].idtype == IT::L)
@@ -297,15 +305,15 @@ namespace Gener
 				switch (ITENTRY(i + 1).iddatatype)
 				{
 				case IT::IDDATATYPE::INT:
-					ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outnumline\n";
-					break;
 				case IT::IDDATATYPE::BOL:
+					ofile << "\n\tpush " << ITENTRY(i + 1).id << "\n\tcall outnumline\n";
+					break;				
 				case IT::IDDATATYPE::SYM:
 				case IT::IDDATATYPE::STR:
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::L)
-						ofile << "\npush offset " << ITENTRY(i + 1).id << "\ncall outstrline\n";
+						ofile << "\n\tpush offset " << ITENTRY(i + 1).id << "\n\tcall outstrline\n";
 					else 
-						ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outstrline\n";
+						ofile << "\n\tpush " << ITENTRY(i + 1).id << "\n\tcall outstrline\n";
 					break;
 				}
 				break;
@@ -315,45 +323,22 @@ namespace Gener
 				switch (ITENTRY(i + 1).iddatatype)
 				{
 				case IT::IDDATATYPE::INT:
-					ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outnum\n";
-					break;
 				case IT::IDDATATYPE::BOL:
+					ofile << "\n\tpush " << ITENTRY(i + 1).id << "\n\tcall outnum\n";
+					break;				
 				case IT::IDDATATYPE::SYM:
 				case IT::IDDATATYPE::STR:
 					if (ITENTRY(i + 1).idtype == IT::IDTYPE::L)
-						ofile << "\npush offset " << ITENTRY(i + 1).id << "\ncall outstr\n";
+						ofile << "\n\tpush offset " << ITENTRY(i + 1).id << "\n\tcall outstr\n";
 					else 
-						ofile << "\npush " << ITENTRY(i + 1).id << "\ncall outstr\n";
+						ofile << "\n\tpush " << ITENTRY(i + 1).id << "\n\tcall outstr\n";
 					break;
 				}
 				break;
 			}
 			case LEX_IF: // условие
 			{
-				flag_is = true;
-
-				char* right = nullptr, *wrong = nullptr;
-				int j = i;
-
-				while (LEXEMA(j) != LEX_SQ_RBRACELET)
-				{
-					if (LEXEMA(j) == LEX_ISTRUE)
-					{
-						flag_true = true;
-					}
-					else if (LEXEMA(j) == LEX_ISFALSE)
-					{
-						flag_false = true;
-					}
-
-					j++;
-				}
-
-				if (LEXEMA(j + 1) == LEX_ISTRUE || LEXEMA(j + 1) == LEX_ISFALSE)
-				{
-					flag_true = true;
-					flag_false = true;
-				}
+				ifNum++;
 
 				switch (ITENTRY(i + 1).iddatatype)
 				{
@@ -459,6 +444,9 @@ namespace Gener
 					break;
 				}
 
+				ifStack.push(ifNum);
+				lopstack.push(true);
+
 				i += 2;
 				break;
 			}
@@ -468,37 +456,50 @@ namespace Gener
 				break;
 			case LEX_SQ_RBRACELET:
 			{
-				if (flag_cycle && !flag_is)
+				bool isDel = false;
+
+				if (!whileStack.empty() && !lopstack.top())
 				{
 					flag_cycle = false;
 
-					ofile << "\tjmp while" << cyclenum << endl << endl;
+					ofile << "\tjmp while" << whileStack.top() << endl << endl;
 
-					ofile << "endwhile" << cyclenum << ':' << endl;
+					ofile << "endwhile" << whileStack.top() << ':' << endl;
+
+					whileStack.pop();
+
+					lopstack.pop();
+
+					isDel = true;
+
+					break;
 				}
-				if (flag_is)
+
+				if (!ifStack.empty() && lopstack.top())
 				{
 					if (LEXEMA(i + 1) != LEX_ISTRUE && LEXEMA(i + 1) != LEX_ISFALSE)
 					{
 						ofile << "\n\t.ENDIF\n";
-						flag_is = false;
-						flag_true = false;
-						flag_false = false;
+
+						lopstack.pop();
+
+						ifStack.pop();
 					}
 					else
-					{
 						ofile << "\t.ELSE\n";
-					}
+
+					break;
 				}
+
 				break;
 			}
 			case LEX_WHILE:
 			{
+				whileNum++;
+
 				flag_cycle = true;
 
-				cyclenum++;
-
-				ofile << "while" << cyclenum << ":" << endl;
+				ofile << "while" << whileNum << ":" << endl;
 
 				switch (ITENTRY(i + 1).iddatatype)
 				{
@@ -614,8 +615,11 @@ namespace Gener
 					break;
 				}
 
-				ofile << "\t\tjmp endwhile" << cyclenum << endl;
+				ofile << "\t\tjmp endwhile" << whileNum << endl;
 				ofile << "\t.ENDIF" << endl << endl;
+
+				whileStack.push(whileNum);
+				lopstack.push(false);
 
 				i += 2;
 				break;

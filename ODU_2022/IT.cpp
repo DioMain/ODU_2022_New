@@ -4,7 +4,7 @@
 #define W(x, y)\
 		<< std::setw(x) << (y) <<
 #define STR(n, line, type, id)\
-		"|" W(4,n) " |  " W(6,line) "    |" W(21,type) " |  " W(SCOPED_ID_MAXSIZE, id) " |"
+		"|" W(4,n) " |  " W(6,line) "    |" W(21,type) " |  " W(16, id) " |"
 
 namespace IT {
 

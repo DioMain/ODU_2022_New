@@ -24,209 +24,73 @@ ExitProcess PROTO:DWORD
 
  random PROTO  : DWORD
 
- lenght PROTO  : DWORD
+ strLen PROTO  : DWORD
+
+ inputInt PROTO 
+
+ inputString PROTO 
+
+ inputChar PROTO 
 
  power PROTO : DWORD, : DWORD
 .const
  null_division BYTE 'ERROR: DIVISION BY ZERO', 0
  overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
-	L1 BYTE 'COPY TEXT!', 0
-	L2 SDWORD 7
-	L3 SDWORD 125
-	L4 SDWORD 10
-	L5 SDWORD 5
-	L6 SDWORD 2
-	L7 SDWORD 1
-	L8 SDWORD 16
-	L9 BYTE 'TEXT', 0
-	L10 BYTE ' ', 0
+	L1 DWORD 1
+	L2 DWORD 0
+	L3 SDWORD 100
+	L4 SDWORD 5
+	L5 SDWORD 0
+	L6 BYTE 'Please input your name: ', 0
+	L7 BYTE ' ', 0
+	L8 BYTE 'NEW ENEMY!', 0
+	L9 SDWORD 30
+	L10 SDWORD 15
+	L11 BYTE 'Enemy hp = ', 0
+	L12 BYTE ' hp = ', 0
+	L13 BYTE 'COMMANDS:', 0
+	L14 BYTE 'f - FIGTH, d - DEFENCE', 0
+	L15 BYTE 'f', 0
+	L16 BYTE 'd', 0
+	L17 SDWORD 2
+	L18 BYTE 'Unknown command!', 0
+	L19 BYTE 'You kill the enemy!', 0
+	L20 BYTE 'GAME OVER', 0
 .data
-	_ostresult SDWORD 0
-	mainoriginal DWORD ?
-	maincopyright DWORD ?
-	mainoffset SDWORD 0
-	mainnums SDWORD 0
-	mainrandnum SDWORD 0
-	textlen SDWORD 0
-	maincon DWORD ?
-	mainconv DWORD ?
+	_GetDamageGDresult SDWORD 0
+	mainIsAlive DWORD 0
+	mainIsHaveEnemy DWORD 0
+	mainIsHaveCommand DWORD 0
+	mainCommand DWORD ?
+	mainPlayerName DWORD ?
+	mainPlayerHp SDWORD 0
+	mainPlayerDamage SDWORD 0
+	mainFightsCount SDWORD 0
+	mainEnemyHpBuf SDWORD 0
+	mainEnemyDamageBuf SDWORD 0
 
 .code
 
-_ost PROC _osta :  SDWORD , _ostb :  SDWORD 
-	push _osta
-	push _ostb
-	pop ebx
-	pop eax
-	cmp ebx,0
-	je SOMETHINGWRONG
-	cdq
-	idiv ebx
-	push edx
-	pop _ostresult
-
-	mov eax, _ostresult
-	ret
-
-SOMETHINGWRONG:
-push offset null_division
-call outstrline
-call system_pause
-push -1
-call ExitProcess
-
-EXIT_OVERFLOW:
-push offset overflow
-call outstrline
-call system_pause
-push -2
-call ExitProcess
-_ost ENDP
-main PROC
-	push offset L1
-	pop mainoriginal
-
-	push offset copy
-	push mainoriginal
-	pop edx
-	pop edx
-	push mainoriginal
-		call copy
-	push eax
-	pop maincopyright
-
-	push L2
-	pop mainoffset
-
-	push _ost
-	push L3
-	push L4
-	pop edx
-	pop edx
-	pop edx
-	push L4
-	push L3
-		call _ost
-	push eax
-	push L5
-	pop eax
-	pop ebx
-	add eax, ebx
-	jo EXIT_OVERFLOW
-	push eax
-	push L6
-	push L6
-	push L7
-	pop eax
-	pop ebx
-	imul ebx
-	jo EXIT_OVERFLOW
-	push eax
-	pop ebx
-	pop eax
-	cmp ebx,0
-	je SOMETHINGWRONG
-	cdq
-	idiv ebx
-	push eax
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	push mainoffset
-	pop eax
-	pop ebx
-	add eax, ebx
-	jo EXIT_OVERFLOW
-	push eax
-	pop mainnums
-
+_GetDamage PROC _GetDamagedmg :  SDWORD 
+	push _GetDamagedmg
 	push random
-	push L8
+	push _GetDamagedmg
 	pop edx
 	pop edx
-	push L8
+	push _GetDamagedmg
 		call random
 	push eax
-	pop mainrandnum
-
-	push lenght
-	push offset L9
-	pop edx
-	pop edx
-	push offset L9
-		call lenght
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
 	push eax
-	pop textlen
-
-	push offset concat
-	push mainoriginal
-	push maincopyright
+	push random
+	push _GetDamagedmg
 	pop edx
 	pop edx
 	pop edx
-	push maincopyright
-	push mainoriginal
-		call concat
-	push eax
-	pop maincon
-
-
-push maincopyright
-call outstrline
-
-push offset L10
-call outstrline
-
-push mainnums
-call outnumline
-
-push offset L10
-call outstrline
-
-push maincon
-call outstrline
-
-push offset L10
-call outstrline
-
-push mainrandnum
-call outnumline
-
-push offset L10
-call outstrline
-
-push textlen
-call outnumline
-
-push offset L10
-call outstrline
-	push offset intToStr
-	push textlen
 	pop edx
-	pop edx
-	push textlen
-		call intToStr
-	push eax
-	pop mainconv
-
-
-push mainconv
-call outstrline
-call system_pause
-push 0
-call ExitProcess
-SOMETHINGWRONG:
-push offset null_division
-call outstrline
-call system_pause
-push -1
-call ExitProcess
-EXIT_OVERFLOW:
-push offset overflow
-call outstrline
-call system_pause
-push -2
-call ExitProcess
-main ENDP
-end main
+	push _GetDamagedmg
+	push random
+	push random

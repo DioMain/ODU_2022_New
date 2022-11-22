@@ -11,10 +11,13 @@
 #define INT_TO_STR		"intToStr"
 #define CONCAT			"concat"
 #define COPY			"copy"
+#define ININT			"inputInt"
+#define INSTR			"inputString"
+#define INSYM			"inputChar"
 #define TYPE_VOID		"void"
 #define MAIN			"Main"
 #define POW				"pow"
-#define LENGHT			"lenght"
+#define STRLEN			"strLen"
 
 #define ISTYPE(str) ( !strcmp(str, TYPE_INTEGER) || !strcmp(str, TYPE_STRING) )
 

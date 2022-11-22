@@ -3,7 +3,7 @@
 
 namespace GRB
 {
-	Greibach greibach(NS('S'), TS('$'), 20,
+	Greibach greibach(NS('S'), TS('$'), 19,
 
 		Rule(NS('S'), GRB_ERROR_SERIES, 3,						// Неверная структура программы	
 			Rule::Chain(6, TS('t'), TS('f'), TS('i'), NS('P'), NS('T'), NS('S')),
@@ -112,7 +112,13 @@ namespace GRB
 			Rule::Chain(3, TS('i'), NS('F'), TS(';'))			// вызов функции
 		),
 
-		Rule(NS('X'), GRB_ERROR_SERIES + 13, 12,								// Недопустимая синтаксическая конструкция в теле цикла/условного выражения	
+		Rule(NS('X'), GRB_ERROR_SERIES + 13, 16,								// Недопустимая синтаксическая конструкция в теле цикла/условного выражения	
+
+			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),				// if
+			Rule::Chain(5, TS('c'), NS('Z'), TS('d'), NS('H'), NS('X')),	// while
+			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),						// if
+			Rule::Chain(4, TS('c'), NS('Z'), TS('d'), NS('H')),				// while	
+
 			Rule::Chain(5, TS('i'), TS('='), NS('W'), TS(';'), NS('X')),		// присваивание
 			Rule::Chain(5, TS('i'), TS(':'), NS('V'), TS(';'), NS('X')),		// присваивание
 			Rule::Chain(4, TS('o'), NS('V'), TS(';'), NS('X')),					// вывод
@@ -135,12 +141,12 @@ namespace GRB
 			Rule::Chain(2, TS('e'), TS(';')),
 			Rule::Chain(5, TS('e'), TS('('), TS('l'), TS(')'), TS(';'))
 		),
-		Rule(NS('B'), GRB_ERROR_SERIES + 14, 4,						// Ошибка при конструировании условного выражения в цикле
-			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),
-			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),
-			Rule::Chain(5, TS('?'), NS('Z'), NS('R'), NS('X'), NS('B')),
-			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('B'))
-		),
+		//Rule(NS('B'), GRB_ERROR_SERIES + 14, 4,						// Ошибка при конструировании условного выражения в цикле
+		//	Rule::Chain(3, TS('?'), NS('Z'), NS('R')),
+		//	Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),
+		//	Rule::Chain(5, TS('?'), NS('Z'), NS('R'), NS('X'), NS('B')),
+		//	Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('B'))
+		//),
 		Rule(NS('Y'), GRB_ERROR_SERIES + 16, 4,						// Ошибка в теле условного выражения
 			Rule::Chain(4, TS('['), NS('X'), NS('Q'), TS(']')),
 			Rule::Chain(3, TS('['), NS('X'), TS(']')),
@@ -148,8 +154,8 @@ namespace GRB
 			Rule::Chain(2, TS('['), TS(']'))
 		),
 		Rule(NS('H'), GRB_ERROR_SERIES + 17, 4,						// ошибка в теле цикла	
-			Rule::Chain(4, TS('['), NS('X'), NS('B'), TS(']')),
-			Rule::Chain(3, TS('['), NS('B'), TS(']')),
+			Rule::Chain(4, TS('['), NS('X'), NS('Q'), TS(']')),
+			Rule::Chain(3, TS('['), NS('Q'), TS(']')),
 			Rule::Chain(3, TS('['), NS('X'), TS(']')),
 			Rule::Chain(2, TS('['), TS(']'))
 		),
@@ -165,7 +171,6 @@ namespace GRB
 		Rule(NS('G'), GRB_ERROR_SERIES + 2, 2,						// ошибка в теле процедуры
 			Rule::Chain(4, TS('{'), TS('e'), TS(';'), TS('}')),
 			Rule::Chain(5, TS('{'), NS('K'), TS('e'), TS(';'), TS('}'))
-		)
-		
+		)	
 	);
 }

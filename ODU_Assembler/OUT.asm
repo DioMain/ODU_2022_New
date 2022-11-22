@@ -24,32 +24,28 @@ ExitProcess PROTO:DWORD
 
  random PROTO  : DWORD
 
- lenght PROTO  : DWORD
+ strLen PROTO  : DWORD
+
+ inputInt PROTO 
+
+ inputString PROTO 
+
+ inputChar PROTO 
 
  power PROTO : DWORD, : DWORD
 .const
  null_division BYTE 'ERROR: DIVISION BY ZERO', 0
  overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
-	L1 BYTE 'COPY TEXT!', 0
-	L2 SDWORD 7
-	L3 SDWORD 125
-	L4 SDWORD 10
-	L5 SDWORD 5
-	L6 SDWORD 2
-	L7 SDWORD 1
-	L8 SDWORD 16
-	L9 BYTE 'TEXT', 0
-	L10 BYTE ' ', 0
+	L1 BYTE 'Typing!', 0
+	L2 BYTE 'Input the string: ', 0
+	L3 BYTE 'Input the symbol: ', 0
+	L4 BYTE 'Input the number: ', 0
 .data
 	_ostresult SDWORD 0
-	mainoriginal DWORD ?
-	maincopyright DWORD ?
-	mainoffset SDWORD 0
-	mainnums SDWORD 0
-	mainrandnum SDWORD 0
-	textlen SDWORD 0
-	maincon DWORD ?
-	mainconv DWORD ?
+	mainstrlen SDWORD 0
+	maininStr DWORD ?
+	maininChar DWORD ?
+	maininInt SDWORD 0
 
 .code
 
@@ -83,136 +79,51 @@ push -2
 call ExitProcess
 _ost ENDP
 main PROC
+	push strLen
 	push offset L1
-	pop mainoriginal
-
-	push offset copy
-	push mainoriginal
 	pop edx
 	pop edx
-	push mainoriginal
-		call copy
+	push offset L1
+		call strLen
 	push eax
-	pop maincopyright
+	pop mainstrlen
 
-	push L2
-	pop mainoffset
 
-	push _ost
-	push L3
-	push L4
+	push offset L2
+	call outstr
+	push offset inputString
 	pop edx
-	pop edx
-	pop edx
-	push L4
-	push L3
-		call _ost
+		call inputString
 	push eax
-	push L5
-	pop eax
-	pop ebx
-	add eax, ebx
-	jo EXIT_OVERFLOW
-	push eax
-	push L6
-	push L6
-	push L7
-	pop eax
-	pop ebx
-	imul ebx
-	jo EXIT_OVERFLOW
-	push eax
-	pop ebx
-	pop eax
-	cmp ebx,0
-	je SOMETHINGWRONG
-	cdq
-	idiv ebx
-	push eax
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	push mainoffset
-	pop eax
-	pop ebx
-	add eax, ebx
-	jo EXIT_OVERFLOW
-	push eax
-	pop mainnums
+	pop maininStr
 
-	push random
-	push L8
+
+	push offset L3
+	call outstr
+	push offset inputChar
 	pop edx
-	pop edx
-	push L8
-		call random
+		call inputChar
 	push eax
-	pop mainrandnum
+	pop maininChar
 
-	push lenght
-	push offset L9
+
+	push offset L4
+	call outstr
+	push inputInt
 	pop edx
-	pop edx
-	push offset L9
-		call lenght
+		call inputInt
 	push eax
-	pop textlen
-
-	push offset concat
-	push mainoriginal
-	push maincopyright
-	pop edx
-	pop edx
-	pop edx
-	push maincopyright
-	push mainoriginal
-		call concat
-	push eax
-	pop maincon
+	pop maininInt
 
 
-push maincopyright
-call outstrline
+	push maininStr
+	call outstrline
 
-push offset L10
-call outstrline
+	push maininChar
+	call outstrline
 
-push mainnums
-call outnumline
-
-push offset L10
-call outstrline
-
-push maincon
-call outstrline
-
-push offset L10
-call outstrline
-
-push mainrandnum
-call outnumline
-
-push offset L10
-call outstrline
-
-push textlen
-call outnumline
-
-push offset L10
-call outstrline
-	push offset intToStr
-	push textlen
-	pop edx
-	pop edx
-	push textlen
-		call intToStr
-	push eax
-	pop mainconv
-
-
-push mainconv
-call outstrline
+	push maininInt
+	call outnumline
 call system_pause
 push 0
 call ExitProcess

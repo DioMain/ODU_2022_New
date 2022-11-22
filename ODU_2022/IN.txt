@@ -1,33 +1,85 @@
-int function ost(int a, int b){
-	type int result = a % b;
+int function GetDamage(int dmg) {
+	type int GDresult = dmg + random(dmg) - random(dmg);
 	
-	return result;
+	return GDresult;
 }
 
+
 Main {
-	type string original = "COPY TEXT!";
-	type string copyright = copy(original);
+	type bool IsAlive = true;
+	type bool IsHaveEnemy = false;
+	type bool IsHaveCommand = false;
+	type char Command;
+
+	type string PlayerName;
 	
-	type int offset = 7;
+	type int PlayerHp = 100;
+	type int PlayerDamage = 5;
 	
-	type int nums = (ost(125, 10) + 5 - 2 / (2 * 1)) + offset;
-	type int randnum = random(16);
-	type int textlen = lenght("TEXT");
+	type int FightsCount = 0;
 	
-	type string con = concat(original, copyright);
+	type int EnemyHpBuf;
+	type int EnemyDamageBuf;
 	
-	WriteLine copyright;
-	WriteLine " ";
-	WriteLine nums;
-	WriteLine " ";
-	WriteLine con;
-	WriteLine " ";
-	WriteLine randnum;
-	WriteLine " ";
-	WriteLine textlen;
+	Write "Please input your name: ";
+	PlayerName = inputString();
+	
 	WriteLine " ";
 	
-	type string conv = intToStr(textlen);
+	while IsAlive == true do [
+		
+		IsHaveCommand = false;
+		
+		if IsHaveEnemy == false then [
+			WriteLine " ";
+			WriteLine "NEW ENEMY!";
+			WriteLine " ";
+		
+			EnemyHpBuf = random(30);
+			EnemyDamageBuf = random(15);
+		]
+		
+		Write "Enemy hp = ";
+		WriteLine EnemyHpBuf;
+		WriteLine " ";
+		Write PlayerName;
+		Write " hp = ";
+		WriteLine EnemyHpBuf;
+		WriteLine " ";
+		WriteLine "COMMANDS:";
+		WriteLine "f - FIGTH, d - DEFENCE";
+		
+		Command = inputChar();
+		
+		if Command == 'f' then [
+			
+			EnemyHpBuf = EnemyHpBuf - GetDamage(PlayerDamage);
+			PlayerHp = PlayerHp - GetDamage(EnemyDamageBuf);
+			
+			IsHaveCommand = true;
+		]
+		if Command == 'd' then [
+			
+			PlayerHp = PlayerHp - GetDamage(EnemyDamageBuf) / 2;
+			
+			IsHaveCommand = true;
+		]
+		
+		if IsHaveCommand == false then [
+			WriteLine "Unknown command!";
+		]
+		
+		if EnemyHpBuf <= 0 then [
+			WriteLine "You kill the enemy!";
+		
+			IsHaveEnemy = false;
+		]
+		
+		if PlayerHp <= 0 then [
+			IsAlive = false;
+		]
+	]
 	
-	WriteLine conv;
+	WriteLine " ";
+	WriteLine "GAME OVER";
 }
