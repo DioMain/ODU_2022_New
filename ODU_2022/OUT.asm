@@ -36,330 +36,159 @@ ExitProcess PROTO:DWORD
 .const
  null_division BYTE 'ERROR: DIVISION BY ZERO', 0
  overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
-	L1 SDWORD 0
-	L2 SDWORD -1
-	L3 DWORD 1
-	L4 DWORD 0
-	L5 SDWORD 100
-	L6 SDWORD 5
-	L7 BYTE 'Please input your name: ', 0
-	L8 BYTE ' ', 0
-	L9 BYTE 'NEW ENEMY!', 0
-	L10 SDWORD 30
-	L11 SDWORD 15
-	L12 BYTE 'Enemy hp = ', 0
-	L13 BYTE ' hp = ', 0
-	L14 BYTE 'COMMANDS:', 0
-	L15 BYTE 'f - FIGTH, d - DEFENCE', 0
-	L16 BYTE 'f', 0
-	L17 BYTE 'd', 0
-	L18 SDWORD 2
-	L19 BYTE 'Unknown command!', 0
-	L20 BYTE 'You kill the enemy!', 0
-	L21 BYTE 'GAME OVER', 0
+	L1 BYTE 'STR ', 0
+	L2 BYTE 'str', 0
+	L3 SDWORD 1
+	L4 BYTE '==', 0
+	L5 SDWORD 2
+	L6 BYTE '!=', 0
+	L7 BYTE '>', 0
+	L8 BYTE '<', 0
+	L9 BYTE '>=', 0
+	L10 BYTE '<=', 0
+	L11 BYTE 'ERROR!', 0
+	L12 BYTE 'ELSE AND LAYERNESS WORK!', 0
+	L13 BYTE '2', 0
+	L14 BYTE 'i and l', 0
+	L15 BYTE '3', 0
+	L16 BYTE 'l and i', 0
+	L17 BYTE 'i and i', 0
 .data
-	_GetDamagerand0 SDWORD 0
-	_GetDamagerand1 SDWORD 0
-	_GetDamageGDresult SDWORD 0
-	mainIsAlive DWORD 0
-	mainIsHaveEnemy DWORD 0
-	mainIsHaveCommand DWORD 0
-	mainCommand DWORD ?
-	mainPlayerName DWORD ?
-	mainPlayerHp SDWORD 0
-	mainPlayerDamage SDWORD 0
-	mainFightsCount SDWORD 0
-	mainEnemyHpBuf SDWORD 0
-	mainEnemyDamageBuf SDWORD 0
+	mainstr0 DWORD ?
+	mainstr1 DWORD ?
+	mainstr2 DWORD ?
+	mainstr3 DWORD ?
+	mainsomevar DWORD ?
 
 .code
 
-_GetDamage PROC _GetDamagedmg :  SDWORD 
-	push random
-	push _GetDamagedmg
-	pop edx
-	pop edx
-	push _GetDamagedmg
-		call random
-	push eax
-	pop _GetDamagerand0
+main PROC
+	push offset L1
+	pop mainstr0
 
-	push random
-	push _GetDamagedmg
-	pop edx
-	pop edx
-	push _GetDamagedmg
-		call random
-	push eax
-	pop _GetDamagerand1
+	push offset L2
+	pop mainstr1
 
-	push _GetDamagedmg
-	push random
-	push _GetDamagedmg
+	push offset concat
+	push mainstr0
+	push mainstr1
 	pop edx
 	pop edx
-	push _GetDamagedmg
-		call random
+	pop edx
+	push mainstr1
+	push mainstr0
+		call concat
 	push eax
-	pop eax
-	pop ebx
-	add eax, ebx
-	jo EXIT_OVERFLOW
-	push eax
-	push _GetDamagerand1
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	pop _GetDamageGDresult
+	pop mainstr2
 
-	mov eax, _GetDamageGDresult
-	mov ebx, L1
-	.IF SDWORD PTR eax  <  SDWORD PTR ebx
-	push _GetDamageGDresult
-	push L2
-	pop eax
-	pop ebx
-	imul ebx
-	jo EXIT_OVERFLOW
+	push offset copy
+	push mainstr1
+	pop edx
+	pop edx
+	push mainstr1
+		call copy
 	push eax
-	pop _GetDamageGDresult
+	pop mainstr3
 
+
+	push mainstr2
+	call outstrline
+
+	push mainstr3
+	call outstrline
+	mov eax, L3
+	mov ebx, L3
+	.IF SDWORD PTR eax  ==  SDWORD PTR ebx
+
+	push offset L4
+	call outstrline
 
 	.ENDIF
-	mov eax, _GetDamageGDresult
-	ret
+	mov eax, L3
+	mov ebx, L5
+	.IF SDWORD PTR eax  !=  SDWORD PTR ebx
 
-SOMETHINGWRONG:
-push offset null_division
-call outstrline
-call system_pause
-push -1
-call ExitProcess
+	push offset L6
+	call outstrline
 
-EXIT_OVERFLOW:
-push offset overflow
-call outstrline
-call system_pause
-push -2
-call ExitProcess
-_GetDamage ENDP
-main PROC
-	push L3
-	pop mainIsAlive
-
-	push L4
-	pop mainIsHaveEnemy
-
-	push L4
-	pop mainIsHaveCommand
-
-	push L5
-	pop mainPlayerHp
-
-	push L6
-	pop mainPlayerDamage
-
-	push L1
-	pop mainFightsCount
-
+	.ENDIF
+	mov eax, L5
+	mov ebx, L3
+	.IF SDWORD PTR eax  >  SDWORD PTR ebx
 
 	push offset L7
-	call outstr
-	push offset inputString
-	pop edx
-		call inputString
-	push eax
-	pop mainPlayerName
-
-
-	push offset L8
 	call outstrline
-while1:
-	mov eax, mainIsAlive
-	mov ebx, L3
 
-	.IF eax  !=  ebx
-		jmp endwhile1
 	.ENDIF
-
-	push L4
-	pop mainIsHaveCommand
-
-	mov eax, mainIsHaveEnemy
-	mov ebx, L4
-	.IF eax  ==  ebx
+	mov eax, L3
+	mov ebx, L5
+	.IF SDWORD PTR eax  <  SDWORD PTR ebx
 
 	push offset L8
 	call outstrline
+
+	.ENDIF
+	mov eax, L3
+	mov ebx, L3
+	.IF SDWORD PTR eax  >=  SDWORD PTR ebx
 
 	push offset L9
 	call outstrline
 
-	push offset L8
+	.ENDIF
+	mov eax, L3
+	mov ebx, L3
+	.IF SDWORD PTR eax  <=  SDWORD PTR ebx
+
+	push offset L10
 	call outstrline
-	push random
-	push L10
-	pop edx
-	pop edx
-	push L10
-		call random
-	push eax
-	pop mainEnemyHpBuf
+	mov eax, L5
+	mov ebx, L5
+	.IF SDWORD PTR eax  !=  SDWORD PTR ebx
 
-	push random
-	push L11
-	pop edx
-	pop edx
-	push L11
-		call random
-	push eax
-	pop mainEnemyDamageBuf
+	push offset L11
+	call outstrline
+	.ELSE
 
-	push L3
-	pop mainIsHaveEnemy
-
+	push offset L12
+	call outstrline
 
 	.ENDIF
 
-	push offset L12
-	call outstr
-
-	push mainEnemyHpBuf
-	call outnumline
-
-	push offset L8
-	call outstrline
-
-	push mainPlayerName
-	call outstr
-
+	.ENDIF
 	push offset L13
-	call outstr
+	pop mainsomevar
 
-	push mainPlayerHp
-	call outnumline
-
-	push offset L8
-	call outstrline
+	mov esi, mainsomevar
+	mov edi, offset L13
+	mov al, BYTE PTR [esi]
+	mov bl, BYTE PTR [edi]
+	.IF al  ==  bl
 
 	push offset L14
 	call outstrline
 
-	push offset L15
-	call outstrline
-	push offset inputChar
-	pop edx
-		call inputChar
-	push eax
-	pop mainCommand
+	.ENDIF
+	mov esi, offset L15
+	mov esi, mainsomevar
+	mov al, BYTE PTR [esi]
+	mov bl, BYTE PTR [edi]
+	.IF al  !=  bl
 
-	mov esi, mainCommand
-	mov edi, offset L16
+	push offset L16
+	call outstrline
+
+	.ENDIF
+	mov esi, mainsomevar
+	mov esi, mainsomevar
 	mov al, BYTE PTR [esi]
 	mov bl, BYTE PTR [edi]
 	.IF al  ==  bl
-	push mainEnemyHpBuf
-	push _GetDamage
-	push mainPlayerDamage
-	pop edx
-	pop edx
-	push mainPlayerDamage
-		call _GetDamage
-	push eax
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	pop mainEnemyHpBuf
 
-	push mainPlayerHp
-	push _GetDamage
-	push mainEnemyDamageBuf
-	pop edx
-	pop edx
-	push mainEnemyDamageBuf
-		call _GetDamage
-	push eax
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	pop mainPlayerHp
-
-	push L3
-	pop mainIsHaveCommand
-
-
-	.ENDIF
-	mov esi, mainCommand
-	mov edi, offset L17
-	mov al, BYTE PTR [esi]
-	mov bl, BYTE PTR [edi]
-	.IF al  ==  bl
-	push mainPlayerHp
-	push _GetDamage
-	push mainEnemyDamageBuf
-	pop edx
-	pop edx
-	push mainEnemyDamageBuf
-		call _GetDamage
-	push eax
-	push L18
-	pop ebx
-	pop eax
-	cmp ebx,0
-	je SOMETHINGWRONG
-	cdq
-	idiv ebx
-	push eax
-	pop ebx
-	pop eax
-	sub eax, ebx
-	push eax
-	pop mainPlayerHp
-
-	push L3
-	pop mainIsHaveCommand
-
-
-	.ENDIF
-	mov eax, mainIsHaveCommand
-	mov ebx, L4
-	.IF eax  ==  ebx
-
-	push offset L19
+	push offset L17
 	call outstrline
 
 	.ENDIF
-	mov eax, mainEnemyHpBuf
-	mov ebx, L1
-	.IF SDWORD PTR eax  <=  SDWORD PTR ebx
-
-	push offset L20
-	call outstrline
-	push L4
-	pop mainIsHaveEnemy
-
-
-	.ENDIF
-	mov eax, mainPlayerHp
-	mov ebx, L1
-	.IF SDWORD PTR eax  <=  SDWORD PTR ebx
-	push L4
-	pop mainIsAlive
-
-
-	.ENDIF
-	jmp while1
-
-endwhile1:
-
-	push offset L8
-	call outstrline
-
-	push offset L21
-	call outstrline
 call system_pause
 push 0
 call ExitProcess

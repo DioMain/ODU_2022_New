@@ -1,93 +1,49 @@
-int function GetDamage(int dmg) {
-	type int rand0 = random(dmg);
-	type int rand1 = random(dmg);
-	type int GDresult = dmg + random(dmg) - rand1;
-	
-	if GDresult < 0 then [
-		GDresult = GDresult * -1;
-	]
-	
-	return GDresult;
-}
-
-
 Main {
-	type bool IsAlive = true;
-	type bool IsHaveEnemy = false;
-	type bool IsHaveCommand = false;
-	type char Command;
-
-	type string PlayerName;
+	type string str0 = "STR ";
+	type string str1 = "str";
 	
-	type int PlayerHp = 100;
-	type int PlayerDamage = 5;
+	type string str2 = concat(str0, str1);
 	
-	type int FightsCount = 0;
+	type string str3 = copy(str1);
 	
-	type int EnemyHpBuf;
-	type int EnemyDamageBuf;
+	WriteLine str2;
+	WriteLine str3;
 	
-	Write "Please input your name: ";
-	PlayerName = inputString();
-	
-	WriteLine " ";
-	
-	while IsAlive == true do [
+	if 1 == 1 then [
+		WriteLine "==";
+	]
+	if 1 != 2 then [
+		WriteLine "!=";
+	]
+	if 2 > 1 then [
+		WriteLine ">";
+	]
+	if 1 < 2 then [
+		WriteLine "<";
+	]
+	if 1 >= 1 then [
+		WriteLine ">=";
+	]
+	if 1 <= 1 then [
+		WriteLine "<=";
 		
-		IsHaveCommand = false;
-		
-		if IsHaveEnemy == false then [
-			WriteLine " ";
-			WriteLine "NEW ENEMY!";
-			WriteLine " ";
-		
-			EnemyHpBuf = random(30);
-			EnemyDamageBuf = random(15);
-			
-			IsHaveEnemy = true;
+		if 2 != 2 then [
+			WriteLine "ERROR!";
 		]
-		
-		Write "Enemy hp = ";
-		WriteLine EnemyHpBuf;
-		WriteLine " ";
-		Write PlayerName;
-		Write " hp = ";
-		WriteLine PlayerHp;
-		WriteLine " ";
-		WriteLine "COMMANDS:";
-		WriteLine "f - FIGTH, d - DEFENCE";
-		
-		Command = inputChar();
-		
-		if Command == 'f' then [
-			
-			EnemyHpBuf = EnemyHpBuf - GetDamage(PlayerDamage);
-			PlayerHp = PlayerHp - GetDamage(EnemyDamageBuf);
-			
-			IsHaveCommand = true;
-		]
-		if Command == 'd' then [
-			
-			PlayerHp = PlayerHp - GetDamage(EnemyDamageBuf) / 2;
-			
-			IsHaveCommand = true;
-		]
-		
-		if IsHaveCommand == false then [
-			WriteLine "Unknown command!";
-		]
-		
-		if EnemyHpBuf <= 0 then [
-			WriteLine "You kill the enemy!";
-		
-			IsHaveEnemy = false;
-		]
-		
-		if PlayerHp <= 0 then [
-			IsAlive = false;
+		else [
+			WriteLine "ELSE AND LAYERNESS WORK!";
 		]
 	]
 	
-	WriteLine " ";
-	WriteLine "GAME OVER";
+	type char somevar = '2';
+	
+	if somevar == '2' then [
+		WriteLine "i and l";
+	]
+	if '3' != somevar then [
+		WriteLine "l and i";
+	]
+	if somevar == somevar then [
+		WriteLine "i and i";
+	]
 }

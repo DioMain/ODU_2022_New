@@ -380,7 +380,7 @@ namespace Gener
 					if (ITENTRY(i + 3).id[0] == 'L')
 						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
 					else
-						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+						ofile << "\tmov edi, " << ITENTRY(i + 3).id << endl;
 
 					ofile << "\tmov al, BYTE PTR [esi]" << "\n";
 					ofile << "\tmov bl, BYTE PTR [edi]" << "\n";
@@ -428,7 +428,7 @@ namespace Gener
 					if (ITENTRY(i + 3).id[0] == 'L')
 						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
 					else 
-						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+						ofile << "\tmov edi, " << ITENTRY(i + 3).id << endl;
 
 					ofile << "\tmov eax, 0" << endl;
 
@@ -571,7 +571,7 @@ namespace Gener
 					if (ITENTRY(i + 3).id[0] == 'L')
 						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
 					else
-						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+						ofile << "\tmov edi, " << ITENTRY(i + 3).id << endl;
 
 					ofile << "\tmov al, BYTE PTR [esi]" << "\n";
 					ofile << "\tmov bl, BYTE PTR [edi]" << "\n";
@@ -596,7 +596,7 @@ namespace Gener
 					if (ITENTRY(i + 3).id[0] == 'L')
 						ofile << "\tmov edi, offset " << ITENTRY(i + 3).id << endl;
 					else
-						ofile << "\tmov esi, " << ITENTRY(i + 3).id << endl;
+						ofile << "\tmov edi, " << ITENTRY(i + 3).id << endl;
 
 					ofile << "\tmov eax, 0" << endl;
 
