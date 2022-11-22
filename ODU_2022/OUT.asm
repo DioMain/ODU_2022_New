@@ -53,12 +53,16 @@ ExitProcess PROTO:DWORD
 	L15 BYTE '3', 0
 	L16 BYTE 'l and i', 0
 	L17 BYTE 'i and i', 0
+	L18 SDWORD 0
+	L19 SDWORD 10
+	L20 BYTE ' ', 0
 .data
 	mainstr0 DWORD ?
 	mainstr1 DWORD ?
 	mainstr2 DWORD ?
 	mainstr3 DWORD ?
 	mainsomevar DWORD ?
+	maini SDWORD 0
 
 .code
 
@@ -170,7 +174,7 @@ main PROC
 
 	.ENDIF
 	mov esi, offset L15
-	mov esi, mainsomevar
+	mov edi, mainsomevar
 	mov al, BYTE PTR [esi]
 	mov bl, BYTE PTR [edi]
 	.IF al  !=  bl
@@ -180,7 +184,7 @@ main PROC
 
 	.ENDIF
 	mov esi, mainsomevar
-	mov esi, mainsomevar
+	mov edi, mainsomevar
 	mov al, BYTE PTR [esi]
 	mov bl, BYTE PTR [edi]
 	.IF al  ==  bl
@@ -189,6 +193,38 @@ main PROC
 	call outstrline
 
 	.ENDIF
+	push L18
+	pop maini
+
+while1:
+	mov eax, maini
+	mov ebx, L19
+
+	.IF SDWORD PTR eax  >=  SDWORD PTR ebx
+		jmp endwhile1
+	.ENDIF
+
+
+	push maini
+	call outnum
+
+	push offset L20
+	call outstr
+	push maini
+	push L3
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop maini
+
+	jmp while1
+
+endwhile1:
+
+	push offset L20
+	call outstrline
 call system_pause
 push 0
 call ExitProcess

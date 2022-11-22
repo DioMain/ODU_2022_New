@@ -46,4 +46,13 @@ Main {
 	if somevar == somevar then [
 		WriteLine "i and i";
 	]
+	
+	type int i = 0;
+	while i < 10 do [
+		Write i;
+		Write " ";
+		
+		i = i + 1;
+	]
+	WriteLine " ";
 }
