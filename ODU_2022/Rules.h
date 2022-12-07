@@ -141,12 +141,6 @@ namespace GRB
 			Rule::Chain(2, TS('e'), TS(';')),
 			Rule::Chain(5, TS('e'), TS('('), TS('l'), TS(')'), TS(';'))
 		),
-		//Rule(NS('B'), GRB_ERROR_SERIES + 14, 4,						// Ошибка при конструировании условного выражения в цикле
-		//	Rule::Chain(3, TS('?'), NS('Z'), NS('R')),
-		//	Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),
-		//	Rule::Chain(5, TS('?'), NS('Z'), NS('R'), NS('X'), NS('B')),
-		//	Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('B'))
-		//),
 		Rule(NS('Y'), GRB_ERROR_SERIES + 16, 4,						// Ошибка в теле условного выражения
 			Rule::Chain(4, TS('['), NS('X'), NS('Q'), TS(']')),
 			Rule::Chain(3, TS('['), NS('X'), TS(']')),

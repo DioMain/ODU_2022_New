@@ -467,10 +467,6 @@ namespace Gener
 				i += 2;
 				break;
 			}
-			case LEX_ISTRUE:
-				break;
-			case LEX_ISFALSE:
-				break;
 			case LEX_SQ_RBRACELET:
 			{
 				bool isDel = false;

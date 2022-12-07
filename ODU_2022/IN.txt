@@ -1,58 +1,16 @@
+void function foo(bool IsActive, int a, char b, string s) { 
+	
+	if IsActive == false then [
+		WriteLine "Test";
+	]
+	
+	a = 13;
+	b = 'f';
+	s = intToStr(169);
+	
+	return;
+}
+
 Main {
-	type string str0 = "STR ";
-	type string str1 = "str";
-	
-	type string str2 = concat(str0, str1);
-	
-	type string str3 = copy(str1);
-	
-	WriteLine str2;
-	WriteLine str3;
-	
-	if 1 == 1 then [
-		WriteLine "==";
-	]
-	if 1 != 2 then [
-		WriteLine "!=";
-	]
-	if 2 > 1 then [
-		WriteLine ">";
-	]
-	if 1 < 2 then [
-		WriteLine "<";
-	]
-	if 1 >= 1 then [
-		WriteLine ">=";
-	]
-	if 1 <= 1 then [
-		WriteLine "<=";
-		
-		if 2 != 2 then [
-			WriteLine "ERROR!";
-		]
-		else [
-			WriteLine "ELSE AND LAYERNESS WORK!";
-		]
-	]
-	
-	type char somevar = '2';
-	
-	if somevar == '2' then [
-		WriteLine "i and l";
-	]
-	if '3' != somevar then [
-		WriteLine "l and i";
-	]
-	if somevar == somevar then [
-		WriteLine "i and i";
-	]
-	
-	type int i = 0;
-	while i < 10 do [
-		Write i;
-		Write " ";
-		
-		i = i + 1;
-	]
-	WriteLine " ";
+	foo(false, 12, 'd', "fg");
 }

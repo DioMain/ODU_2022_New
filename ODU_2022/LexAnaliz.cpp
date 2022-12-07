@@ -155,7 +155,7 @@ namespace Lex
 		else if (*curword == IN_CODE_NOT_DOUBLE_QUOTE)
 			return IT::IDDATATYPE::SYM;	// символьный литерал
 		else if (*curword == IN_CODE_BOL_T || *curword == IN_CODE_BOL_F)
-			return IT::IDDATATYPE::BOL;	// символьный литерал
+			return IT::IDDATATYPE::BOL;
 
 		return IT::IDDATATYPE::UNDEF;		// неопределенный тип, индикатор ошибки
 	}
@@ -358,6 +358,7 @@ namespace Lex
 				itentry->idtype = IT::IDTYPE::P;
 			else
 				itentry->idtype = IT::IDTYPE::V;
+
 			if (!isFunc)
 			{
 				memset(itentry->id, '\0', SCOPED_ID_MAXSIZE);
@@ -411,13 +412,19 @@ namespace Lex
 		for (int i = 0; i < in.words->size; i++)
 		{
 			strcpy_s(curword, in.words[i].word);
+
 			if (i < in.words->size - 1)
 				strcpy_s(nextword, in.words[i + 1].word);
+
 			curline = in.words[i].line;
+
 			isFunc = false;
+
 			int idxTI = TI_NULLIDX;
+
 			for (int j = 0; j < N_GRAPHS; j++) {
 				FST::FST fst((unsigned char*)curword, graphs[j].graph);
+
 				if (FST::execute(fst)) {
 					char lexema = graphs[j].lexema;
 					
@@ -448,7 +455,8 @@ namespace Lex
 						{
 							isParam = false;
 							// конец области видимости
-							if (*in.words[i - 1].word == LEX_LEFTHESIS || (i > 2 && (tables.lextable.table[tables.lextable.size - 2].lexema == LEX_ID_TYPE)))
+							if ((*in.words[i - 1].word == LEX_LEFTHESIS || (i > 2 && (tables.lextable.table[tables.lextable.size - 2].lexema == LEX_ID_TYPE)))
+								&& !scopes.empty())
 								scopes.pop();
 							break;
 						}

@@ -19,7 +19,7 @@
 #define POW				"pow"
 #define STRLEN			"strLen"
 
-#define ISTYPE(str) ( !strcmp(str, TYPE_INTEGER) || !strcmp(str, TYPE_STRING) )
+#define ISTYPE(str) ( !strcmp(str, TYPE_INTEGER) || !strcmp(str, TYPE_STRING) || !strcmp(str, TYPE_SYMBOL) || !strcmp(str, TYPE_BOOLEAN) )
 
 namespace Lex
 {

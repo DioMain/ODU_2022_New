@@ -39,15 +39,15 @@ ExitProcess PROTO:DWORD
 	L1 BYTE 'STR ', 0
 	L2 BYTE 'str', 0
 	L3 SDWORD 1
-	L4 BYTE '==', 0
+	L4 BYTE '1 == 1', 0
 	L5 SDWORD 2
-	L6 BYTE '!=', 0
-	L7 BYTE '>', 0
-	L8 BYTE '<', 0
-	L9 BYTE '>=', 0
-	L10 BYTE '<=', 0
+	L6 BYTE '1 != 2', 0
+	L7 BYTE '2 > 1', 0
+	L8 BYTE '1 < 2', 0
+	L9 BYTE '1 >= 1', 0
+	L10 BYTE '1 <= 1', 0
 	L11 BYTE 'ERROR!', 0
-	L12 BYTE 'ELSE AND LAYERNESS WORK!', 0
+	L12 BYTE '2 !!= 2 AND LAYERNESS WORK!', 0
 	L13 BYTE '2', 0
 	L14 BYTE 'i and l', 0
 	L15 BYTE '3', 0

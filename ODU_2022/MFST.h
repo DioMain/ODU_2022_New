@@ -11,19 +11,19 @@
 	<< std::setw(20) << std::left << "Стек" \
 	<< std::endl;
 
-#define MFST_TRACE1(LOG) *log.stream <<std::setw( 4)<<std::left<<++FST_TRACE_n<<":" \
+#define MFST_TRACE1(LOG) *log.stream <<std::setw(4)<<std::left<<++FST_TRACE_n<<":" \
 	<< std::setw(20) << std::left << rule.getCRule(rbuf, nrulechain)  \
 	<< std::setw(30) << std::left << getCLenta(lbuf, lenta_position) \
 	<< std::setw(20) << std::left << getCSt(sbuf) \
 	<< std::endl;
 
-#define MFST_TRACE2(LOG)    *log.stream <<std::setw( 4)<<std::left<<FST_TRACE_n<<":" \
+#define MFST_TRACE2(LOG)    *log.stream <<std::setw(4)<<std::left<<FST_TRACE_n<<":" \
 	<< std::setw(20) << std::left << " "  \
 	<< std::setw(30) << std::left << getCLenta(lbuf, lenta_position) \
 	<< std::setw(20) << std::left << getCSt(sbuf) \
 	<< std::endl;
 
-#define MFST_TRACE3(LOG)     *log.stream<<std::setw( 4)<<std::left<<++FST_TRACE_n<<":" \
+#define MFST_TRACE3(LOG)     *log.stream<<std::setw(4)<<std::left<<++FST_TRACE_n<<":" \
 	<< std::setw(20) << std::left << " "  \
 	<< std::setw(30) << std::left << getCLenta(lbuf, lenta_position) \
 	<< std::setw(20) << std::left << getCSt(sbuf) \

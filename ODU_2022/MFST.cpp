@@ -63,6 +63,7 @@ namespace MFST
 	Mfst::RC_STEP Mfst::step(const Log::LOG& log)		// шаг автомата
 	{
 		RC_STEP rc = SURPRISE;
+
 		if (lenta_position < lenta_size)	// если лента не закончилась
 		{
 			if (ISNS(st.top()))			// если на вершине стеке нетерминал
@@ -85,7 +86,7 @@ namespace MFST
 						MFST_TRACE4(log, "TNS_NORULECHAIN/NS_NORULE")
 							savediagnosis(NS_NORULECHAIN);
 						rc = reststate(log) ? NS_NORULECHAIN : NS_NORULE;	// восстановить состояние автомата
-					};
+					}
 				}
 				else rc = NS_ERROR;		// неизвестный нетерминал
 			}
