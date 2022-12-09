@@ -44,7 +44,9 @@ ExitProcess PROTO:DWORD
 	L6 SDWORD 12
 	L7 BYTE 'd', 0
 	L8 BYTE 'fg', 0
+	L9 SDWORD 2
 .data
+	mainj SDWORD 0
 
 .code
 
@@ -99,6 +101,21 @@ push L6
 push offset L1
 
 call foo
+	push L9
+	push L9
+	push L9
+	pop eax
+	pop ebx
+	add eax, ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop eax
+	pop ebx
+	imul ebx
+	jo EXIT_OVERFLOW
+	push eax
+	pop mainj
+
 call system_pause
 push 0
 call ExitProcess

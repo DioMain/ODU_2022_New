@@ -13,4 +13,6 @@ void function foo(bool IsActive, int a, char b, string s) {
 
 Main {
 	foo(false, 12, 'd', "fg");
+
+	type int j = 2 * (2 + 2);
 }
