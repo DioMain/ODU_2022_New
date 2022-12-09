@@ -306,9 +306,10 @@ namespace Gener
 					while (!temp.empty())
 					{
 						if (temp.top().idtype == IT::IDTYPE::L && (temp.top().iddatatype == IT::IDDATATYPE::STR 
-															|| temp.top().iddatatype == IT::IDDATATYPE::SYM
-															|| temp.top().iddatatype == IT::IDDATATYPE::BOL))
+															|| temp.top().iddatatype == IT::IDDATATYPE::SYM))
 							ofile << "\npush offset " << temp.top().id << "\n";
+						else if (temp.top().idtype == IT::IDTYPE::L && temp.top().iddatatype == IT::IDDATATYPE::BOL)
+							ofile << "\npush DWORD ptr " << temp.top().id << "\n";
 						else  
 							ofile << "\npush " << temp.top().id << "\n";
 						temp.pop();
@@ -362,6 +363,7 @@ namespace Gener
 				case IT::IDDATATYPE::BOL:
 
 					ofile << "\tmov eax, " << ITENTRY(i + 1).id << endl;
+
 					ofile << "\tmov ebx, " << ITENTRY(i + 3).id << endl;
 
 					if (LEXEMA(i + 2) == LEX_LOGIC_EQUALS) 

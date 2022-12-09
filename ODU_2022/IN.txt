@@ -1,7 +1,19 @@
 void function foo(bool IsActive, int a, char b, string s) { 
 	
 	if IsActive == false then [
-		WriteLine "Test";
+		WriteLine "Bool";
+	]
+	
+	if b == 'd' then [
+		WriteLine "Char";
+	]
+	
+	if s == "fg" then [
+		WriteLine "String";
+	]
+	
+	if a > 11 then [
+		WriteLine "Int";
 	]
 	
 	a = 13;
