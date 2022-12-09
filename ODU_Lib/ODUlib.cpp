@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+﻿	#include "pch.h"
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
@@ -60,7 +60,7 @@ extern "C"
 		stream << a << '\0';
 
 		return stream.str();
-	}
+	}		
 
 	int __stdcall inputInt() {
 		int result;

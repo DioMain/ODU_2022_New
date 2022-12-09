@@ -23,7 +23,7 @@
 #define LEX_DIRSLASH				'/'	// деление
 #define LEX_PROCENT					'%'	// остаток от деления
 #define	LEX_EQUAL					'='	// присваивание				
-#define LEX_IF						'?'	// is
+#define LEX_IF						'?'	// if
 #define LEX_NOT_DOUBLE_QUOTE		'\''// отрицательный идентификатор
 #define LEX_WHILE					'c'	// while
 #define LEX_ISTRUE					'r'	// ложный блок
