@@ -1,30 +1,3 @@
-void function foo(bool IsActive, int a, char b, string s) { 
-	
-	if IsActive == false then [
-		WriteLine "Bool";
-	]
-	
-	if b == 'd' then [
-		WriteLine "Char";
-	]
-	
-	if s == "fg" then [
-		WriteLine "String";
-	]
-	
-	if a > 11 then [
-		WriteLine "Int";
-	]
-	
-	a = 13;
-	b = 'f';
-	s = intToStr(169);
-	
-	return;
-}
-
 Main {
-	foo(false, 12, 'd', "fg");
-
-	type int j = 2 * (2 + 2);
+	WriteLine " " ";
 }

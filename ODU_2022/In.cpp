@@ -222,13 +222,13 @@ namespace In {
 				buffer[bufpos++] = IN_CODE_NOT_DOUBLE_QUOTE;
 				if (text[i + 1] == IN::N)
 				{
-					Log::WriteError(stream, Error::GetError(311, line, 0));
+					throw Error::GetError(311, line, 0);
 					break;
 				}
 				buffer[bufpos++] = text[++i];
 				if (text[i + 1] != IN_CODE_NOT_DOUBLE_QUOTE)
 				{
-					Log::WriteError(stream, Error::GetError(312, line, 0));
+					throw Error::GetError(312, line, 0);
 					break;
 				}
 				buffer[bufpos++] = text[++i];
@@ -248,8 +248,7 @@ namespace In {
 				{
 					if (code[text[j]] == IN::N)
 					{
-						Log::WriteError(stream, Error::GetError(311, line, 0));
-						isltrlgood = false; // литерал не закрыт!
+						throw Error::GetError(311, line, 0);
 						break;
 					}
 				}
@@ -260,7 +259,7 @@ namespace In {
 					{
 						if (j == 256 || i + j == textSize)
 						{
-							Log::WriteError(stream, Error::GetError(312, line, 0));
+							throw Error::GetError(312, line, 0);
 							break; // превышен размер литерала(учтена откр кавычка)
 						}
 						buffer[bufpos++] = text[i + j];

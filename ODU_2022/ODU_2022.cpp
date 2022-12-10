@@ -12,8 +12,6 @@ using namespace std;
 int _tmain(int argc, wchar_t* argv[])
 {
 	setlocale(0, "");
-	cout << "у тебя всё получится!";
-
 	char LEXERROR[] = "Лексический анализ завершен с ошибками";
 	char SYNTERROR[] = "Синтаксический анализ завершен с ошибками";
 	char SEMERROR[] = "Обнаружены семантические ошибки";
@@ -118,10 +116,13 @@ int _tmain(int argc, wchar_t* argv[])
 
 		Log::Close(log);
 	}
-
 	catch (Error::ERROR e)
 	{
+		Log::WriteLine(log, "Работа заврешена с ошибками!", "");
+		cout << "Работа заврешена с ошибками!" << endl;
+
 		Log::WriteError(log.stream, e);
+		cout << e.message << endl;
 	}
 	catch (...)
 	{
