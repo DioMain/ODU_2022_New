@@ -249,6 +249,7 @@ namespace In {
 					if (code[text[j]] == IN::N)
 					{
 						throw Error::GetError(311, line, 0);
+						isltrlgood = false; // литерал не закрыт!
 						break;
 					}
 				}
