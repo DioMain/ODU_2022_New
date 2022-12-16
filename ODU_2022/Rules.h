@@ -114,26 +114,27 @@ namespace GRB
 
 		Rule(NS('X'), GRB_ERROR_SERIES + 13, 16,								// Недопустимая синтаксическая конструкция в теле цикла/условного выражения	
 
-			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),				// if
-			Rule::Chain(5, TS('c'), NS('Z'), TS('d'), NS('H'), NS('X')),	// while
-			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),						// if
-			Rule::Chain(4, TS('c'), NS('Z'), TS('d'), NS('H')),				// while	
-
-			Rule::Chain(5, TS('i'), TS('='), NS('W'), TS(';'), NS('X')),		// присваивание
-			Rule::Chain(5, TS('i'), TS(':'), NS('V'), TS(';'), NS('X')),		// присваивание
-			Rule::Chain(4, TS('o'), NS('V'), TS(';'), NS('X')),					// вывод
-			Rule::Chain(4, TS('^'), NS('V'), TS(';'), NS('X')),						// перевод строки
-			Rule::Chain(6, TS('i'), TS('='), TS('U'), NS('F'), TS(';'), NS('K')),	// присваивание c помощью вызова функции 
-
-			Rule::Chain(4, TS('i'), NS('F'), TS(';'), NS('K')),						// вызов функции
-
 			Rule::Chain(4, TS('i'), TS('='), NS('W'), TS(';')),						// присваивание
 			Rule::Chain(3, TS('o'), NS('V'), TS(';')),								// вывод
 			Rule::Chain(3, TS('^'), NS('V'), TS(';')),								// перевод строки
 			Rule::Chain(4, TS('i'), TS(':'), NS('V'), TS(';')),						// присваивание
 			Rule::Chain(5, TS('i'), TS('='), TS('U'), NS('F'), TS(';')),			// присваивание c помощью вызова функции 
 
-			Rule::Chain(3, TS('i'), NS('F'), TS(';'))								// вызов функции
+			Rule::Chain(3, TS('i'), NS('F'), TS(';')),							// вызов функции
+
+			Rule::Chain(3, TS('?'), NS('Z'), NS('R')),						// if
+			Rule::Chain(4, TS('c'), NS('Z'), TS('d'), NS('H')),			// while	
+
+			Rule::Chain(4, TS('?'), NS('Z'), NS('R'), NS('X')),				// if
+			Rule::Chain(5, TS('c'), NS('Z'), TS('d'), NS('H'), NS('X')),	// while
+
+			Rule::Chain(5, TS('i'), TS('='), NS('W'), TS(';'), NS('X')),		// присваивание
+			Rule::Chain(5, TS('i'), TS(':'), NS('V'), TS(';'), NS('X')),		// присваивание
+			Rule::Chain(4, TS('o'), NS('V'), TS(';'), NS('X')),					// вывод
+			Rule::Chain(4, TS('^'), NS('V'), TS(';'), NS('X')),						// перевод строки
+			Rule::Chain(6, TS('i'), TS('='), TS('U'), NS('F'), TS(';'), NS('X')),	// присваивание c помощью вызова функции 
+
+			Rule::Chain(4, TS('i'), NS('F'), TS(';'), NS('X'))						// вызов функции
 		),
 		Rule(NS('Q'), GRB_ERROR_SERIES + 7, 4,						// Ошибка при конструировании return
 			Rule::Chain(3, TS('e'), NS('V'), TS(';')),

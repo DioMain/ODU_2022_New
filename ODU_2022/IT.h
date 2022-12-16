@@ -47,7 +47,6 @@ namespace IT {
 	static const IDDATATYPE INT_TO_STR_PARAMS[] = { IT::IDDATATYPE::INT };								//параметры функции int to string
 	static const IDDATATYPE CONCAT_PARAMS[] = { IT::IDDATATYPE::STR, IT::IDDATATYPE::STR };				//параметры функции concat
 	static const IDDATATYPE COPY_PARAMS[] = { IT::IDDATATYPE::STR };									//параметры функции copy
-	//static const IDDATATYPE INPUT_PARAMS[] = { IT::IDDATATYPE:: };									//параметры функции copy
 
 	struct Entry	// строка таблицы идентификаторов
 	{
