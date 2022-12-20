@@ -37,7 +37,7 @@ namespace Semantic
 								if (tables.lextable.table[k + 2].lexema == LEX_LITERAL && tables.idtable.table[tables.lextable.table[k + 2].idxTI].value.vint == 0) //проверяем тип и значение
 								{
 									sem_ok = false;
-									Log::WriteError(log.stream, Error::GetError(318, tables.lextable.table[i].sn, 0));
+									Log::WriteError(log.stream, Error::GetError(314, tables.lextable.table[i].sn, 0));
 								}
 							}
 						}
@@ -48,7 +48,7 @@ namespace Semantic
 					if (tables.idtable.table[tables.lextable.table[i + 1].idxTI].value.vint == 0)
 					{
 						sem_ok = false;
-						Log::WriteError(log.stream, Error::GetError(318, tables.lextable.table[k].sn, 0));
+						Log::WriteError(log.stream, Error::GetError(320, tables.lextable.table[k].sn, 0));
 					}
 				}
 				break;
