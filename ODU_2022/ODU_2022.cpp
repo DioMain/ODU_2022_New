@@ -15,10 +15,12 @@ int _tmain(int argc, wchar_t* argv[])
 	char LEXERROR[] = "Лексический анализ завершен с ошибками";
 	char SYNTERROR[] = "Синтаксический анализ завершен с ошибками";
 	char SEMERROR[] = "Обнаружены семантические ошибки";
+	char GENERROR[] = "Генерация кодо завершена с ошибками";
 	char POLISHERROR[] = "Ошибка при попытке преобразования выражения";
 	char LEXGOOD[] = "Лексический анализ завершен без ошибок";
 	char SYNTGOOD[] = "Синтаксический анализ завершен без ошибок";
 	char SEMGOOD[] = "Семантический анализ завершен без ошибок";
+	char GENGOOD[] = "Генерация кодо завершена без ошибками";
 	char POLISHGOOD[] = "Преобразование выражений завершено без ошибок";
 	char MESSAGE[] = "--------------------КОНЕЧНЫЕ ТАБЛИЦЫ ЛЕКСЕМ И ИДЕНТИФИКАТОРОВ-------------------";
 	char STOP[] = "\nВыполнение программы остановлено";
@@ -103,13 +105,13 @@ int _tmain(int argc, wchar_t* argv[])
 		bool gen_ok = Gener::CodeGeneration(tables, parm, log);			
 
 		if (!gen_ok) {
-			Log::WriteLine(log, SEMERROR, "");
-			Log::WriteLineConsole(SEMERROR, STOP, "");
+			Log::WriteLine(log, GENERROR, "");
+			Log::WriteLineConsole(GENERROR, STOP, "");
 
 			return 0;
 		}
 		else 
-			Log::WriteLineConsole(SEMGOOD, "");
+			Log::WriteLineConsole(GENGOOD, "");
 
 		Log::WriteLine(log, ALLGOOD, "");								
 		Log::WriteLineConsole(ALLGOOD, "");
