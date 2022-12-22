@@ -89,7 +89,7 @@ namespace Lex
 		else if (!strcmp(CONCAT, id))
 			return IT::STDFNC::F_CONCAT;
 		else if (!strcmp(COPY, id))
-			return IT::STDFNC::F_CONCAT;
+			return IT::STDFNC::F_COPY;
 		else if (!strcmp(ININT, id))
 			return IT::STDFNC::F_ININT;
 		else if (!strcmp(INSYM, id))
