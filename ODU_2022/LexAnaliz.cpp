@@ -514,7 +514,7 @@ namespace Lex
 						
 						if (itentry != nullptr) // первая встреча - объявление
 						{
-							if (isFunc) // если функция - сохранить список параметров
+							if (isFunc && itentry->idtype != IT::IDTYPE::S) // если функция - сохранить список параметров
 							{
 								itentry->value.params.count = NULL;
 								itentry->value.params.types = new IT::IDDATATYPE[MAX_PARAMS_COUNT];

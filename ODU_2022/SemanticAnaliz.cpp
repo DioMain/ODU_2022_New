@@ -103,6 +103,7 @@ namespace Semantic
 				}
 				break;
 			}
+			case LEX_STDFUNC:
 			case LEX_ID: // проверка типа возвращаемого значения  
 			{
 				IT::Entry e = tables.idtable.table[tables.lextable.table[i].idxTI];

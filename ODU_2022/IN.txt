@@ -1,4 +1,21 @@
+int function GetNum() {
+	type int result = inputInt();
+
+	return result;
+}
+
+int function GetNumOffset(int offset) {
+	type int result = inputInt() + offset;
+
+	return result;
+}
+
 Main {
-	type int a = 125 / 0;
+	type int a = GetNum();
+	a = GetNumOffset(15);
+	
+	type string Text = intToStr(12);
+	
+	WriteLine a;
 }
 
