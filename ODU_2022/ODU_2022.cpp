@@ -29,8 +29,12 @@ int _tmain(int argc, wchar_t* argv[])
 
 	Log::LOG log = Log::INITLOG;
 
+	bool logIsInit = false;
+
 	try {
 		Parm::PARM parm = Parm::getparm(argc, argv);
+		logIsInit = true;
+
 		log = Log::getlog(parm.log);
 
 		Log::WriteLine(log, "Тест:", " без ошибок ", "");
@@ -120,10 +124,12 @@ int _tmain(int argc, wchar_t* argv[])
 	}
 	catch (Error::ERROR e)
 	{
-		Log::WriteLine(log, "Работа заврешена с ошибками!", "");
-		cout << "Работа заврешена с ошибками!" << endl;
+		if (logIsInit) {
+			Log::WriteLine(log, "Работа заврешена с ошибками!", "");
+			Log::WriteError(log.stream, e);
+		}
 
-		Log::WriteError(log.stream, e);
+		cout << "Работа заврешена с ошибками!" << endl;
 		cout << e.message << endl;
 	}
 	catch (...)

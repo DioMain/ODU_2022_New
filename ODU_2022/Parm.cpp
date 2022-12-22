@@ -24,15 +24,27 @@ namespace Parm
 		if (*parm.in == 0)//если не задан in
 			throw ERROR_THROW(100); // параметр должен быть задан
 
+		bool inIsRight = false;
+		for (size_t i = 0; i < wcslen(parm.in); i++)
+			if (parm.in[i] == '.' && i != wcslen(parm.in) - 1)
+				inIsRight = true;
+
+		if (!inIsRight)
+			throw ERROR_THROW(102); // параметр должен быть правильный
+
 		if (*parm.out == 0)//если не задан out
 		{
-			wcscpy_s(parm.out, parm.in);
+			for (size_t i = 0; parm.in[i] != '.'; i++) 
+				parm.out[i] = parm.in[i];
+
 			wcsncat_s(parm.out, PARM_OUT_DEFAULT_EXT, sizeof(PARM_OUT_DEFAULT_EXT));
 		}
 
 		if (*parm.log == 0)//если не задан log
 		{
-			wcscpy_s(parm.log, parm.in);
+			for (size_t i = 0; parm.in[i] != '.'; i++)
+				parm.log[i] = parm.in[i];
+
 			wcsncat_s(parm.log, PARM_LOG_DEFAULT_EXT, sizeof(PARM_LOG_DEFAULT_EXT));
 		};
 

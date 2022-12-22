@@ -7,7 +7,7 @@
 #define PARM_LT			L"-l"
 
 #define PARM_MAX_SIZE 300
-#define PARM_OUT_DEFAULT_EXT L".out"
+#define PARM_OUT_DEFAULT_EXT L".asm"
 #define PARM_LOG_DEFAULT_EXT L".log"
 
 
